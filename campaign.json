@@ -1,0 +1,21 @@
+{
+  "campaigns" : [
+    {
+      "title": "hoge",
+      "description": "hoge\nfuga",
+      "urls": [
+        "https://tanjo.in/acc"
+      ],
+      "service_title": "tanjoin"
+    },
+    {
+      "title": "piyo",
+      "description": "にゃー",
+      "urls": [
+        "https://tanjo.in/",
+        "https://tanjo.in/book.html"
+      ],
+      "service_title": "tanjoin"
+    }
+  ]
+}
