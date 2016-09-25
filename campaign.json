@@ -1,21 +1,28 @@
 {
   "campaigns" : [
     {
-      "title": "hoge",
-      "description": "hoge\nfuga",
+      "title": "スマホアプリ「Pontaカード(公式)」をつかうとおトク!大戸屋のご利用でPontaポイントが5倍キャンペーン！",
+      "description": "スマホアプリ「Pontaカード(公式)」以外の\nデジタルPontaカードのご提示は、対象外となります。",
       "urls": [
-        "https://tanjo.in/acc"
+        "http://pntc.ponta.jp/campaign/tkp16091/"
       ],
-      "service_title": "tanjoin"
+      "service_title": "大戸屋",
+      "date": {
+        "start": "",
+        "end": ""
+      }
     },
     {
-      "title": "piyo",
-      "description": "にゃー",
+      "title": "11ブランドのお店から10％OFFクーポン",
+      "description": "",
       "urls": [
-        "https://tanjo.in/",
-        "https://tanjo.in/book.html"
+        "http://otpn.jp/0FIIIM/?e=V6nouKB9WPMf10068247"
       ],
-      "service_title": "tanjoin"
+      "service_title": "すかいらーくグループ",
+      "date": {
+        "start": "",
+        "end": ""
+      }
     }
   ]
 }
