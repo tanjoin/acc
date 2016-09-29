@@ -8,21 +8,8 @@
       ],
       "service_title": "大戸屋",
       "date": {
-        "start": "",
-        "end": ""
-      },
-      "on": [ "All" ]
-    },
-    {
-      "title": "11ブランドのお店から10％OFFクーポン",
-      "description": "",
-      "urls": [
-        "http://otpn.jp/0FIIIM/?e=V6nouKB9WPMf10068247"
-      ],
-      "service_title": "すかいらーくグループ",
-      "date": {
-        "start": "",
-        "end": ""
+        "start": "2016/09/01",
+        "end": "2016/09/30"
       },
       "on": [ "All" ]
     },
