@@ -56,8 +56,7 @@
       "title": "カードの日",
       "description": "毎週火曜・土曜のカードの日にファミマＴカード（クレジットカード・Visaデビット付キャッシュカード）をご提示のうえお買い物いただくとショッピングポイント3倍！さらにクレジットやVisaデビットでお支払いただくとクレジットポイント・Visaデビットポイント2倍！合計で通常時（火曜・土曜以外）の現金払いと比べてポイントが5倍も貯まりとってもお得に！",
       "urls": [
-        "http://www.family.co.jp/ft/ft_card/credit_privilege/special_day/index.html
-"
+        "http://www.family.co.jp/ft/ft_card/credit_privilege/special_day/index.html"
       ],
       "service_title": "ファミマTカード",
       "date": {
@@ -66,5 +65,55 @@
       },
       "on": [ "All" ]
     },
+    {
+      "title": "火曜市",
+      "description": ""
+      "urls": [],
+      "service_title": "イオン",
+      "date": {
+        "start": "2000/01/01 00:00",
+        "end": "2100/12/59 23:59"
+      },
+      "on": [ "Tue" ]
+    },
+    {
+      "title": "お客さま感謝デー",
+      "description": "5%OFF"
+      "urls": [
+        "http://www.aeonretail.jp/otoku/kansyaday.html"
+      ],
+      "service_title": "イオン",
+      "date": {
+        "start": "2000/01/01 00:00",
+        "end": "2100/12/59 23:59"
+      },
+      "on": [ "30th", "20th" ]
+    },
+    {
+      "title": "お客さまわくわくデー",
+      "description": "200円で2ポイント"
+      "urls": [
+        "http://www.aeonretail.jp/otoku/wakuwakuday.html"
+      ],
+      "service_title": "イオン",
+      "date": {
+        "start": "2000/01/01 00:00",
+        "end": "2100/12/59 23:59"
+      },
+      "on": [ "5th", "15th", "25th" ]
+    },
+    {
+      "title": "ありが10デー",
+      "description": "ポイント5倍（200円ごとに5ポイント）"
+      "urls": [
+        "http://www.aeonretail.jp/campaign/ariga10/"
+      ],
+      "service_title": "イオン",
+      "date": {
+        "start": "2000/01/01 00:00",
+        "end": "2100/12/59 23:59"
+      },
+      "on": [ "10th" ]
+    }
   ]
 }
