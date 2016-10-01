@@ -67,7 +67,7 @@
     },
     {
       "title": "火曜市",
-      "description": ""
+      "description": "",
       "urls": [],
       "service_title": "イオン",
       "date": {
@@ -78,7 +78,7 @@
     },
     {
       "title": "お客さま感謝デー",
-      "description": "5%OFF"
+      "description": "5%OFF",
       "urls": [
         "http://www.aeonretail.jp/otoku/kansyaday.html"
       ],
@@ -91,7 +91,7 @@
     },
     {
       "title": "お客さまわくわくデー",
-      "description": "200円で2ポイント"
+      "description": "200円で2ポイント",
       "urls": [
         "http://www.aeonretail.jp/otoku/wakuwakuday.html"
       ],
@@ -104,7 +104,7 @@
     },
     {
       "title": "ありが10デー",
-      "description": "ポイント5倍（200円ごとに5ポイント）"
+      "description": "ポイント5倍（200円ごとに5ポイント）",
       "urls": [
         "http://www.aeonretail.jp/campaign/ariga10/"
       ],
