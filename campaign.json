@@ -114,6 +114,39 @@
         "end": "2016/12/31"
       },
       "on": [ "All" ]
+    },
+    {
+      "title": "1% ポイント還元",
+      "description": "",
+      "urls": [
+        "http://info.d-card.jp/std/topics/la/la_off.html"
+      ],
+      "service_title": "dカード",
+      "date": {
+      },
+      "on": [ "All" ]
+    },
+    {
+      "title": "3% OFF",
+      "description": "",
+      "urls": [
+        "http://info.d-card.jp/std/topics/la/la_off.html"
+      ],
+      "service_title": "dカード",
+      "date": {
+      },
+      "on": [ "All" ]
+    },
+    {
+      "title": "1%ポイント還元",
+      "description": "①全国のローソン、ナチュラルローソンで、dカード、DCMXでお支払いいただくとお買物金額から3％割引します。\n※dカード、dカード GOLD、dカード mini、DCMX、DCMX GOLDで電子マネー「iD」またはVisa/MasterCardでのお支払いが対象。\n※ローソンストア100は対象外、また一部対象外の商品・サービスがあります。詳しくは以下[ご利用上の注意]をご確認ください。\n②dカード、DCMXのお支払いでdポイント（決済ポイント）を100円につき1ポイント進呈（1％ポイント還元）\n※dカード、dカード GOLD、DCMX、DCMX GOLDで電子マネー「iD」またはVisa/MasterCardでのお支払いが対象。\n※dカード miniのお支払いは、200円につき1ポイント進呈します（0.5％ポイント還元）\n③dカードまたはdポイントカードのご提示でdポイント（加盟店ポイント）を100円（税抜）につき1ポイント進呈（1％ポイント還元）",
+      "urls": [
+        "http://info.d-card.jp/std/topics/la/la_off.html"
+      ],
+      "service_title": "dカード",
+      "date": {
+      },
+      "on": [ "All" ]
     }
   ]
 }
