@@ -1,6 +1,19 @@
 {
   "campaigns" : [
     {
+      "title": "お店で交換コース｜秋のリラックマフェア｜ローソン",
+      "description": "",
+      "urls": [
+        "http://www.lawson.co.jp/campaign/rilakkumafair16a/poikore_store.html"
+      ],
+      "service_title": "LAWSON",
+      "date": {
+        "start": "2016/09/16",
+        "end": "2016/12/05"
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "【お得なセール情報】＜予告＞ローソン得市（10/20～10/24）｜ローソン研究所",
       "description": "ローソンセレクトの冷蔵・冷凍食品、アイス各種　10%引\n※氷・飲料・調味料を除く。\n\n対象の和菓子各種　10%引",
       "urls": [ 
