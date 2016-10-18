@@ -1,6 +1,19 @@
 {
   "campaigns" : [
     {
+      "title": "いい買い物の日",
+      "description": "今だけお得なセールやキャンペーンで「買う」を楽しもう",
+      "urls": [
+        "http://kaimono.yahoo.co.jp/"
+      ],
+      "service_title": "Yahoo!JAPAN",
+      "date": {
+        "start": "2016/10/18",
+        "end": "2016/11/30"
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "牛めし豚汁半熟玉子セット (並盛) 30円引き",
       "description": "LINE・モバイル限定クーポン。",
       "urls": [
