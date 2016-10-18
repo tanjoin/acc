@@ -1,6 +1,19 @@
 {
   "campaigns" : [
     {
+      "title": "牛めし豚汁半熟玉子セット (並盛) 30円引き",
+      "description": "LINE・モバイル限定クーポン。",
+      "urls": [
+        "http://www.matsuyafoods.co.jp/sp/line_cp/161018/"
+      ],
+      "service_title": "松屋",
+      "date": {
+        "start": "2016/10/18",
+        "end": "2016/11/01 15:00"
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "おでん10%引き",
       "description": "期間中、対象のおでん全品を税込価格から10%引きにて販売します。",
       "urls": [
