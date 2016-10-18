@@ -1,6 +1,18 @@
 {
   "campaigns" : [
     {
+      "title": "すき焼き商品50円引きクーポン",
+      "description": "10月20日(木)までにすき家モバイル会員に登録すると、10月21日（金）のすき家メールマガジン内で、“すき焼き商品50円引きクーポン”を配信いたします。クーポンを使って、お得に新商品をお召し上がりください♪※対象商品：牛すき鍋定食、キムチ牛すき鍋定食、牛すき焼き丼、牛すき焼き皿定食（牛すき皿単品は対象外）",
+      "urls": [
+        "http://www.sukiya.jp/campaign/2016/gyusuki/?utm_source=push&utm_medium=LINE&utm_campaign=linepsukinabe#col02"
+      ],
+      "service_title": "すき家",
+      "date": {
+        "start": "2016/10/21"
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "10ピースチキンナゲット 200円 キャンペーン|BURGER KING®",
       "description": "",
       "urls": [
