@@ -1,6 +1,18 @@
 {
   "campaigns" : [
     {
+      "title": "【23日(日)まで何度でも10％OFF！】9ブランドのクーポンプレゼント☆",
+      "description": "すかいらーくグループ・9ブランドのお店から10％OFFクーポンをプレゼント♪",
+      "urls": [
+        "http://otpn.jp/userlogin.php"
+      ],
+      "service_title": "すかいらーく",
+      "date": {
+        "end": "2016/10/23"
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "お店で交換コース｜秋のリラックマフェア｜ローソン",
       "description": "",
       "urls": [
