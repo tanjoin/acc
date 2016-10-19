@@ -1,6 +1,17 @@
 {
   "campaigns" : [
     {
+      "title": "毎日ゲームにチャレンジして貯める | ポイントを貯める | ポイント | モバイル | ソフトバンク",
+      "description": "簡単なゲームに参加すると、抽選でＴポイントが当たる、ポイントチャレンジを実施中です。",
+      "urls": [
+        "http://www.softbank.jp/mobile/point/saving/challenge/"
+      ],
+      "service_title": "SoftBank",
+      "date": {
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "【23日(日)まで何度でも10％OFF！】9ブランドのクーポンプレゼント☆",
       "description": "すかいらーくグループ・9ブランドのお店から10％OFFクーポンをプレゼント♪",
       "urls": [
