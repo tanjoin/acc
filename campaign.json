@@ -1,6 +1,18 @@
 {
   "campaigns" : [
     {
+      "title": "ファミリーマート・ガスト・TSUTAYAのお会計で3倍 | 特集 | モバイル | ソフトバンク",
+      "description": "ソフトバンク携帯電話にTカード番号登録（連携）してファミリーマート、ガスト、TSUTAYAを利用すると、いつでもTポイント3倍に！",
+      "urls": [ 
+        "http://www.softbank.jp/mobile/special/tpoint-3bai/"
+      ],
+      "service_title": "SoftBank",
+      "date": {
+        
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "毎日ゲームにチャレンジして貯める | ポイントを貯める | ポイント | モバイル | ソフトバンク",
       "description": "簡単なゲームに参加すると、抽選でＴポイントが当たる、ポイントチャレンジを実施中です。",
       "urls": [
