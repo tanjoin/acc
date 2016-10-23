@@ -1,15 +1,15 @@
 {
   "campaigns" : [
     {
-      "title": "",
-      "description": "",
+      "title": "JCB マジカル 2016 第2弾 │ JCBブランドで実施中のおトクなキャンペーン",
+      "description": "パークで遊ぶ！ホテルに泊まる！\n東京ディズニーリゾート（R）宿泊プランが当たる！\n\nJCBカードのご利用合計金額5万円（税込）を1口として抽選でプレゼント！\nまずは、ご希望のコースを選んで参加登録！",
       "urls": [
-        ""
+        "http://campaign.jcb.jp/list/c15_140magical_b.html"
       ],
-      "service_title": "",
+      "service_title": "JCB",
       "date": {
-        "start": "",
-        "end": ""
+        "start": "2016/06/16",
+        "end": "2016/12/15"
       },
       "on": [ "All" ]
     },
@@ -380,7 +380,9 @@
     },
     {
       "title": "1%ポイント還元",
-      "description": "③dカードまたはdポイントカードのご提示でdポイント（加盟店ポイント）を100円（税抜）につき1ポイント進呈（1％ポイント還元）",
+      "description": "③dカードまたはdポイント
+      
+      ご提示でdポイント（加盟店ポイント）を100円（税抜）につき1ポイント進呈（1％ポイント還元）",
       "urls": [
         "http://info.d-card.jp/std/topics/la/la_off.html"
       ],
