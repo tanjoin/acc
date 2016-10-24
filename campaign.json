@@ -82,6 +82,8 @@
         "https://survey.mb.softbank.jp/"
       ],
       "service_title": "SoftBank",
+      "date": {
+      },
       "on": [ "All" ]
     },
     {
@@ -380,9 +382,7 @@
     },
     {
       "title": "1%ポイント還元",
-      "description": "③dカードまたはdポイント
-      
-      ご提示でdポイント（加盟店ポイント）を100円（税抜）につき1ポイント進呈（1％ポイント還元）",
+      "description": "③dカードまたはdポイントカードのご提示でdポイント（加盟店ポイント）を100円（税抜）につき1ポイント進呈（1％ポイント還元）",
       "urls": [
         "http://info.d-card.jp/std/topics/la/la_off.html"
       ],
