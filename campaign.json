@@ -1,6 +1,19 @@
 {
   "campaigns" : [
     {
+      "title": "楽天カードでのEdyチャージでもれなくポイント2倍！",
+      "description": "キャンペーン期間中にエントリーのうえ、以下の方法でEdyチャージ(入金)\n・楽天カードを使ってEdyチャージ(入金)\n・楽天e-NAVIでEdyチャージ(Edyチャージ、いつでもEdyチャージ、Edyオートチャージ)のお申し込みをして、Edyチャージ(入金)",
+      "urls": [
+        "https://www.rakuten-card.co.jp/e-navi/p/enavi/include/campaign/detail/133395/detail.html"
+      ],
+      "service_title": "楽天カード",
+      "date": {
+        "start": "2016/10/18 0:00",
+        "end": "2016/11/04 23:59"
+      },
+      "on": [ "All" ]
+    },
+    {
       "title": "JCB マジカル 2016 第2弾 │ JCBブランドで実施中のおトクなキャンペーン",
       "description": "パークで遊ぶ！ホテルに泊まる！\n東京ディズニーリゾート（R）宿泊プランが当たる！\n\nJCBカードのご利用合計金額5万円（税込）を1口として抽選でプレゼント！\nまずは、ご希望のコースを選んで参加登録！",
       "urls": [
