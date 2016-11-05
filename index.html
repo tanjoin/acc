@@ -17,7 +17,12 @@
         httpObj.open("get", "campaign.json", true);
         httpObj.onload = function() {
           var data = JSON.parse(this.responseText);
-          console.log(data);
+          for (var i = 0; i < data.campaigns.length; i++) {
+            var campaign = data.campaigns[i];
+            var title = document.createElement("div");
+            title.innerText = campaign.title;
+            document.getElementById("contents").appendChild(title);
+          }
         };
         httpObj.send(null);
       }
