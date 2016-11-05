@@ -72,15 +72,15 @@
     },
     {
       "id": 59,
-      "title": "",
-      "description": "",
+      "title": "鍋レシピ [クックパッド] 新作レシピコンテスト",
+      "description": "投稿者の中から抽選で1000名様に500円分のギフト券をプレゼント♪複数レシピ応募できますが、お一人様一回限りの当選となります。※当選者の方には直接メールでご連絡いたします。",
       "urls": [
-        ""
+        "http://cookpad.com/ha/contests/85",
+        "http://cookpad.com/ha/contests/nabe2016"
       ],
-      "service_title": "JCB（ソラチカカード）",
+      "service_title": "cookpad",
       "date": {
-        "start": "2016/07/22 10:00",
-        "end": "2017/03/31 23:59"
+        "end": "2016/11/28 10:00"
       },
       "on": [ "All" ]
     },
