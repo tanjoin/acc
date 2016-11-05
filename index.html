@@ -12,18 +12,20 @@
   <body>
     <div id="contents"></div>
     <script>
-      var httpObj = new XMLHttpRequest();
-      httpObj.open("get", "campaign.json", true);
-      httpObj.onload = function() {
-        var data = JSON.parse(this.responseText);
-        for (var i = 0; i < data.campaign.length; i++) {
-          var campaign = data.campaign[i];
-          var title = document.createElement("div");
-          title.innerText = campaign.title;
-          document.getElementById("contents").appendChild(title);
-        }
-      };
-      httpObj.send(null);
+      window.onload = function(){
+        var httpObj = new XMLHttpRequest();
+        httpObj.open("get", "campaign.json", true);
+        httpObj.onload = function() {
+          var data = JSON.parse(this.responseText);
+          for (var i = 0; i < data.length; i++) {
+            var campaign = data[i];
+            var title = document.createElement("div");
+            title.innerText = campaign.title;
+            document.getElementById("contents").appendChild(title);
+          }
+        };
+        httpObj.send(null);
+      }
     </script>
   </body>
 </html>
