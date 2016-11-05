@@ -16,6 +16,7 @@
       httpObj.open("get", "campaign.json", true);
       httpObj.onload = function() {
         var data = JSON.parse(this.responseText);
+        console.log(data);
         var text = "";
         for (var i = 0; i < data.length; i++) {
           var option = document.createElement("option");
