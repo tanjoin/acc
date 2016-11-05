@@ -19,13 +19,16 @@
         httpObj.open("get", "campaign.json", true);
         httpObj.onload = function() {
           var data = JSON.parse(this.responseText);
+          
+          var row = document.createElement("div");
+          row.className = "row";
+          var col = document.createElement("div");
+          col.className = "col s12 m6";
+          row.appendChild(col);
+          
           for (var i = 0; i < data.campaigns.length; i++) {
             var campaign = data.campaigns[i];
-            var row = document.createElement("div");
-            row.className = "row";
-            var col = document.createElement("div");
-            col.className = "col s12 m6";
-            row.appendChild(col);
+
             var card = document.createElement("div");
             card.className = "card blue-grey darken-3";
             col.appendChild(card);
