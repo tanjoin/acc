@@ -17,12 +17,7 @@
         httpObj.open("get", "campaign.json", true);
         httpObj.onload = function() {
           var data = JSON.parse(this.responseText);
-          for (var i = 0; i < data.length; i++) {
-            var campaign = data[i];
-            var title = document.createElement("div");
-            title.innerText = campaign.title;
-            document.getElementById("contents").appendChild(title);
-          }
+          console.log(data);
         };
         httpObj.send(null);
       }
