@@ -2,29 +2,29 @@
   "campaigns" : [
     {
       "id": 64,
-      "title": "",
-      "description": "",
+      "title": "おまかせチャージ（クレジット機能）ご入会キャンペーン",
+      "description": "2016年10月25日（火）から2016年12月31日（土）の間に、ソフトバンクカード おまかせチャージ（クレジット機能）へのご入会・ご契約が完了し、ご契約完了日から翌月末日までの間に1回でもソフトバンクカードをご利用いただいた方に、もれなく3,000円分のプリペイドバリュープレゼント！",
       "urls": [
-        ""
+        "http://www.softbank.jp/card/campaigns/list/cardcp-03/"
       ],
-      "service_title": "JCB（ソラチカカード）",
+      "service_title": "SoftBank",
       "date": {
-        "start": "2016/07/22 10:00",
-        "end": "2017/03/31 23:59"
+        "start": "2016/10/25",
+        "end": "2017/12/31"
       },
       "on": [ "All" ]
     },
     {
       "id": 63,
-      "title": "",
-      "description": "",
+      "title": "Apple Pay はじめようキャンペーン",
+      "description": "Apple Pay にソフトバンクカードを登録し、ソフトバンクカードアプリからチャージするだけで、お買い物に使える2,000円分のプリペイドバリューをすぐにプレゼントいたします。",
       "urls": [
-        ""
+        "http://www.softbank.jp/mobile/campaigns/list/applepay-02/"
       ],
-      "service_title": "JCB（ソラチカカード）",
+      "service_title": "SoftBank",
       "date": {
-        "start": "2016/07/22 10:00",
-        "end": "2017/03/31 23:59"
+        "start": "2016/10/25",
+        "end": "2017/12/31"
       },
       "on": [ "All" ]
     },
