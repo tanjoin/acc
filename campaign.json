@@ -58,14 +58,13 @@
     },
     {
       "id": 60,
-      "title": "",
-      "description": "",
+      "title": "好評につき延長！QUICPay付nanacoカード誕生2周年キャンペーン | JCBのインターネットサービスMyJCB（マイジェーシービー）",
+      "description": "Oki Dokiポイントプログラムの交換商品に「QUICPay付nanacoカード」が加わって2周年！\nご好評にお応えして、Oki Dokiポイント1,050ポイントをnanacoポイント5,700ポイントが付いているQUICPay付nanacoカードに交換できるキャンペーンを、本年も実施します。\n※キャンペーン終了後［2017年3月31日（金）以降］は、nanacoポイント5,100ポイントが付いているQUICPay付nanacoカードをお届けします。",
       "urls": [
-        ""
+        "https://my.jcb.co.jp/campaign/myj/qp_nanacocard1604_myj.html"
       ],
       "service_title": "JCB（ソラチカカード）",
       "date": {
-        "start": "2016/07/22 10:00",
         "end": "2017/03/31 23:59"
       },
       "on": [ "All" ]
