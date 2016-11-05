@@ -41,6 +41,7 @@
             cardContent.appendChild(description);
             
             var cardAction = document.createElement("div");
+            cardAction.className = "card-action";
             var isAddCardAction = false;
             for (var j = 0; j < campaign.urls.length; j++) {
               var alink = document.createElement("a");
