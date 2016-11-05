@@ -46,7 +46,7 @@
             for (var j = 0; j < campaign.urls.length; j++) {
               var alink = document.createElement("a");
               alink.href = campaign.urls[j];
-              alink.innerText = "その" + j;
+              alink.innerText = "その" + (j+1);
               cardAction.appendChild(alink);
               isAddCardAction = true;
             }
