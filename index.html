@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aac</title>
+    <meta charset="utf-8">
+    <meta name="description" content="aac">
+    <meta name="author" content="tanjoin">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="">
+  </head>
+  <body>
+    <div id="group_select"></div>
+    <script>
+      var httpObj = new XMLHttpRequest();
+      httpObj.open("get", "aac/campaign.json", true);
+      httpObj.onload = function() {
+        var data = JSON.parse(this.responseText);
+        var text = "";
+        for (var i = 0; i < data.length; i++) {
+          var option = document.createElement("option");
+          option.innerText = data[i].name;
+          option.value = data[i].value;
+          document.getElementById("group_select").appendChild(option);
+        }
+      };
+      httpObj.send(null);
+    </script>
+  </body>
+</html>
