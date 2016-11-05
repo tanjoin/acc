@@ -30,29 +30,28 @@
     },
     {
       "id": 62,
-      "title": "",
-      "description": "",
+      "title": "先着5万名 Apple Payの「iD」でのご利用を5,000円まで負担！",
+      "description": "エントリーいただいた先着5万名限定。Apple Payを全国の「iD」マークのあるお店や自動販売機などでご利用いただくと、そのご利用代金を三井住友カードが5,000円分まで負担します。\n本キャンペーンは、「iD」ご利用代金の5,000円分を上限としてエントリー後、約3ヵ月間弊社が負担（キャッシュバック）いたします。",
       "urls": [
-        ""
+        "https://www.smbc-card.com/mem/cardinfo/cardinfo7020932.jsp"
       ],
-      "service_title": "JCB（ソラチカカード）",
+      "service_title": "三井住友VISAカード",
       "date": {
-        "start": "2016/07/22 10:00",
-        "end": "2017/03/31 23:59"
+        "end": "2017/12/31 23:59"
       },
       "on": [ "All" ]
     },
     {
       "id": 61,
-      "title": "",
-      "description": "",
+      "title": "Apple Payを使ってもれなく10％キャッシュバックキャンペーン",
+      "description": "キャンペーン期間中に、Apple Payに追加したJCBカードでのApple Payご利用金額の10％をもれなくキャッシュバック\n※キャッシュバック上限金額は5,000円まで（利用額合計5万円まで）",
       "urls": [
-        ""
+        "http://www.jcb.co.jp/campaign/apple-pay_2016.html"
       ],
       "service_title": "JCB（ソラチカカード）",
       "date": {
         "start": "2016/07/22 10:00",
-        "end": "2017/03/31 23:59"
+        "end": "2017/01/15 23:59"
       },
       "on": [ "All" ]
     },
