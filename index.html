@@ -13,7 +13,7 @@
     <div id="group_select"></div>
     <script>
       var httpObj = new XMLHttpRequest();
-      httpObj.open("get", "aac/campaign.json", true);
+      httpObj.open("get", "campaign.json", true);
       httpObj.onload = function() {
         var data = JSON.parse(this.responseText);
         var text = "";
