@@ -22,6 +22,7 @@
           
           var row = document.createElement("div");
           row.className = "row";
+          document.getElementById("contents").appendChild(row);
                    
           for (var i = 0; i < data.campaigns.length; i++) {
             var campaign = data.campaigns[i];
@@ -29,16 +30,43 @@
             var col = document.createElement("div");
             col.className = "col s12 m6 l3";
             row.appendChild(col);            
-            var card = document.createElement("div");
-            card.className = "card blue-grey darken-3";
-            col.appendChild(card);
+            
+            if (campaign.urls.length > 0) {
+              var cardLink = document.createElement("a");
+              cardLink.href = campaign.urls[j];
+              col.appendChild(cardLink);
+              var card = document.createElement("div");
+              card.className = "card blue-grey darken-3";
+              cardLink.appendChild(card);
+            } else {
+              var card = document.createElement("div");
+              card.className = "card blue-grey darken-3";
+              col.appendChild(card);
+            }
+            
             var cardContent = document.createElement("div");
             cardContent.className = "card-content white-text";
             card.appendChild(cardContent);
+
+            var cardId = document.createElement("div");
+            cardId.className = "blue";
+            cardId.innerText = campaign.id;
+            cardContent.appendChild(cardId);
+            
+            var cardService = document.createElement("div");
+            cardService.className = "yeallow";
+            cardService.innerText = campaign.service_title;
+            cardContent.appendChild(cardService);
+            
+            var cardDay = document.createElement("div");
+            cardDay.innerText = campaign.date.start + "～" + campaign.date.end;
+            cardContent.appendChild(cardDay);
+            
             var cardTitle = document.createElement("span");
             cardTitle.className = "card-title";
             cardTitle.innerText = campaign.title;
             cardContent.appendChild(cardTitle);
+            
             var description = document.createElement("p");
             description.innerText = campaign.description;
             cardContent.appendChild(description);
@@ -56,7 +84,6 @@
             if (isAddCardAction) {
               cardContent.appendChild(cardAction);
             }
-            document.getElementById("contents").appendChild(row);
           }
         };
         httpObj.send(null);
