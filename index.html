@@ -53,16 +53,17 @@
             card.appendChild(cardContent);
 
             var cardId = document.createElement("span");
-            cardId.className = "blue";
+            cardId.className = "blue-text";
             cardId.innerText = campaign.id;
             cardContent.appendChild(cardId);
             
             var cardService = document.createElement("span");
-            cardService.className = "amber";
+            cardService.className = "amber-text";
             cardService.innerText = campaign.service_title;
             cardContent.appendChild(cardService);
             
             var cardDay = document.createElement("div");
+            cardDay.className = "grey-text";
             cardDay.innerText = campaign.date.start || '';
             cardDay.innerText += "～";
             cardDay.innerText += campaign.date.end || '';
