@@ -27,7 +27,7 @@
             col.className = "col s12 m6";
             row.appendChild(col);
             var card = document.createElement("div");
-            card.className = "card blue-gray darken-1";
+            card.className = "card blue-grey darken-3";
             col.appendChild(card);
             var cardContent = document.createElement("div");
             cardContent.className = "card-content white-text";
@@ -44,6 +44,7 @@
             var isAddCardAction = false;
             for (var j = 0; j < campaign.urls.length; j++) {
               var alink = document.createElement("a");
+              alink.href = campaign.urls[j];
               cardAction.appendChild(alink);
               isAddCardAction = true;
             }
