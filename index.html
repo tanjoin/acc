@@ -6,11 +6,12 @@
     <meta name="description" content="aac">
     <meta name="author" content="tanjoin">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link rel="shortcut icon" href="">
   </head>
   <body>
     <div id="contents"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script>
       window.onload = function(){
         var httpObj = new XMLHttpRequest();
@@ -19,9 +20,36 @@
           var data = JSON.parse(this.responseText);
           for (var i = 0; i < data.campaigns.length; i++) {
             var campaign = data.campaigns[i];
-            var title = document.createElement("div");
-            title.innerText = campaign.title;
-            document.getElementById("contents").appendChild(title);
+            var row = document.createElement("div");
+            row.className = "row";
+            var col = document.createElement("div");
+            col.className = "col s12 m6";
+            row.appendChild(col);
+            var card = document.createElement("div");
+            card.className = "card blue-gray darken-1";
+            col.appendChild(card);
+            var cardContent = document.createElement("div");
+            cardContent.className = "card-content white-text";
+            card.appendChild(cardContent);
+            var cardTitle = document.createElement("span");
+            cardTitle.className = "card-title";
+            cardTitle.innerText = campaign.title;
+            cardContent.appendChild(cardTitle);
+            var description = document.createElement("p");
+            description.innerText = campaign.description;
+            cardContent.appendChild(description);
+            
+            var cardAction = document.createElement("div");
+            var isAddCardAction = false;
+            for (var j = 0; j < campaign.urls.length; j++) {
+              var alink = document.createElement("a");
+              cardAction.appendChild(alink);
+              isAddCardAction = true;
+            }
+            if (isAddCardAction) {
+              cardContext.appendChild(cardAction);
+            }
+            document.getElementById("contents").appendChild(row);
           }
         };
         httpObj.send(null);
