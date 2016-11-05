@@ -14,10 +14,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script>
-      function nullToEmpty(string) {
-        
-      };
-      
       window.onload = function(){
         var httpObj = new XMLHttpRequest();
         httpObj.open("get", "campaign.json", true);
@@ -52,17 +48,17 @@
             cardContent.className = "card-content white-text";
             card.appendChild(cardContent);
 
-            var cardId = document.createElement("span");
+            var cardId = document.createElement("div");
             cardId.className = "blue-text";
             cardId.innerText = campaign.id;
             cardContent.appendChild(cardId);
                         
-            var cardTitle = document.createElement("span");
+            var cardTitle = document.createElement("div");
             cardTitle.className = "card-title";
             cardTitle.innerText = campaign.title;
             cardContent.appendChild(cardTitle);
             
-            var cardService = document.createElement("span");
+            var cardService = document.createElement("div");
             cardService.className = "amber-text";
             cardService.innerText = campaign.service_title;
             cardContent.appendChild(cardService);
