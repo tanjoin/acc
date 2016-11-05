@@ -10,19 +10,17 @@
     <link rel="shortcut icon" href="">
   </head>
   <body>
-    <div id="group_select"></div>
+    <div id="contents"></div>
     <script>
       var httpObj = new XMLHttpRequest();
       httpObj.open("get", "campaign.json", true);
       httpObj.onload = function() {
         var data = JSON.parse(this.responseText);
-        console.log(data);
-        var text = "";
-        for (var i = 0; i < data.length; i++) {
-          var option = document.createElement("option");
-          option.innerText = data[i].name;
-          option.value = data[i].value;
-          document.getElementById("group_select").appendChild(option);
+        for (var i = 0; i < data.campaign.length; i++) {
+          var campaign = data.campaign[i];
+          var title = document.createElement("div");
+          title.innerText = campaign.title;
+          document.getElementById("contents").appendChild(title);
         }
       };
       httpObj.send(null);
