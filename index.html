@@ -44,6 +44,14 @@
               col.appendChild(card);
             }
             
+            if (campaign.img != null && campaign.img.length > 0) {
+              var cardImage = document.createElement("div");
+              var img = document.createElement("img");
+              img.src = campaign.img;
+              cardImage.appendChild(img);
+              card.appendChild(cardImage);
+            }
+            
             var cardContent = document.createElement("div");
             cardContent.className = "card-content white-text";
             card.appendChild(cardContent);
