@@ -1,9 +1,37 @@
 {
   "campaigns" : [
     {
+      "id": 70,
+      "title": "【11月誕生月の方限定】アプリを提示して、2回以上お買い物で50ポイントプレゼント！",
+      "description": "キャンペーン期間中にエントリーのうえ、キャンペーン対象日に楽天ポイントカードアプリを提示して、お買い物を2回以上された方へ、楽天スーパーポイント50ポイントをプレゼント。",
+      "urls": [
+        "http://point.rakuten.co.jp/rpointcard/campaign/birthmonth/"
+      ],
+      "service_title": "楽天ポイントカード",
+      "date": {
+        "start": "2016/11/01",
+        "end": "2017/11/30"
+      },
+      "on": [ "All" ]
+    },
+    {
+      "id": 69,
+      "title": "ポイント利用で20％ポイントバックキャンペーン｜出前・フード宅配サービスのdデリバリー",
+      "description": "ご注文時にdポイント及びドコモポイントをご利用いただくと、期間中の利用ポイント合計の20%をdポイント（期間・用途限定）でポイントバックさせて頂きます。",
+      "urls": [
+        "https://delivery.dmkt-sp.jp/campaign/pointback201611/"
+      ],
+      "service_title": "dデリバリー",
+      "date": {
+        "start": "2016/11/01",
+        "end": "2017/11/30"
+      },
+      "on": [ "All" ]
+    },
+    {
       "id": 68,
       "title": "16時～24時はおトクタイム！お買上げPontaポイント5倍",
-      "description": "",
+      "description": "弁当・めん類、グラタン・ドリア、スープ・サラダ、ローソンセレクトの冷蔵食品\n※寿司・セットおにぎり・アルミ鍋・お好み焼・たこ焼などの軽食・冷凍食品・即席食品（カップラーメン・スープ等）・袋麺・飲料・調味料・店内調理品・予約商品は除く。",
       "img": "http://www.lawson.co.jp/ponta/pp5g/img/pp5g_time.png",
       "urls": [
         "http://www.lawson.co.jp/ponta/pp5g/"
