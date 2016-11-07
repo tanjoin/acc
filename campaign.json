@@ -1,6 +1,35 @@
 {
   "campaigns" : [
     {
+      "id": 68,
+      "title": "16時～24時はおトクタイム！お買上げPontaポイント5倍",
+      "description": "",
+      "img": "http://www.lawson.co.jp/ponta/pp5g/img/pp5g_time.png",
+      "urls": [
+        "http://www.lawson.co.jp/ponta/pp5g/"
+      ],
+      "service_title": "LAWSON",
+      "date": {
+        "start": "2016/11/01",
+        "end": "2017/11/30"
+      },
+      "on": [ "All" ]
+    },
+    {
+      "id": 67,
+      "title": "電子マネー「楽天Edy（エディ）」 | キャンペーン情報 | 楽天Edy利用＆楽天ポイントカード提示でポイント山分け!",
+      "description": "キャンペーン期間内にエントリーのうえ、楽天スーパーポイントが貯まる設定をした楽天Edyの決済利用と、店頭レジにて楽天ポイントカードのバーコードを提示した方を対象に、楽天スーパーポイント200,000ポイントを山分けプレゼント！",
+      "urls": [
+        "http://edy.rakuten.co.jp/campaign/2016/1101_rpoint_edy/"
+      ],
+      "service_title": "楽天Edy",
+      "date": {
+        "start": "2016/11/01",
+        "end": "2017/11/30"
+      },
+      "on": [ "All" ]
+    },
+    {
       "id": 66,
       "title": "ＱＵＩＣＰay利用開始記念キャンペーン！",
       "description": "期間中、ビックカメラグループ（ビックカメラ・コジマ・ソフマップ）でビックカメラグループのポイントカードを提示し、クイックペイまたはApple Payに登録したクイックペイを利用すると、ご利用合計金額3,000円（税込）を一口として抽選でプレゼント！",
