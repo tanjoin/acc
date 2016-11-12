@@ -31,7 +31,7 @@
             var end = new Date(Date.parse(campaign.date.end));
             var now = new Date();
             
-            if (satrt != null && start.getTime() > now.getTime()) {
+            if (start != null && start.getTime() > now.getTime()) {
               continue;
             }
             
