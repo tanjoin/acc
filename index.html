@@ -26,6 +26,18 @@
                    
           for (var i = 0; i < data.campaigns.length; i++) {
             var campaign = data.campaigns[i];
+            
+            var start = new Date(Date.parse(campaign.date.start));
+            var end = new Date(Date.parse(campaign.date.end));
+            var now = new Date();
+            
+            if (start.getTime() > now.getTime()) {
+              continue;
+            }
+            
+            if (now.getTime() > end.getTime()) {
+              continue;
+            }
 
             var col = document.createElement("div");
             col.className = "col s12 m6 l3";
