@@ -160,7 +160,9 @@
             cardDay.innerText = campaign.date.start || '';
             cardDay.innerText += "～";
             cardDay.innerText += campaign.date.end || '';
-            cardContent.appendChild(cardDay);
+            if (cardday.innerText && cardday.innerText.length > 0 && cardDay.innerText != "～") {
+              cardContent.appendChild(cardDay);
+            }
             
             var description = document.createElement("p");
             description.innerText = campaign.description;
