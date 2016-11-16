@@ -1,6 +1,18 @@
 {
   "campaigns" : [
     {
+      "id": 76,
+      "title": "ポイントがたまるアンケート｜JCBが運営するポイント優待サイト OkiDoki ランド",
+      "description": "",
+      "urls": [
+        "http://www.okidokiland.com/cm/campaign/feature/answerplus/index.html"
+      ],
+      "service_title": "JCB",
+      "date": {
+      },
+      "on": [ "All" ]
+    },
+    {
       "id": 75,
       "title": "おむすび｜商品情報｜FamilyMart",
       "description": "おむすび各種どれでも2個買うとごとに50円引き\n※セットおむすびは1パックで1品\n※寿司は対象外となります",
