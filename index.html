@@ -59,6 +59,54 @@
             if (end != null && now.getTime() > end.getTime()) {
               continue;
             }
+            
+            if (campaign.on.indexOf("All") == -1) {
+              var isVisible = false;
+              
+              if (now.getDay() == 0 && campaign.on && campaign.on.indexOf("Sun")) {
+                isVisible = true;
+              }
+              if (now.getDay() == 1 && campaign.on && campaign.on.indexOf("Mon")) {
+                isVisible = true;
+              }
+              if (now.getDay() == 2 && campaign.on && campaign.on.indexOf("Tue")) {
+                isVisible = true;
+              }
+              if (now.getDay() == 3 && campaign.on && campaign.on.indexOf("Wed")) {
+                isVisible = true;
+              }
+              if (now.getDay() == 4 && campaign.on && campaign.on.indexOf("Thu")) {
+                isVisible = true;
+              }
+              if (now.getDay() == 5 && campaign.on && campaign.on.indexOf("Fri")) {
+                isVisible = true;
+              }
+              if (now.getDay() == 6 && campaign.on && campaign.on.indexOf("Sat")) {
+                isVisible = true;
+              }
+              if (now.getDate() == 30 && campaign.on && campaign.on.indexOf("30th") {
+                isVisible = true;
+              }
+              if (now.getDate() == 20 && campaign.on && campaign.on.indexOf("20th") {
+                isVisible = true;
+              }
+              if (now.getDate() == 10 && campaign.on && campaign.on.indexOf("10th") {
+                isVisible = true;
+              }
+              if (now.getDate() == 5 && campaign.on && campaign.on.indexOf("5th") {
+                isVisible = true;
+              }
+              if (now.getDate() == 15 && campaign.on && campaign.on.indexOf("15th") {
+                isVisible = true;
+              }
+              if (now.getDate() == 25 && campaign.on && campaign.on.indexOf("25th") {
+                isVisible = true;
+              }              
+              
+              if (!isVisible) {
+                continue;
+              }
+            }
 
             var col = document.createElement("div");
             col.className = "col s12 m6 l3";
