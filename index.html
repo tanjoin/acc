@@ -14,7 +14,22 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script>
-      window.onload = function(){
+      function getUrlQuery() {
+        var vars = [], max = 0, hash = "", array = "";
+        var url = window.location.search;
+
+        hash  = url.slice(1).split('&');    
+        max = hash.length;
+        for (var i = 0; i < max; i++) {
+          array = hash[i].split('=');    //keyと値に分割。
+          vars.push(array[0]);    //末尾にクエリ文字列のkeyを挿入。
+          vars[array[0]] = array[1];    //先ほど確保したkeyに、値を代入。
+        }
+        return vars;
+      }
+      
+      window.onload = function(){       
+        var query = getUrlQuery();
         var httpObj = new XMLHttpRequest();
         httpObj.open("get", "campaign.json", true);
         httpObj.onload = function() {
@@ -26,6 +41,12 @@
                    
           for (var i = 0; i < data.campaigns.length; i++) {
             var campaign = data.campaigns[i];
+            
+            if (query.service_title.length > 0) {
+              if (query.service_title == campaign.service_title) {
+                continue;
+              }
+            }
             
             var start = new Date(Date.parse(campaign.date.start));
             var end = new Date(Date.parse(campaign.date.end));
@@ -81,8 +102,11 @@
             var cardService = document.createElement("div");
             cardService.className = "amber-text";
             cardService.innerText = campaign.service_title;
-            cardContent.appendChild(cardService);
-            
+            var cardServicelink = document.createElement("a");
+            cardServicelink.href = "/?service_title=" + campaign.service_title;
+            cardServicelink.appendChild(cardService);
+            cardContent.appendChild(cardServicelink);
+                        
             var cardDay = document.createElement("div");
             cardDay.className = "grey-text";
             cardDay.innerText = campaign.date.start || '';
