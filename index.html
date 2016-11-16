@@ -43,7 +43,7 @@
             var campaign = data.campaigns[i];
             
             if (query.service_title && query.service_title.length > 0) {
-              if (query.service_title == campaign.service_title) {
+              if (decodeURI(query.service_title) != campaign.service_title) {
                 continue;
               }
             }
