@@ -77,3 +77,70 @@ acc.Campaign = function(opt_jsonData) {
   this.urls = opt_jsonData.urls;
 };
 
+acc.Campaign.prototype.hasUrl = function() {
+  return this.urls != null && this.urls.length > 0;
+};
+
+acc.Campaign.prototype.hasImage = function() {
+  return this.img != null && this.img.length > 0;
+};
+
+acc.Campaign.prototype.isShow = function(now) {
+  return this.validateDate_(now) && this.validateOn_(now);
+};
+
+/** @private */
+acc.Campaign.prototype.containsInOn_ = function(on) {
+  return this.on != null && this.on.indexOf(on) != -1;
+};
+
+/** @private */
+acc.Campaign.prototype.validateOn_ = function(now) {
+  if (this.on == null) {
+    return false;
+  }
+  if (this.containsInOn_(acc.On.ALL) ||
+      this.validateOnForDay_(now, acc.On.DAY.SUN) ||
+      this.validateOnForDay_(now, acc.On.DAY.MON) ||
+      this.validateOnForDay_(now, acc.On.DAY.TUE) ||
+      this.validateOnForDay_(now, acc.On.DAY.WED) ||
+      this.validateOnForDay_(now, acc.On.DAY.THU) ||
+      this.validateOnForDay_(now, acc.On.DAY.FRI) ||
+      this.validateOnForDay_(now, acc.On.DAY.SAT) ||
+      this.validateOnForDate_(now, acc.on.DATE.D_5)  ||
+      this.validateOnForDate_(now, acc.on.DATE.D_10) ||
+      this.validateOnForDate_(now, acc.on.DATE.D_15) ||
+      this.validateOnForDate_(now, acc.on.DATE.D_20) ||
+      this.validateOnForDate_(now, acc.on.DATE.D_25) ||
+      this.validateOnForDate_(now, acc.on.DATE.D_30) ||) {
+    return true;
+  }
+  return false;
+};
+
+/** @private */
+acc.Campaign.prototype.validateOnForDay_ = function(now, onDay) {
+  return now.getDay() == onDay.day && this.containsInOn_(onDay.text);
+};
+
+/** @private */
+acc.Campaign.prototype.validateOnForDate_ = function(now, onDate) {
+  return now.getDate() == onDate.date && this.containsInOn_(onDate.text);
+};
+
+/** @private 日付チェック */
+acc.Campaign.prototype.validateDate_ = function(now) {
+  if (now == null) {
+    now = new Date();
+  }
+  var start = new Date(Date.parse(this.date.start));
+  var end = new Date(Date.parse(this.date.end));
+  if (start != null && start.getTime() > now.getTime()) {
+    return false;
+  }
+  if (end != null && now.getTime() > end.getTime()) {
+    return false;
+  }
+  return true;
+};
+
