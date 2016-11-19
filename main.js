@@ -67,13 +67,13 @@ acc.Campaign = function(opt_jsonData) {
     return;
   }
   this.jsonData_ = opt_jsonData;
-  this.id = opt_data.id;
-  this.title = opt_data.title;
-  this.serviceTitle = opt_data.service_title;
-  this.date = opt_data.date;
-  this.on = opt_data.on;
-  this.img = opt_data.img;
-  this.description = opt_data.description;
-  this.urls = opt_data.urls;
+  this.id = opt_jsonData.id;
+  this.title = opt_jsonData.title;
+  this.serviceTitle = opt_jsonData.service_title;
+  this.date = opt_jsonData.date;
+  this.on = opt_jsonData.on;
+  this.img = opt_jsonData.img;
+  this.description = opt_jsonData.description;
+  this.urls = opt_jsonData.urls;
 };
 
