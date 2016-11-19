@@ -280,6 +280,10 @@ acc.onload = function(urlQuery) {
     var row = acc.createDiv("row");
     acc.insertInContents(row);
     var now = new Date();
+    
+    if (viewType == acc.ViewType.SERVICE_TITLE) {
+      campaigns = acc.filterCampaigns(campaigns, serviceTitle);
+    }
 
     for (var i = 0; i < campaigns.length; i++) {
       var campaign = campaigns[i];
