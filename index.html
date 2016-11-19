@@ -194,7 +194,7 @@ acc.convertData = function(responseText) {
   
 /** URL Query から service_title を取得する */
 acc.getServiceTitle = function(urlQuery) {
-  if (urlQuery != null && urlQuery.service_title.length > 0) {
+  if (urlQuery != null && urlQuery.service_title != null && urlQuery.service_title.length > 0) {
     return decodeURI(urlQuery.service_title);
   }
   return null;
