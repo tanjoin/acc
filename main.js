@@ -63,10 +63,10 @@ acc.Campaign = function(opt_jsonData) {
    * @type {Object|undefined}
    * @private
    */
-  if (opt_data == null) {
+  if (opt_jsonData == null) {
     return;
   }
-  this.jsonData_ = opt_data;
+  this.jsonData_ = opt_jsonData;
   this.id = opt_data.id;
   this.title = opt_data.title;
   this.serviceTitle = opt_data.service_title;
