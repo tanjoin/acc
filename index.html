@@ -177,7 +177,7 @@ acc.getUrlQuery = function() {
 acc.getCampaign = function(callback) {
   var request = new XMLHttpRequest();
   request.open(acc.API_METHOD_GET, acc.API_PATH_GET_CAMPAIGN, true);
-  request.onload(callback);
+  request.onload = callback;
   request.send(null);
 };
   
