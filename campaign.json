@@ -1,6 +1,20 @@
 {
   "campaigns" : [
     {
+      "id": 78,
+      "title": "ビューカードでApple Pay デビューキャンペーン。",
+      "description": "ビューカードでApple Payにご登録いただき、対象期間中にApple PayでSuica関連（*1）のお支払い、またはQUICPayのお支払いで合計5,000円（税込）以上（*2）ご利用いただいた方全員に、ビューサンクスポイント400ポイント（1,000円分相当）をプレゼントいたします。",
+      "urls": [
+        "http://www.jreast.co.jp/card/campaign/ap/?utm_source=hp&utm_medium=campaign&utm_campaign=ap&utm_content=216_216"
+      ],
+      "service_title": "ビューカード",
+      "date": {
+        "start": "2016/10/25",
+        "end": "2017/01/31"
+      },
+      "on": [ "All" ]
+    },
+    {
       "id": 77,
       "title": "ビックカメラSuicaカード会員さま限定 特別優待クーポン",
       "description": "本クーポンは、2016年10月1日（土）から2016年12月31日（土）までの期間中、ビックカメラ・コジマにてビックカメラSuicaカード（クレジット決済）でお支払い頂くと通常のビック・コジマポイントよりさらに3％ポイントアップ！何度でもご利用いただけます。",
