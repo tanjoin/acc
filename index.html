@@ -123,12 +123,12 @@ acc.Campaign.prototype.validateOn_ = function(now) {
       this.validateOnForDay_(now, acc.On.DAY.THU) ||
       this.validateOnForDay_(now, acc.On.DAY.FRI) ||
       this.validateOnForDay_(now, acc.On.DAY.SAT) ||
-      this.validateOnForDate_(now, acc.on.DATE.D_5)  ||
-      this.validateOnForDate_(now, acc.on.DATE.D_10) ||
-      this.validateOnForDate_(now, acc.on.DATE.D_15) ||
-      this.validateOnForDate_(now, acc.on.DATE.D_20) ||
-      this.validateOnForDate_(now, acc.on.DATE.D_25) ||
-      this.validateOnForDate_(now, acc.on.DATE.D_30)) {
+      this.validateOnForDate_(now, acc.On.DATE.D_5)  ||
+      this.validateOnForDate_(now, acc.On.DATE.D_10) ||
+      this.validateOnForDate_(now, acc.On.DATE.D_15) ||
+      this.validateOnForDate_(now, acc.On.DATE.D_20) ||
+      this.validateOnForDate_(now, acc.On.DATE.D_25) ||
+      this.validateOnForDate_(now, acc.On.DATE.D_30)) {
     return true;
   }
   return false;
