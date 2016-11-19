@@ -1,6 +1,20 @@
 {
   "campaigns" : [
     {
+      "id": 77,
+      "title": "ビックカメラSuicaカード会員さま限定 特別優待クーポン",
+      "description": "本クーポンは、2016年10月1日（土）から2016年12月31日（土）までの期間中、ビックカメラ・コジマにてビックカメラSuicaカード（クレジット決済）でお支払い頂くと通常のビック・コジマポイントよりさらに3％ポイントアップ！何度でもご利用いただけます。",
+      "urls": [
+        "http://www.biccamera.co.jp/shopguide/coupon/suica10_card/img/suicaweb160925_2.jpg",
+        "http://www.biccamera.co.jp/shopguide/coupon/suica10_card/index.html"
+      ],
+      "service_title": "ビューカード",
+      "date": {
+        "end": "2016/12/31"
+      },
+      "on": [ "All" ]
+    },
+    {
       "id": 76,
       "title": "ポイントがたまるアンケート｜JCBが運営するポイント優待サイト OkiDoki ランド",
       "description": "",
