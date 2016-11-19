@@ -323,7 +323,7 @@ acc.onload = function(urlQuery) {
 
         var cardService = acc.createDiv("amber-text");
         cardService.innerText = campaign.serviceTitle;
-        var cardServicelink = acc.createA("/acc/?service_title=" + campaign.service_title);
+        var cardServicelink = acc.createA("/acc/?service_title=" + campaign.serviceTitle);
         cardServicelink.appendChild(cardService);
         cardContent.appendChild(cardServicelink);
 
