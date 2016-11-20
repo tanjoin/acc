@@ -277,14 +277,15 @@ acc.onload = function(urlQuery) {
   
   acc.getCampaign(function() {
     var campaigns = acc.convertData(this.responseText);
-    var row = acc.createDiv("row");
-    acc.insertInContents(row);
     var now = new Date();
     
     if (viewType == acc.ViewType.SERVICE_TITLE) {
       campaigns = acc.filterCampaigns(campaigns, serviceTitle);
     }
 
+    var row = acc.createDiv("row");
+    acc.insertInContents(row);
+    
     for (var i = 0; i < campaigns.length; i++) {
       var campaign = campaigns[i];
       var isShow = campaign.isShow(now);
@@ -325,7 +326,7 @@ acc.onload = function(urlQuery) {
         cardTitle.innerText = campaign.title;
         cardContent.appendChild(cardTitle);
 
-        var cardService = acc.createDiv("amber-text");
+        var cardService = acc.createDiv("chip amber-text");
         cardService.innerText = campaign.serviceTitle;
         var cardServicelink = acc.createA("/acc/?service_title=" + campaign.serviceTitle);
         cardServicelink.appendChild(cardService);
