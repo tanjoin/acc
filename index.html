@@ -326,7 +326,7 @@ acc.onload = function(urlQuery) {
         cardTitle.innerText = campaign.title;
         cardContent.appendChild(cardTitle);
 
-        var cardService = acc.createDiv("chip amber-text");
+        var cardService = acc.createDiv("chip");
         cardService.innerText = campaign.serviceTitle;
         var cardServicelink = acc.createA("/acc/?service_title=" + campaign.serviceTitle);
         cardServicelink.appendChild(cardService);
