@@ -1,6 +1,62 @@
 {
   "campaigns" : [
     {
+      "id": 84,
+      "title": "キャンペーン：Android限定キャンペーン",
+      "description": "キャンペーン期間中に以下の条件を満たした方へ楽天スーパーポイント100ポイントプレゼント。\nSuper Point Screen アプリを新規でダウンロードし、楽天ＩＤログイン、ユーザ登録をしていただいた方。（ユーザ登録とは、SMS認証が完了していることをいいます。）",
+      "urls": [
+        "http://screen.rakuten.co.jp/campaign/?scid=mi_grp_gmx_sps_pcm20161117_2"
+      ],
+      "service_title": "楽天スーパーポイントスクリーン",
+      "date": {
+        "start": "2016/11/01 00:00",
+        "end": "2016/11/30 23:59"
+      },
+      "on": [ "All" ]
+    },
+    {
+      "id": 83,
+      "title": "ポイントからのチャージでチャージ額の3％分プレゼント！",
+      "description": "楽天カードに付帯のEdy、「楽天スーパーポイントを貯める」設定が完了したケータイ・スマートフォン",
+      "urls": [
+        "https://www.rakuten-card.co.jp/e-navi/p/enavi/include/campaign/detail/133487/detail.html"
+      ],
+      "service_title": "楽天カード",
+      "date": {
+        "start": "2016/11/16",
+        "end": "2016/11/23"
+      },
+      "on": [ "All" ]
+    },
+    {
+      "id": 82,
+      "title": "合計1,000円以上チャージでもれなく100ポイント",
+      "description": "期間中に楽天カードに付帯のEdyに合計1,000円以上チャージ",
+      "urls": [
+        "https://www.rakuten-card.co.jp/e-navi/p/enavi/include/campaign/detail/133484/detail.html"
+      ],
+      "service_title": "楽天カード",
+      "date": {
+        "start": "2016/11/16",
+        "end": "2016/12/04"
+      },
+      "on": [ "All" ]
+    },
+    {
+      "id": 81,
+      "title": "楽天カードでのEdyチャージで、もれなくポイント2倍！",
+      "description": "キャンペーン期間中にエントリーのうえ、以下の方法でEdyチャージ(入金)\n・楽天カードを使ってEdyチャージ(入金)\n・楽天e-NAVIでEdyチャージ(Edyチャージ、いつでもEdyチャージ、Edyオートチャージ)のお申し込みをして、Edyチャージ(入金)",
+      "urls": [
+        "https://www.rakuten-card.co.jp/e-navi/p/enavi/include/campaign/detail/133492/detail.html"
+      ],
+      "service_title": "楽天カード",
+      "date": {
+        "start": "2016/11/18",
+        "end": "2016/12/05"
+      },
+      "on": [ "All" ]
+    },
+    {
       "id": 80,
       "title": "中華まん10%引き",
       "description": "期間中、中華まん全品を10%引きで販売いたします。",
