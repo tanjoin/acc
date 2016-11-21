@@ -344,7 +344,7 @@
         
         acc.validateHide = function(campaign, urlQuery) {
             for (var i = 0; i < urlQuery.length; i++) {
-                if (campaign.id == urlQuery["hide[" + 0 + "]"]) {
+                if (campaign.id == urlQuery["hide[" + i + "]"]) {
                     return false;
                 }
             }
