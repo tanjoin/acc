@@ -311,6 +311,7 @@
             var img = document.createElement(acc.ELEMENT_IMG);
             img.setAttribute("width", "100%");
             img.setAttribute("height", "100%");
+            img.className = "materialboxed";
             if (opt_src != null) {
                 img.src = opt_src;
             }
@@ -438,6 +439,12 @@
             var urlQuery = acc.getUrlQuery();
             acc.onload(urlQuery);
         };
+        
+        // Materialize code
+        
+        $(document).ready(function(){
+            $('.materialboxed').materialbox();
+        });
     </script>
 </body>
 
