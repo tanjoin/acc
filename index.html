@@ -310,7 +310,7 @@
         };
         
         /** <i> 作成 */
-        acc.createIcon = function(opt_type) {
+        acc.createIcon  = function(opt_type) {
             var icon = document.createElement("i");
             icon.className = "material-icons";
             icon.innerText = opt_type;
@@ -426,7 +426,7 @@
             }
 
             var cardAction = acc.createDiv("card-action");
-            var icon = acc.ceateIcon("done");
+            var icon = acc.createIcon("done");
             cardAction.appendChild(icon);
             cardContent.appendChild(cardAction);
 
