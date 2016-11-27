@@ -309,6 +309,8 @@
         /** <img> 作成 */
         acc.createImg = function(opt_src) {
             var img = document.createElement(acc.ELEMENT_IMG);
+            img.setAttribute("width", "100vw");
+            img.setAttribute("height", "100vw");
             if (opt_src != null) {
                 img.src = opt_src;
             }
