@@ -42,9 +42,15 @@
 
         /** @const */
         acc.ELEMENT_P = "p";
+        
+        /** @const */
+        acc.ELEMENT_I = "i";
 
         /** @const */
         acc.ELEMENT_IMG = "img";
+        
+        /** @const */
+        acc.CLASS_NAME_MATERIAL_ICONS = "material-icons";
 
         /** @enum {string} */
         acc.ViewType = {
@@ -311,8 +317,8 @@
         
         /** <i> 作成 */
         acc.createIcon  = function(opt_type) {
-            var icon = document.createElement("i");
-            icon.className = "material-icons";
+            var icon = document.createElement(acc.ELEMENT_I);
+            icon.className = acc.CLASS_NAME_MATERIAL_ICONS;
             icon.innerText = opt_type;
             return icon;
         };
