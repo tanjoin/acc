@@ -8,6 +8,7 @@
     <meta name="author" content="tanjoin">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="">
 </head>
 
@@ -307,6 +308,14 @@
             }
             return img;
         };
+        
+        /** <i> 作成 */
+        acc.createIcon = function(opt_type) {
+            var icon = document.createElement("i");
+            icon.className = "material-icons";
+            icon.innerText = opt_type;
+            return icon;
+        };
 
         /** <div id="contents"> に要素を追加 */
         acc.insertInContents = function(element) {
@@ -408,17 +417,19 @@
             description.innerText = campaign.description;
             cardContent.appendChild(description);
 
-            var cardAction = acc.createDiv("card-action");
-            var isAddCardAction = false;
             for (var j = 1; j < campaign.urls.length; j++) {
+                var div = acc.createDiv();
                 var a = acc.createA(campaign.urls[j]);
                 a.innerText = "その" + (j + 1);
-                cardAction.appendChild(a);
-                isAddCardAction = true;
+                div.appendChild(a);
+                cardContent.appendChild(div);
             }
-            if (isAddCardAction) {
-                cardContent.appendChild(cardAction);
-            }
+
+            var cardAction = acc.createDiv("card-action");
+            var icon = acc.ceateIcon("done");
+            cardAction.appendChild(icon);
+            cardContent.appendChild(cardAction);
+
         };
 
         window.onload = function() {
