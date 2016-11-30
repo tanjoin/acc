@@ -1,6 +1,20 @@
 {
   "campaigns" : [
     {
+      "id": 91,
+      "title": "どこかにマイル - JALマイレージバンク",
+      "description": "詳しいご利用条件などは、12月12日（月）11:00以降、当ページにてご確認ください。",
+      "urls": [
+        "https://www.jal.co.jp/jmb/dokokani/"
+      ],
+      "service_title": "JAL",
+      "date": {
+        "start": "2016/12/12 11:00"
+      },
+      "img": "https://www.jal.co.jp/jmb/dokokani/Y15/img/lead_text.png"
+      "on": [ "All" ]
+    },
+    {
       "id": 90,
       "title": "松屋モバイルクーポン",
       "description": "ネギたっぷり旨辛ネギたま牛めし（並盛）\n30円引き\nネギたっぷり旨辛ネギたま牛めし（大盛）\n30円引き\n豆腐キムチチゲ膳（生玉子）\n40円引き\n豆腐キムチチゲ膳（半熟玉子）\n40円引き",
