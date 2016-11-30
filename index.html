@@ -42,13 +42,13 @@
 
         /** @const */
         acc.ELEMENT_P = "p";
-        
+
         /** @const */
         acc.ELEMENT_I = "i";
 
         /** @const */
         acc.ELEMENT_IMG = "img";
-        
+
         /** @const */
         acc.CLASS_NAME_MATERIAL_ICONS = "material-icons";
 
@@ -317,7 +317,7 @@
             }
             return img;
         };
-        
+
         /** <i> 作成 */
         acc.createIcon  = function(opt_type) {
             var icon = document.createElement(acc.ELEMENT_I);
@@ -329,6 +329,33 @@
         /** <div id="contents"> に要素を追加 */
         acc.insertInContents = function(element) {
             document.getElementById(acc.ELEMENT_ID_CONTENTS).appendChild(element);
+        };
+
+        acc.hideCampaign = function() {
+          var id = this.campaignId;
+          var count = 0;
+          var urlQuery = acc.getUrlQuery();
+          if (id == null) {
+            return true;
+          }
+          var url = window.location.origin + window.location.pathname + "?";
+
+          var serviceTitle = acc.getServiceTitle(urlQuery);
+          if (serviceTitle != null && serviceTitle.length > 0) {
+            url = url + "service_title=" + serviceTitle + "&";
+          }
+          url = url + "hide[" + count + "]=" + id;
+          count = count + 1;
+          for (var i = 0; i < urlQuery.length; i++) {
+              var hideId = urlQuery["hide[" + i + "]"];
+              if (null == hideId) {
+                break;
+              }
+              url = url + "&hide[" + count + "]=" + hideId;
+              count = count + 1;
+          }
+          document.location = url;
+          return false;
         };
 
         acc.onload = function(urlQuery) {
@@ -359,7 +386,7 @@
                 }
             });
         };
-        
+
         acc.validateHide = function(campaign, urlQuery) {
             for (var i = 0; i < urlQuery.length; i++) {
                 if (campaign.id == urlQuery["hide[" + i + "]"]) {
@@ -407,7 +434,12 @@
             }
 
             var cardContent = acc.insertDiv(card, "card-content white-text");
-            acc.insertDiv(cardContent, "blue-text", campaign.id);
+            acc.insertDiv(cardContent, "blue-text col s10", campaign.id);
+            var doneIcon = acc.createIcon("clear");
+            doneIcon.className = doneIcon.className + " hidebutton";
+            doneIcon.campaignId = campaign.id;
+            doneIcon.onclick = acc.hideCampaign;
+            acc.insertDiv(cardContent, "col s2", null, doneIcon);
             acc.insertDiv(cardContent, "card-title", campaign.title);
 
             var cardServicelink = acc.createA("/acc/?service_title=" + campaign.serviceTitle);
@@ -439,9 +471,9 @@
             var urlQuery = acc.getUrlQuery();
             acc.onload(urlQuery);
         };
-        
+
         // Materialize code
-        
+
         $(document).ready(function(){
             $('.materialboxed').materialbox();
         });
