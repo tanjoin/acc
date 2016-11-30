@@ -394,11 +394,11 @@
             var card;
             if (campaign.hasUrl()) {
                 var cardLink = acc.createA(campaign.urls[0]);
-                card = acc.createDiv("card blue-grey darken-3 waves-effect waves-block waves-light");
+                card = acc.createDiv("card blue-grey darken-3 z-depth-0");
                 cardLink.appendChild(card);
                 col.appendChild(cardLink);
             } else {
-                card = acc.createDiv("card blue-grey darken-3");
+                card = acc.createDiv("card blue-grey darken-3 z-depth-0");
                 col.appendChild(card);
             }
 
