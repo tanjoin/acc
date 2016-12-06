@@ -154,7 +154,7 @@
         };
 
         /** @private */
-        acc.Campaign.prototype.containsInOn_ = function(on) {
+        acc.Campaign.prototype.containsInOn = function(on) {
             return this.on != null && this.on.indexOf(on) != -1;
         };
 
@@ -163,7 +163,7 @@
             if (this.on == null) {
                 return false;
             }
-            if (this.containsInOn_(acc.On.ALL) ||
+            if (this.containsInOn(acc.On.ALL) ||
                 this.validateOnForDay_(now, acc.On.DAY.SUN) ||
                 this.validateOnForDay_(now, acc.On.DAY.MON) ||
                 this.validateOnForDay_(now, acc.On.DAY.TUE) ||
@@ -184,12 +184,12 @@
 
         /** @private */
         acc.Campaign.prototype.validateOnForDay_ = function(now, onDay) {
-            return now.getDay() == onDay.day && this.containsInOn_(onDay.text);
+            return now.getDay() == onDay.day && this.containsInOn(onDay.text);
         };
 
         /** @private */
         acc.Campaign.prototype.validateOnForDate_ = function(now, onDate) {
-            return now.getDate() == onDate.date && this.containsInOn_(onDate.text);
+            return now.getDate() == onDate.date && this.containsInOn(onDate.text);
         };
 
         /** @private 日付チェック */
@@ -269,6 +269,58 @@
                 }
             }
             return result;
+        };
+
+        /** Campaign をソート */
+        acc.sortCampaigns = function(campaigns) {
+          campaigns.sort(function(a, b) {
+            if (!a.containsInOn(acc.On.ALL) && !b.containsInOn(acc.On.ALL)) {
+              if (a.id > b.id) {
+                return -1;
+              }
+              if (a.id < b.id) {
+                return 1;
+              }
+              return 0;
+            }
+
+            if (!a.containsInOn(acc.On.ALL)) {
+              return -1;
+            }
+            if (!b.containsInOn(acc.On.ALL)) {
+              return 1;
+            }
+
+            var aDate = new Date(Date.parse(a.date.end));
+            var bDate = new Date(Date.parse(b.date.end));
+
+            if (isNaN(aDate.getTime()) && isNaN(bDate.getTime())) {
+              if (a.id > b.id) {
+                return -1;
+              }
+              if (a.id < b.id) {
+                return 1;
+              }
+              return 0;
+            }
+
+            if (isNaN(aDate.getTime())) {
+              return 1;
+            }
+            if (isNaN(bDate.getTime())) {
+              return -1;
+            }
+
+            if (aDate.getTime() > bDate.getTime()) {
+              return 1;
+            }
+
+            if (aDate.getTime() < bDate.getTime()) {
+              return -1;
+            }
+            return 0;
+          });
+          return campaigns;
         };
 
         /** service_title が一致するかどうか */
@@ -369,6 +421,8 @@
                 if (viewType == acc.ViewType.SERVICE_TITLE) {
                     campaigns = acc.filterCampaigns(campaigns, serviceTitle);
                 }
+
+                campaigns = acc.sortCampaigns(campaigns);
 
                 var row = acc.createDiv("row");
                 acc.insertInContents(row);
