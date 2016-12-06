@@ -1,5 +1,47 @@
 {
   "campaigns": [
+    {
+       "id": 100,
+       "title": "",
+       "description": "",
+       "urls": [
+         "http://info.d-card.jp/std/campaigns/ap5_1/ap5_1.html"
+       ],
+       "service_title": "dカード",
+       "date": {
+         "start": "",
+         "end": ""
+       },
+       "on": [ "All" ]
+     },
+     {
+       "id": 99,
+       "title": "dカードならApple Payのご利用でもれなくdポイント5倍キャンペーン! ｜ キャンペーン",
+       "description": "キャンペーン期間中、エントリー期間のApple PayでのiDのご利用分に対して通常ポイント1％に加えて、さらに4％分のキャンペーンポイント（本キャンペーンにより進呈されるポイントをいいます）を進呈します。\n※本会員のエントリーで家族カードのiDご利用分も対象となります。（家族カードのエントリーは必要ありません）\n※キャンペーンポイントの上限は1,000ポイント/月となります。",
+       "urls": [
+         "http://info.d-card.jp/std/campaigns/ap5_1/ap5_1.html"
+       ],
+       "service_title": "dカード",
+       "date": {
+         "start": "2016/11/25",
+         "end": "2017/03/31"
+       },
+       "on": [ "All" ]
+     },
+     {
+       "id": 98,
+       "title": "Apple Payを1万円以上ご利用の方に10,000ポイント当たるチャンス! ｜ キャンペーン",
+       "description": "キャンペーンにエントリーのうえ、Apple Payを10,000円以上ご利用いただいた方の中から、抽選で1,000名様にdポイントを10,000ポイント進呈。",
+       "urls": [
+         "http://info.d-card.jp/std/campaigns/pay/cpn-pay.html"
+       ],
+       "service_title": "dカード",
+       "date": {
+         "start": "2016/10/25",
+         "end": "2017/01/31"
+       },
+       "on": [ "All" ]
+     },
      {
       "id": 97,
       "title": "出前注文でポイント最大20倍！ dポイント冬のスーパァ～チャンス｜出前・フード宅配サービスのdデリバリー",
