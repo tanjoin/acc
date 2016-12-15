@@ -10,7 +10,7 @@
       "img": "http://www.sej.co.jp/mngdbps/_template_/_user_/_SITE_/localhost/_res/cmp/nanaco1612/nanaco_point2x_161201.png",
       "service_title": "nanaco",
       "date": {
-        "start": "2016/12/19"
+        "start": "2016/12/19",
         "end": "2017/01/03"
       },
       "on": [
@@ -27,7 +27,7 @@
       "img": "http://www.sej.co.jp/mngdbps/_template_/_user_/_SITE_/localhost/_res/cmp/nanaco1612/txt_01.jpg",
       "service_title": "nanaco",
       "date": {
-        "start": "2016/12/01"
+        "start": "2016/12/01",
         "end": "2016/12/18"
       },
       "on": [
