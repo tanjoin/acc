@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 106,
+      "title": "【LINE Pay】ポイント2倍！ 年末年始の大大大お買い物祭りを開催！！",
+      "description": "「LINE Pay カード」でお買い物をすると、通常の2倍の4%のLINEポイントが貯まる“年末年始の大大大お買い物祭り”を開催します！キャンペーン期間中に「LINE Pay カード」でお買い物をするだけでOK！ ご利用分が自動的にポイントアップの対象になります。",
+      "urls": [
+        "http://official-blog.line.me/ja/archives/67938117.html"
+      ],
+      "service_title": "LINE",
+      "date": {
+        "start": "2016/12/22 0:00",
+        "end": "2017/01/09 23:59"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 105,
       "title": "吉野家 鍋膳50円引き",
       "description": "LINE クーポン",
