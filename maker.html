@@ -58,7 +58,7 @@
               var campaigns = accMaker.convertData(this.responseText);              
               var lastId = campaigns[0];
               var p = document.createElement("p");
-              p.innerValue = parseInt(lastId) + 1;
+              p.innterHTML = parseInt(lastId) + 1;
               document.getElementById("content_id").appendChild(p);
             });
         };
