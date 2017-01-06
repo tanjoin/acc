@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>acc</title>
+    <title>acc content maker</title>
     <meta charset="utf-8">
     <meta name="description" content="acc">
     <meta name="author" content="tanjoin">
@@ -54,7 +54,7 @@
         };
         
         window.onload = function() {
-            acc.accMaker.getCampaign(function() {
+            accMaker.getCampaign(function() {
               var campaigns = accMaker.convertData(this.responseText);              
               var lastId = campaings[0];
               var p = document.createElement("p");
