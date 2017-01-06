@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>acc</title>
+    <meta charset="utf-8">
+    <meta name="description" content="acc">
+    <meta name="author" content="tanjoin">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="">
+</head>
+
+<body>
+    <div id="contents">
+      <div id="content_id"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script>
+        var accMaker = {};
+        
+        /** @constructor */
+        accMaker.CampaignId = function(opt_jsonData) {
+            /**
+             * JSON 文字列を parse したもの.
+             * @type {Object|undefined}
+             * @private
+             */
+            if (opt_jsonData == null) {
+                return;
+            }
+            this.id = opt_jsonData.id;
+        };
+        
+        /** キャンペーン情報を取得する. */
+        accMaker.getCampaign = function(callback) {
+            var request = new XMLHttpRequest();
+            request.open("GET", "https://tanjo.in/acc/campaign.json", true);
+            request.onload = callback;
+            request.send(null);
+        };
+        
+         /** JSON データを Campaign に変換. */
+        accMaker.convertData = function(responseText) {
+            var data = JSON.parse(responseText);
+            var campaigns = [];
+            for (var i = 0; i < data.campaigns.length; i++) {
+                var campaign = new accMaker.CampaignId(data.campaigns[i]);
+                campaigns.push(campaign);
+            }
+            return campaigns;
+        };
+        
+        window.onload = function() {
+            acc.accMaker.getCampaign(function() {
+              var campaigns = accMaker.convertData(this.responseText);              
+              var lastId = campaings[0];
+              var p = document.createElement("p");
+              document.getElementById("content_id").appendChild(element);
+            });
+        };
+    </script>
+</body>
+
+</html>
