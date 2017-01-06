@@ -56,7 +56,7 @@
         window.onload = function() {
             accMaker.getCampaign(function() {
               var campaigns = accMaker.convertData(this.responseText);              
-              var lastId = campaigns[0];
+              var lastId = campaigns[0].id;
               var p = document.createElement("p");
               p.innerText = parseInt(lastId) + 1;
               document.getElementById("content_id").appendChild(p);
