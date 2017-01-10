@@ -1,5 +1,6 @@
 {
   "campaigns": [
+    {"id":"108","service_title":"オムニ７","title":"【必ず当たる！】セブンネットおみくじキャンペーン ","description":"①　オムニ７に会員登録\n②「キャンペーンに参加する」ボタンからキャンペーンページへ\n③「オムニ7ログインID」を入力し、チェックボックスにチェックを入れる\n④「おみくじを引く」ボタンをクリックし、結果を確認\n\n・キャンペーンへの参加はお一人様、1回限りとなります。\n・Facebook、Twitter、Google+、yahoo!Japan のIDでオムニ7をご利用されている方は対象外となります。「オムニ7」への会員登録をお願いいたします。","urls":["http://7net.omni7.jp/general/sp/170110omikuji"],"img":"http://img.omni7.jp/cm/0001/sc_image/inc/pc/special/170110omikuji/topimage_980x326.jpg","date":{"end":"2017/01/31"},"on":["All"]},
     {
       "id": 107,
       "title": "ローソンIDメール限定クーポン[LAWSON]",
