@@ -1,6 +1,6 @@
 {
   "campaigns": [
-    {"id":"107","title":"ローソンIDメール限定クーポン[LAWSON] ","description":"ウチカフェスイーツ各種20円引（予約商品・ウチカフェドリンク・一部チルド商品を除く） ","url":"http://www.lawson.co.jp/ml_coupon/?utm_source=email&utm_medium=email-lid&utm_term=&utm_content=etc-3&utm_campaign=20161223-coupon","date":{"start":"2017/01/01","end":"2017/01/31"},"on":["All"]},
+    {"id":"107","title":"ローソンIDメール限定クーポン[LAWSON] ","description":"ウチカフェスイーツ各種20円引（予約商品・ウチカフェドリンク・一部チルド商品を除く） ","url":["http://www.lawson.co.jp/ml_coupon/?utm_source=email&utm_medium=email-lid&utm_term=&utm_content=etc-3&utm_campaign=20161223-coupon"],"date":{"start":"2017/01/01","end":"2017/01/31"},"on":["All"]},
     {
       "id": 106,
       "title": "【LINE Pay】ポイント2倍！ 年末年始の大大大お買い物祭りを開催！！",
