@@ -168,7 +168,7 @@
           var data = {};
           var val = $('#content_id').val();
           if (val != null && val.length > 0) {
-            data.id = val;
+            data.id = parseInt(val);
           }
           val = $('#content_service_title').val();
           if (val != null && val.length > 0) {
