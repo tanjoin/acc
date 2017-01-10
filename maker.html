@@ -184,7 +184,10 @@
           }
           val = $('#content_url').val();
           if (val != null && val.length > 0) {
-            data.url = val;
+            if (data.url == null) {
+                data.url = [];
+            }
+            data.url.push(val);
           }
           val = $('#content_img').val();
           if (val != null && val.length > 0) {
