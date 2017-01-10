@@ -14,13 +14,213 @@
 
 <body>
     <div id="contents">
-      <div id="content_id"></div>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input class="validate" id="content_id" type="number" disabled="disabled" value="0">
+              <label for="content_id">ID</label>
+            </div>
+            <div class="input-field col s12">
+              <input class="validate" id="content_title" type="text" required>
+              <label for="content_title">タイトル</label>
+            </div>
+            <div class="input-field col s12">
+              <input class="autocomplete" id="content_service_title" type="text" required>
+              <label for="content_service_title">サービス</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="content_start_date" type="text">
+              <label for="content_start_date">開始日</label>
+              <!--
+              <div class="col s6">
+                <input id="content_start_time" type="time">
+              </div>
+              -->
+            </div>
+            <div class="input-field col s12">
+              <input id="content_end_date" type="text">
+              <label for="content_end_date">終了日</label>
+              <!--
+              <div class="col s6">
+                <input id="content_end_time" type="time">
+              </div>
+              -->
+            </div>
+            <div class="input-field col s12">
+              <input class="validate" id="content_url" type="text">
+              <label for="content_url">URL</label>
+            </div>
+            <div class="input-field col s12">
+              <input class="validate" id="content_img" type="text">
+              <label for="content_img">画像URL</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea id="content_description" class="materialize-textarea"></textarea>
+              <label for="content_description">説明</label>
+            </div>
+            <div class="input-field col s12">
+              <p>On</p>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_all" value="All">
+              <label for="on_all">All</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_mon" value="Mon">
+              <label for="on_mon">Mon</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_tue" value="Tue">
+              <label for="on_tue">Tue</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_wed" value="Wed">
+              <label for="on_wed">Wed</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_thu" value="Thu">
+              <label for="on_thu">Thu</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_fri" value="Fri">
+              <label for="on_fri">Fri</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_sat" value="Sat">
+              <label for="on_sat">Sat</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_sun" value="Sun">
+              <label for="on_sun">Sun</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_5th" value="5th">
+              <label for="on_5th">5th</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_10th" value="10th">
+              <label for="on_10th">10th</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_15th" value="15th">
+              <label for="on_15th">15th</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_20th" value="20th">
+              <label for="on_20th">20th</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_25th" value="25th">
+              <label for="on_25th">25th</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="checkbox" id="on_30th" value="30th">
+              <label for="on_30th">30th</label>
+            </div>
+            <div class="col s5"></div>
+            <div id="create_json" class="btn col s2">
+              <span>Create</span>
+            </div>
+            <div class="col s5"></div>
+            <div class="col s12"><br></div>
+            <div class="col s1"></div>
+            <div class="col s10" id="result"></div>
+            <div class="col s1"></div>
+          </div>
+        </form>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script>
         var accMaker = {};
-        
+        accMaker.serviceTitles = {};
+
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+
+        $('input[type="checkbox"]').change(function() {
+          if ($(this).is($('input#on_all'))) {
+            if ($(this).is(':checked')) {
+              $('input[type="checkbox"]').each(function(){
+                $(this).prop("checked", false);
+              });
+              $(this).prop("checked", true);
+            }
+          } else {
+            $('input#on_all').prop("checked", false);
+          }
+        });
+
+        $('#create_json').click(function() {
+          var data = {};
+          var val = $('#content_id').val();
+          if (val != null && val.length > 0) {
+            data.id = val;
+          }
+          val = $('#content_service_title').val();
+          if (val != null && val.length > 0) {
+            data.service_title = val;
+          }
+          val = $('#content_title').val();
+          if (val != null && val.length > 0) {
+            data.title = val;
+          }
+          val = $('#content_description').val();
+          if (val != null && val.length > 0) {
+            data.description = val;
+          }
+          val = $('#content_url').val();
+          if (val != null && val.length > 0) {
+            data.url = val;
+          }
+          val = $('#content_img').val();
+          if (val != null && val.length > 0) {
+            data.img = val;
+          }
+          val = $('#content_start_date').val();
+          if (val != null && val.length > 0) {
+            if (data.date == null) {
+              data.date = {};
+            }
+            data.date.start = val;
+
+            val = $('#content_start_time').val();
+            if (val != null && val.length > 0) {
+              data.date.start += " " + val;
+            }
+          }
+          val = $('#content_end_date').val();
+          if (val != null && val.length > 0) {
+            if (data.date == null) {
+              data.date = {};
+            }
+            data.date.end = val;
+
+            val = $('#content_end_time').val();
+            if (val != null && val.length > 0) {
+              data.date.end += " " + val;
+            }
+          }
+
+          // TODO: On
+          $('input[type="checkbox"]').each(function() {
+            if ($(this).is(':checked')) {
+              if (data.on == null) {
+                data.on = [];
+              }
+              data.on.push($(this).val());
+            }
+          });
+
+          $('#result').addClass('blue-grey lighten-5');
+          $('#result').css('padding', '50px');
+          $('#result').text(JSON.stringify(data));
+        });
+
         /** @constructor */
         accMaker.CampaignId = function(opt_jsonData) {
             /**
@@ -32,8 +232,9 @@
                 return;
             }
             this.id = opt_jsonData.id;
+            this.serviceTitle = opt_jsonData.service_title;
         };
-        
+
         /** キャンペーン情報を取得する. */
         accMaker.getCampaign = function(callback) {
             var request = new XMLHttpRequest();
@@ -41,7 +242,7 @@
             request.onload = callback;
             request.send(null);
         };
-        
+
          /** JSON データを Campaign に変換. */
         accMaker.convertData = function(responseText) {
             var data = JSON.parse(responseText);
@@ -49,17 +250,19 @@
             for (var i = 0; i < data.campaigns.length; i++) {
                 var campaign = new accMaker.CampaignId(data.campaigns[i]);
                 campaigns.push(campaign);
+                accMaker.serviceTitles[campaign.serviceTitle] = null;
             }
+            $('input#content_service_title').autocomplete({
+              data: accMaker.serviceTitles
+            });
             return campaigns;
         };
-        
+
         window.onload = function() {
             accMaker.getCampaign(function() {
-              var campaigns = accMaker.convertData(this.responseText);              
+              var campaigns = accMaker.convertData(this.responseText);
               var lastId = campaigns[0].id;
-              var p = document.createElement("p");
-              p.innerText = parseInt(lastId) + 1;
-              document.getElementById("content_id").appendChild(p);
+              document.getElementById("content_id").value = parseInt(lastId) + 1;
             });
         };
     </script>
