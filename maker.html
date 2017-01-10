@@ -184,10 +184,10 @@
           }
           val = $('#content_url').val();
           if (val != null && val.length > 0) {
-            if (data.url == null) {
-                data.url = [];
+            if (data.urls == null) {
+                data.urls = [];
             }
-            data.url.push(val);
+            data.urls.push(val);
           }
           val = $('#content_img').val();
           if (val != null && val.length > 0) {
@@ -218,7 +218,6 @@
             }
           }
 
-          // TODO: On
           $('input[type="checkbox"]').each(function() {
             if ($(this).is(':checked')) {
               if (data.on == null) {
