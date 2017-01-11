@@ -229,7 +229,7 @@
 
           $('#result').addClass('blue-grey lighten-5');
           $('#result').css('padding', '50px');
-          $('#result').text(JSON.stringify(data, null, 4).replace(/\r?\n/g, '<br>').replace(/ /g, '&nbsp;'));
+          $('#result').html(JSON.stringify(data, null, 4).replace(/\r?\n/g, '<br>').replace(/ /g, '&nbsp;'));
         });
 
         /** @constructor */
