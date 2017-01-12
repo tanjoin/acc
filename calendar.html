@@ -1,1 +1,286 @@
-Comming soon ....
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>acc calendar</title>
+    <meta charset="utf-8">
+    <meta name="description" content="acc">
+    <meta name="author" content="tanjoin">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="">
+</head>
+
+<body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Acc Calendar</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
+          <li><a href="https://tanjo.in/acc">ACC</a></li>
+          <li><a href="https://tanjo.in/acc/maker.html">Maker</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div id="contents">
+      <div class="row">
+        <div class="col s5"></div>
+        <div id="month_area" class="col s2"></div>
+        <div class="col s5"></div>
+        <div class="col s12">
+          <table class="bordered">
+            <thead>
+              <tr>
+                <th id="mon">月</th>
+                <th id="tue">火</th>
+                <th id="wed">水</th>
+                <th id="thu">木</th>
+                <th id="fri">金</th>
+                <th id="sat">土</th>
+                <th id="sun">日</th>
+              </tr>
+              <tbody id="calendar_body">
+              </tbody>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script>
+        var accCalendar = {};
+        accCalendar.colors = ["#e3f2fd", "#90caf9", "#ffccbc", "#80cbc4", "#c5cae9", "#eeeeee", "#f8bbd0"];
+
+        accCalendar.TD_CSS = "padding:0px;margin:0px;font-size:small;max-width:0px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
+
+        /** @constructor */
+        accCalendar.Campaign = function(opt_jsonData) {
+            /**
+             * JSON 文字列を parse したもの.
+             * @type {Object|undefined}
+             * @private
+             */
+            if (opt_jsonData == null) {
+                return;
+            }
+            this.id = opt_jsonData.id;
+            this.serviceTitle = opt_jsonData.service_title;
+            this.title = opt_jsonData.title;
+            this.urls = opt_jsonData.urls;
+            this.date = opt_jsonData.date;
+            this.on = opt_jsonData.on;
+        };
+
+        accCalendar.Campaign.prototype.contains = function(opt_date) {
+          if (opt_date == null) {
+              opt_date = new Date();
+          }
+          var start = new Date(Date.parse(this.date.start));
+          var end = new Date(Date.parse(this.date.end));
+          if (start != null && start.getTime() > opt_date.getTime()) {
+              return false;
+          }
+          if (end != null && opt_date.getTime() > end.getTime()) {
+              return false;
+          }
+          return true;
+        }
+
+        /** キャンペーン情報を取得する. */
+        accCalendar.getCampaign = function(callback) {
+            var request = new XMLHttpRequest();
+            request.open("GET", "https://tanjo.in/acc/campaign.json", true);
+            request.onload = callback;
+            request.send(null);
+        };
+
+         /** JSON データを Campaign に変換. */
+        accCalendar.convertData = function(responseText) {
+            var data = JSON.parse(responseText);
+            var campaigns = [];
+            for (var i = 0; i < data.campaigns.length; i++) {
+                var campaign = new accCalendar.Campaign(data.campaigns[i]);
+                campaigns.push(campaign);
+            }
+            return campaigns;
+        };
+
+        /** 月初 **/
+        accCalendar.getBeginningOfMonth = function(target, num) {
+          var date = new Date(target.getTime());
+          if (num != null) {
+            date.setDate(num);
+          } else {
+            date.setDate(1);
+          }
+          return date;
+        };
+
+        /** 月末 **/
+        accCalendar.getEndOfMonth = function(target) {
+          var date = new Date(target.getTime());
+          date.setDate(1);
+          date.setMonth(date.getMonth() + 1);
+          date.setDate(0);
+          return date;
+        };
+
+        /** 曜日の位置を取得する **/
+        accCalendar.getIndexOfDay = function(date) {
+          var day = date.getDay();
+          if (day == 0) {
+            return 7;
+          }
+          return day;
+        }
+
+        /** カレンダーの生成に必要な情報を取得 **/
+        accCalendar.getCalendarData = function(target, num) {
+          var begin = accCalendar.getBeginningOfMonth(target, num);
+          var end = accCalendar.getEndOfMonth(target);
+          return {
+            "begin": begin,
+            "end": end,
+            "beginDay": accCalendar.getIndexOfDay(begin),
+            "endDay": accCalendar.getIndexOfDay(end)
+          };
+        }
+
+        accCalendar.setMonthHeaderText = function() {
+          var target = accCalendar.target;
+          document.getElementById("month_area").innerText = (target.getMonth() + 1) + "月";
+        };
+
+        accCalendar.appendTr = function(opt_style) {
+          var tr = document.createElement("tr");
+          if (opt_style != null) {
+            tr.setAttribute("style", opt_style);
+          }
+          document.getElementById("calendar_body").appendChild(tr);
+          return tr;
+        }
+
+        accCalendar.appendTd = function(tr, opt_colspan, opt_text, opt_style, opt_id) {
+          var td = document.createElement("td");
+          if (opt_colspan != null) {
+            td.setAttribute("colspan", opt_colspan);
+          }
+          if (opt_text != null) {
+            td.innerText = opt_text;
+          }
+          if (opt_style != null) {
+            td.setAttribute("style", opt_style);
+          }
+          if (opt_id != null) {
+            td.setAttribute("id", opt_id);
+          }
+          tr.appendChild(td);
+          return td;
+        }
+
+        /** その月の第何週目かを返す **/
+        accCalendar.getWeek = function(date) {
+          var d = new Date(date.getTime());
+          return Math.floor((d.getDate() - d.getDay() + 12) / 7);
+        };
+
+        /** いい感じの TD の値を返す **/
+        accCalendar.judge = function(campaign, first, last, calendarData) {
+          var prefix, suffix, main, d;
+
+          if (first == calendarData.begin.getDate()) {
+            prefix = calendarData.beginDay - 1;
+          }
+
+          d = new Date(calendarData.begin.getTime());
+
+          for (var i = first; i <= last; i++) {
+            // TODO: 判定する
+          }
+        }
+
+        /** カレンダー作成 **/
+        accCalendar.makeCalendar = function(campaigns) {
+          var tr, td, date, week, i, campaign, first, last, result;
+
+          var target = accCalendar.target;
+          date = accCalendar.target.getDate();
+          week = accCalendar.getWeek(target);
+          var calendarData = accCalendar.getCalendarData(target, date);
+
+          tr = accCalendar.appendTr();
+          accCalendar.appendTd(tr, calendarData.beginDay - 1);
+
+          first = date;
+          for (i = calendarData.beginDay; i <= 7; i++) {
+            accCalendar.appendTd(tr, null, date);
+            date++;
+          }
+          last = date;
+
+          for (i = 0; i < campaigns.length; i++) {
+            campaign = campaigns[i];
+
+            tr = accCalendar.appendTr("border-style:hidden;");
+
+            accCalendar.appendTd(tr, calendarData.beginDay - 1, null, accCalendar.TD_CSS);
+
+            // TOOD: ここでCalendarに反映
+            accCalendar.appendTd(tr,
+              7 - calendarData.beginDay + 1,
+              "【" + campaign.serviceTitle + "】" + campaign.title,
+              accCalendar.TD_CSS + "background-color:" + accCalendar.getThemeColor(campaign.id) + ";",
+              week + "-"+ campaign.id);
+            //
+          }
+          week++;
+
+          while(date <= calendarData.end.getDate()) {
+              tr = accCalendar.appendTr();
+
+              first = date;
+              for (var i = 1; i <= 7; i++) {
+                if (date > calendarData.end.getDate()) {
+                  break;
+                }
+                accCalendar.appendTd(tr, null, date);
+                date++;
+              }
+              last = date;
+
+              for (var i = 0; i < campaigns.length; i++) {
+                tr = accCalendar.appendTr("border-style:hidden;");
+
+                campaign = campaigns[i];
+
+                // TOOD: ここでCalendarに反映
+                accCalendar.appendTd(tr,
+                    last - first,
+                    "【" + campaign.serviceTitle + "】" + campaign.title,
+                    accCalendar.TD_CSS + "background-color:" + accCalendar.getThemeColor(campaign.id) + ";",
+                    week + "-" + campaign.id);
+                //
+              }
+              week++;
+          }
+        };
+
+        accCalendar.getThemeColor = function(seed) {
+          return accCalendar.colors[seed % accCalendar.colors.length];
+        }
+
+        window.onload = function() {
+            accCalendar.getCampaign(function() {
+              var campaigns = accCalendar.convertData(this.responseText);
+              accCalendar.target = new Date();
+              accCalendar.target.setMonth(accCalendar.target.getMonth());
+              accCalendar.setMonthHeaderText();
+              accCalendar.makeCalendar(campaigns);
+            });
+        };
+    </script>
+</body>
+
+</html>
