@@ -55,6 +55,67 @@
 
         accCalendar.TD_CSS = "padding:0px;margin:0px;font-size:small;max-width:0px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
 
+        /** @enum {Object} */
+        accCalendar.On = {
+            ALL: "All",
+            DAY: {
+                SUN: {
+                    day: 0,
+                    text: "Sun"
+                },
+                MON: {
+                    day: 1,
+                    text: "Mon"
+                },
+                TUE: {
+                    day: 2,
+                    text: "Tue"
+                },
+                WED: {
+                    day: 3,
+                    text: "Wed"
+                },
+                THU: {
+                    day: 4,
+                    text: "Thu"
+                },
+                FRI: {
+                    day: 5,
+                    text: "Fri"
+                },
+                SAT: {
+                    day: 6,
+                    text: "Sat"
+                }
+            },
+            DATE: {
+                D_05: {
+                    date: 5,
+                    text: "5th"
+                },
+                D_10: {
+                    date: 10,
+                    text: "10th"
+                },
+                D_15: {
+                    date: 15,
+                    text: "15th"
+                },
+                D_20: {
+                    date: 20,
+                    text: "20th"
+                },
+                D_25: {
+                    date: 25,
+                    text: "25th"
+                },
+                D_30: {
+                    date: 30,
+                    text: "30th"
+                }
+            }
+        };
+
         /** @constructor */
         accCalendar.Campaign = function(opt_jsonData) {
             /**
@@ -148,17 +209,53 @@
           };
         }
 
+        /** 今日の曜日を強調する **/
+        accCalendar.setTodaysDay = function() {
+          var id;
+          var today = new Date();
+          switch (today.getDay()) {
+            case 0:
+              id = "sun";
+              break;
+            case 1:
+              id = "mon";
+              break;
+            case 2:
+              id = "tue";
+              break;
+            case 3:
+              id = "wed";
+              break;
+            case 4:
+              id = "thu";
+              break;
+            case 5:
+              id = "sat";
+              break;
+            case 6:
+              id = "sun";
+              break;
+          }
+          var th = document.getElementById(id);
+          th.style.backgroundColor = "#eeeeee";
+        };
+
         accCalendar.setMonthHeaderText = function() {
           var target = accCalendar.target;
           document.getElementById("month_area").innerText = (target.getMonth() + 1) + "月";
         };
 
         accCalendar.appendTr = function(opt_style) {
+          var tr = accCalendar.createTr(opt_style);
+          document.getElementById("calendar_body").appendChild(tr);
+          return tr;
+        }
+
+        accCalendar.createTr = function(opt_style) {
           var tr = document.createElement("tr");
           if (opt_style != null) {
             tr.setAttribute("style", opt_style);
           }
-          document.getElementById("calendar_body").appendChild(tr);
           return tr;
         }
 
@@ -199,7 +296,53 @@
           for (var i = first; i <= last; i++) {
             // TODO: 判定する
           }
-        }
+        };
+
+        accCalendar.createCampaignBar = function(tr, campaign, calendarData, first, last, idPrefix) {
+          var campaignStart = new Date(Date.parse(campaign.date.start));
+          var campaignEnd = new Date(Date.parse(campaign.date.end));
+          var firstDate = new Date(calendarData.begin.getTime());
+          firstDate.setDate(first);
+          var lastDate = new Date(calendarData.begin.getTime());
+          lastDate.setDate(last);
+
+          var date = firstDate;
+          var isEmpty = false;
+          var td = null;
+
+          while (date < lastDate) {
+            if ((campaignStart != null && campaignStart > date) || (campaignEnd != null && campaignEnd < date)) { // 開始前 or 終了済み
+              if (isEmpty && td != null) {
+                td.colSpan = td.colSpan + 1;
+              } else {
+                if (td != null) {
+                  tr.appendChild(td);
+                }
+                td = document.createElement("td");
+                td.style = accCalendar.TD_CSS;
+                td.colSpan = 1;
+              }
+              isEmpty = true;
+            } else {
+              if (isEmpty || td == null) {
+                if (td != null) {
+                  tr.appendChild(td);
+                }
+                td = document.createElement("td");
+                td.innerText = "【" + campaign.id + " " + campaign.serviceTitle + "】" + campaign.title;
+                td.style = accCalendar.TD_CSS + "background-color:" + accCalendar.getThemeColor(campaign.id) + ";";
+                td.id = idPrefix + campaign.id;
+                td.colSpan = 1;
+              } else {
+                td.colSpan = td.colSpan + 1;
+              }
+              isEmpty = false;
+            }
+            date.setDate(date.getDate() + 1);
+          }
+          tr.appendChild(td);
+          document.getElementById("calendar_body").appendChild(tr);
+        };
 
         /** カレンダー作成 **/
         accCalendar.makeCalendar = function(campaigns) {
@@ -227,13 +370,7 @@
 
             accCalendar.appendTd(tr, calendarData.beginDay - 1, null, accCalendar.TD_CSS);
 
-            // TOOD: ここでCalendarに反映
-            accCalendar.appendTd(tr,
-              7 - calendarData.beginDay + 1,
-              "【" + campaign.serviceTitle + "】" + campaign.title,
-              accCalendar.TD_CSS + "background-color:" + accCalendar.getThemeColor(campaign.id) + ";",
-              week + "-"+ campaign.id);
-            //
+            accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
           }
           week++;
 
@@ -251,17 +388,9 @@
               last = date;
 
               for (var i = 0; i < campaigns.length; i++) {
-                tr = accCalendar.appendTr("border-style:hidden;");
-
+                tr = accCalendar.createTr("border-style:hidden;");
                 campaign = campaigns[i];
-
-                // TOOD: ここでCalendarに反映
-                accCalendar.appendTd(tr,
-                    last - first,
-                    "【" + campaign.serviceTitle + "】" + campaign.title,
-                    accCalendar.TD_CSS + "background-color:" + accCalendar.getThemeColor(campaign.id) + ";",
-                    week + "-" + campaign.id);
-                //
+                accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
               }
               week++;
           }
@@ -277,6 +406,7 @@
               accCalendar.target = new Date();
               accCalendar.target.setMonth(accCalendar.target.getMonth());
               accCalendar.setMonthHeaderText();
+              accCalendar.setTodaysDay();
               accCalendar.makeCalendar(campaigns);
             });
         };
