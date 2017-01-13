@@ -32,6 +32,15 @@ td.campaign {
   text-overflow: ellipsis;
 }
 
+td.campaign a {
+  color: black;
+}
+
+td.campaign a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
 @media only screen and (max-device-width: 480px) {
   td.campaign {
     padding: 8px 0px 8px 0px;

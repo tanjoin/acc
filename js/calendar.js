@@ -1,6 +1,28 @@
 var accCalendar = {};
 
-accCalendar.colors = ["#e3f2fd", "#90caf9", "#ffccbc", "#80cbc4", "#c5cae9", "#eeeeee", "#f8bbd0"];
+accCalendar.serviceTitles = [];
+
+accCalendar.colors = [
+  "red",
+  "pink",
+  "purple",
+  "deep-purple",
+  "indigo",
+  "blue",
+  "light-blue",
+  "cyan",
+  "teal",
+  "green",
+  "light-green",
+  "lime",
+  "yellow",
+  "amber",
+  "orange",
+  "deep-orange",
+  "brown",
+  "grey",
+  "blue-grey",
+];
 
 /** @enum {Object} */
 accCalendar.On = {
@@ -132,9 +154,11 @@ accCalendar.getCampaign = function(callback) {
 accCalendar.convertData = function(responseText) {
     var data = JSON.parse(responseText);
     var campaigns = [];
+    accCalendar.serviceTitles = [];
     for (var i = 0; i < data.campaigns.length; i++) {
         var campaign = new accCalendar.Campaign(data.campaigns[i]);
         campaigns.push(campaign);
+        accCalendar.serviceTitles.push(campaign.serviceTitle);
     }
     return campaigns;
 };
@@ -319,9 +343,17 @@ accCalendar.createCampaignBar = function(tr, campaign, calendarData, first, last
                     tr.appendChild(td);
                 }
                 td = document.createElement("td");
-                td.innerText = "【" + campaign.id + " " + campaign.serviceTitle + "】" + campaign.title;
-                td.style = "background-color:" + accCalendar.getThemeColor(campaign.id) + ";";
-                td.setAttribute("class", "campaign");
+                var title = "【" + campaign.serviceTitle + "】" + campaign.title;
+                if (campaign.urls != null && campaign.urls.length > 0) {
+                  var a = document.createElement("a");
+                  a.href = campaign.urls[0];
+                  a.innerText = title;
+                  td.appendChild(a);
+                } else {
+                  td.innerText = title;
+                }
+                td.title = title;
+                td.setAttribute("class", "campaign " + accCalendar.getThemeColorClass(accCalendar.serviceTitles.indexOf(campaign.serviceTitle)) + " lighten-4");
                 td.id = idPrefix + campaign.id;
                 td.colSpan = 1;
             } else {
@@ -419,8 +451,8 @@ accCalendar.makeCalendar = function(campaigns) {
     }
 };
 
-accCalendar.getThemeColor = function(seed) {
-    return accCalendar.colors[seed % accCalendar.colors.length];
+accCalendar.getThemeColorClass = function(seed) {
+  return accCalendar.colors[seed % accCalendar.colors.length];
 };
 
 window.onload = function() {
