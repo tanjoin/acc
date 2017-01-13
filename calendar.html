@@ -134,20 +134,44 @@
             this.on = opt_jsonData.on;
         };
 
-        accCalendar.Campaign.prototype.contains = function(opt_date) {
-          if (opt_date == null) {
-              opt_date = new Date();
-          }
-          var start = new Date(Date.parse(this.date.start));
-          var end = new Date(Date.parse(this.date.end));
-          if (start != null && start.getTime() > opt_date.getTime()) {
-              return false;
-          }
-          if (end != null && opt_date.getTime() > end.getTime()) {
-              return false;
-          }
-          return true;
-        }
+        /** @private */
+        accCalendar.Campaign.prototype.containsInOn = function(on) {
+            return this.on != null && this.on.indexOf(on) != -1;
+        };
+
+        /** @private */
+        accCalendar.Campaign.prototype.validateOn_ = function(now) {
+            if (this.on == null) {
+                return false;
+            }
+            if (this.containsInOn(accCalendar.On.ALL) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.SUN) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.MON) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.TUE) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.WED) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.THU) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.FRI) ||
+                this.validateOnForDay_(now, accCalendar.On.DAY.SAT) ||
+                this.validateOnForDate_(now, accCalendar.On.DATE.D_05) ||
+                this.validateOnForDate_(now, accCalendar.On.DATE.D_10) ||
+                this.validateOnForDate_(now, accCalendar.On.DATE.D_15) ||
+                this.validateOnForDate_(now, accCalendar.On.DATE.D_20) ||
+                this.validateOnForDate_(now, accCalendar.On.DATE.D_25) ||
+                this.validateOnForDate_(now, accCalendar.On.DATE.D_30)) {
+                return true;
+            }
+            return false;
+        };
+
+        /** @private */
+        accCalendar.Campaign.prototype.validateOnForDay_ = function(now, onDay) {
+            return now.getDay() == onDay.day && this.containsInOn(onDay.text);
+        };
+
+        /** @private */
+        accCalendar.Campaign.prototype.validateOnForDate_ = function(now, onDate) {
+            return now.getDate() == onDate.date && this.containsInOn(onDate.text);
+        };
 
         /** キャンペーン情報を取得する. */
         accCalendar.getCampaign = function(callback) {
@@ -311,7 +335,10 @@
           var td = null;
 
           while (date < lastDate) {
-            if ((campaignStart != null && campaignStart > date) || (campaignEnd != null && campaignEnd < date)) { // 開始前 or 終了済み
+            if (!campaign.validateOn_(date) ||
+                (campaignStart != null && campaignStart > date) ||
+                (campaignEnd != null && campaignEnd < date)) { // 開始前 or 終了済み
+
               if (isEmpty && td != null) {
                 td.colSpan = td.colSpan + 1;
               } else {
