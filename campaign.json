@@ -34,7 +34,7 @@
       "title": "ねぎマヨ50円引き（２８６）",
       "description": "LINEクーポン",
       "urls": [
-        "line://"  
+        "line://msg"  
       ],
       "date": {
           "start": "2017/01/13",
@@ -49,9 +49,6 @@
       "service_title": "すき家",
       "title": "牛丼全品30円引き（２１４４）",
       "description": "LINE クーポン",
-      "urls": [
-        "http://line.me/"  
-      ],
       "date": {
           "end": "2017/01/20 08:00"
       },
