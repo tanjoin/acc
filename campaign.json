@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+      "id": 119,
+      "service_title": "BURGER KING",
+      "title": "コーヒー100円クーポン",
+      "description": "Softbank ユーザーのみ",
+      "urls": [
+        "http://u.softbank.jp/1mRSbvw"
+      ],
+      "date": {
+        "end": "2017/03/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 118,
       "service_title": "吉野家",
       "title": "サイドメニュー50円引きクーポン",
