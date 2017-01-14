@@ -15,12 +15,19 @@
 <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Acc</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#!" class="brand-logo">Acc</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-pc" class="right hide-on-med-and-down">
           <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
           <li><a href="https://tanjo.in/acc/calendar.html">Calendar</a></li>
           <li><a href="https://tanjo.in/acc/maker.html">Maker</a></li>
           <li><a href="https://tanjo.in/acc/campaign.json">Json</a></li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
+          <li><a href="https://tanjo.in/acc/calendar.html">Calendar</a></li>
+          <li><a href="https://tanjo.in/acc/maker.html">Maker</a></li>
+          <li><a href="https://tanjo.in/acc/campaign.json">Json</a></li>            
         </ul>
       </div>
     </nav>
@@ -544,6 +551,8 @@
         $(document).ready(function(){
             $('.materialboxed').materialbox();
         });
+        
+        $(".button-collapse").sideNav();
     </script>
 </body>
 
