@@ -33,6 +33,9 @@
       "service_title": "築地銀だこ",
       "title": "ねぎマヨ50円引き（２８６）",
       "description": "LINEクーポン",
+      "urls": [
+        "line://"  
+      ],
       "date": {
           "start": "2017/01/13",
           "end": "2017/01/29"
