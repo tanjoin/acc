@@ -523,12 +523,14 @@
             description.innerText = campaign.description;
             cardContent.appendChild(description);
 
-            for (var j = 1; j < campaign.urls.length; j++) {
-                var div = acc.createDiv();
-                var a = acc.createA(campaign.urls[j]);
-                a.innerText = "その" + (j + 1);
-                div.appendChild(a);
-                cardContent.appendChild(div);
+            if (campaign.hasUrl()) {
+              for (var j = 1; j < campaign.urls.length; j++) {
+                  var div = acc.createDiv();
+                  var a = acc.createA(campaign.urls[j]);
+                  a.innerText = "その" + (j + 1);
+                  div.appendChild(a);
+                  cardContent.appendChild(div);
+              }
             }
         };
 
