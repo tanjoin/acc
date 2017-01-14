@@ -12,17 +12,26 @@
     <link rel="shortcut icon" href="">
 </head>
 
-<body>
+<body>    
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Acc Maker</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#!" class="brand-logo">Acc</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-pc" class="right hide-on-med-and-down">
           <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
           <li><a href="https://tanjo.in/acc">ACC</a></li>
           <li><a href="https://tanjo.in/acc/campaign.json">Json</a></li>
+          <li><a href="https://tanjo.in/acc/calendar.html">Calendar</a></li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
+          <li><a href="https://tanjo.in/acc">ACC</a></li>
+          <li><a href="https://tanjo.in/acc/campaign.json">Json</a></li>
+          <li><a href="https://tanjo.in/acc/calendar.html">Calendar</a></li>
         </ul>
       </div>
     </nav>
+    
     <div id="contents">
       <div class="row">
         <form class="col s12">
@@ -280,6 +289,8 @@
         };
 
         new Clipboard('.clipboard');
+        
+        $(".button-collapse").sideNav();
     </script>
 </body>
 
