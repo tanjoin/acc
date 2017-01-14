@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 118,
+      "service_title": "吉野家",
+      "title": "サイドメニュー50円引きクーポン",
+      "description": "LINE クーポン",
+      "date": {
+          "end": "2017/01/22 0:00"
+      },
+      "on": [
+          "All"
+      ]
+    }
+    {
       "id": 117,
       "service_title": "築地銀だこ",
       "title": "ねぎマヨ50円引き（２８６）",
