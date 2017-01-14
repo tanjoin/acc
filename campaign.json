@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 116,
+      "service_title": "すき家",
+      "title": "牛丼全品30円引き（２１４４）",
+      "description": "LINE クーポン",
+      "date": {
+          "end": "2017/01/20 08:00"
+      },
+      "on": [
+          "All"
+      ]
+    },    
+    {
       "id": 115,
       "service_title": "JCB",
       "title": "インターネットショッピングで総額500万円！キャンペーン 第2弾 ",
