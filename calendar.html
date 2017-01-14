@@ -16,11 +16,19 @@
 <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Acc Calendar</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#!" class="brand-logo">Acc</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-pc" class="right hide-on-med-and-down">
           <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
           <li><a href="https://tanjo.in/acc">ACC</a></li>
           <li><a href="https://tanjo.in/acc/maker.html">Maker</a></li>
+          <li><a href="https://tanjo.in/acc/campaign.json">Json</a></li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="https://github.com/tanjoin/acc/blob/gh-pages/campaign.json">List</a></li>
+          <li><a href="https://tanjo.in/acc">ACC</a></li>
+          <li><a href="https://tanjo.in/acc/maker.html">Maker</a></li>
+          <li><a href="https://tanjo.in/acc/campaign.json">Json</a></li>
         </ul>
       </div>
     </nav>
@@ -51,6 +59,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script src="./js/calendar.js"></script>
+    <script>
+        $(".button-collapse").sideNav();
+    </script>
 </body>
 
 </html>
