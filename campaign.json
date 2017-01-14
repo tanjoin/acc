@@ -52,6 +52,9 @@
       "service_title": "すき家",
       "title": "牛丼全品30円引き（２１４４）",
       "description": "LINE クーポン",
+      "urls": [
+        "http://line.naver.jp/ti/p/%40sukiya"
+      ],
       "date": {
           "end": "2017/01/20 08:00"
       },
