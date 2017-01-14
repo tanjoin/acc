@@ -34,7 +34,7 @@
       "title": "ねぎマヨ50円引き（２８６）",
       "description": "LINEクーポン",
       "urls": [
-        "intent://#Intent;scheme=line;package=jp.naver.line.android;end"  
+        "https://line-beta.me/R/ti/p/%40gindaco"  
       ],
       "date": {
           "start": "2017/01/13",
