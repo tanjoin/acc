@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 120,
+      "service_title": "dカード",
+      "title": "ご利用金額1万円（税込/ケータイ料金のお支払いを除く）を1口として抽選で豪華賞品をプレゼント!",
+      "description": "dカード/dカード GOLD/DCMX/DCMX GOLDでご利用ブランドがVisaの方限定! キャンペーン期間中にエントリーの上、dカード/dカード GOLD/DCMX/DCMX GOLDでお買い物すると、ご利用金額1万円（税込/ケータイ料金のお支払いを除く）を1口として抽選で豪華賞品をプレゼント!\n※dカード GOLD/DCMX GOLD会員は当選確率2倍。",
+      "urls": [
+          "http://info.d-card.jp/std/campaigns/dcard_visa_present/dcard_visa_present.html"
+      ],
+      "img": "http://info.d-card.jp/std/campaigns/dcard_visa_present/images_dcard_visa_present/prize_img02.png",
+      "date": {
+          "start": "2017/01/11",
+          "end": "2017/02/28"
+      },
+      "on": [
+          "All"
+      ]
+    },
+    {
       "id": 119,
       "service_title": "BURGER KING",
       "title": "コーヒー100円クーポン",
@@ -284,22 +301,6 @@
       ]
     },
     {
-      "id": 92,
-      "title": "ビックカメラグループnanacoポイント2倍キャンペーン",
-      "description": "キャンペーン期間中、ビックカメラグループ にてnanacoでお支払いいただくと、通常200円（税込）につき1ポイントのところ、200円（税込）につき2ポイント加算いたします。",
-      "urls": [
-        "http://www.nanaco-net.jp/campaign/index.html#biccamera1611"
-      ],
-      "service_title": "セブン・カード",
-      "date": {
-        "start": "2016/11/19",
-        "end": "2017/01/15"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
       "id": 12,
       "title": "カードの日",
       "description": "毎週火曜・土曜のカードの日にファミマＴカード（クレジットカード・Visaデビット付キャッシュカード）をご提示のうえお買い物いただくとショッピングポイント3倍！さらにクレジットやVisaデビットでお支払いただくとクレジットポイント・Visaデビットポイント2倍！合計で通常時（火曜・土曜以外）の現金払いと比べてポイントが5倍も貯まりとってもお得に！",
@@ -378,71 +379,6 @@
         "start": "2016/12/12 11:00"
       },
       "img": "https://www.jal.co.jp/jmb/dokokani/Y15/img/lead_text.png",
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 14,
-      "title": "最大50,000ポイントが当たる!　クレジットご利用キャンペーン - 株式会社セブン・カードサービス",
-      "description": "期間中のご利用合計金額50,000円（税込）を1口として抽選。\n50名様に50,000ポイント、500名様に1,000ポイントをプレゼント！\nさらにイトーヨーカドーやセブン-イレブンをはじめとするセブン&アイグループ対象店舗でのご利用金額は、10倍にして集計しますので口数アップのチャンス！！",
-      "urls": [
-        "http://www.7card.co.jp/campaign/cp_credit_2016.html"
-      ],
-      "service_title": "セブンカード",
-      "date": {
-        "start": "2016/10/01",
-        "end": "2017/01/15"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 61,
-      "title": "Apple Payを使ってもれなく10％キャッシュバックキャンペーン",
-      "description": "キャンペーン期間中に、Apple Payに追加したJCBカードでのApple Payご利用金額の10％をもれなくキャッシュバック\n※キャッシュバック上限金額は5,000円まで（利用額合計5万円まで）",
-      "urls": [
-        "http://www.jcb.co.jp/campaign/apple-pay_2016.html"
-      ],
-      "service_title": "JCB（ソラチカカード）",
-      "date": {
-        "start": "2016/07/22 10:00",
-        "end": "2017/01/15 23:59"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 32,
-      "title": "JCBオンラインショッピングキャンペーン │ JCBブランドで実施中のおトクなキャンペーン",
-      "description": "期間中、キャンペーン参加登録したJCBカードをインターネットショッピングで利用すると、ご利用合計金額2万円（税込）を1口として、抽選でプレゼント！総額1,100万円分のJCBギフトカードが当たる！\nファミマTカード、リクルートカード(JCB) 等クレジットカードを要チェック！",
-      "urls": [
-        "http://campaign.jcb.jp/list/c16_045online_shopping_b.html"
-      ],
-      "service_title": "JCB",
-      "date": {
-        "start": "2016/10/16",
-        "end": "2017/01/15"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 44,
-      "title": "JCB支払い名人キャンペーン 第1弾",
-      "description": "キャンペーン期間中に「支払い名人」に登録し、設定金額3万円以下に設定のうえカードの各ご利用期間中に支払い名人を15万円（税込）以上ご利用された方に第1弾、第2弾それぞれで10,000マイル相当＊ずつプレゼント！\n繰り上げ返済すれば、リボ手数料は不要になります\n2017年4月15日までに5万円。",
-      "urls": [
-        "http://www.jcb-card.jp/anacard/aw2016sorachika/",
-        "http://www.jcb-card.jp/anacard/2016aw/"
-      ],
-      "service_title": "ソラチカカード",
-      "date": {
-        "start": "2016/10/16",
-        "end": "2017/01/15"
-      },
       "on": [
         "All"
       ]
