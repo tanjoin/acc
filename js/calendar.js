@@ -409,8 +409,11 @@ accCalendar.makeCalendar = function(campaigns) {
     var calendarData = accCalendar.getCalendarData(target, date);
 
     tr = accCalendar.appendTr();
-    accCalendar.appendTd(tr, calendarData.beginDay - 1);
-
+    
+    if (calendarData.beginDay - 1 > 0) {
+      accCalendar.appendTd(tr, calendarData.beginDay - 1);
+    }
+  
     first = date;
     for (i = calendarData.beginDay; i <= 7; i++) {
         accCalendar.appendTd(tr, null, date);
@@ -423,10 +426,10 @@ accCalendar.makeCalendar = function(campaigns) {
 
         tr = accCalendar.appendTr("border-style:hidden;");
         
-        if (calendarData.beginDay - 1 != 0) {
+        if (calendarData.beginDay - 1 > 0) {
           accCalendar.appendTd(tr, calendarData.beginDay - 1, null, "campaign");
         }
-
+      
         accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
     }
     week++;
