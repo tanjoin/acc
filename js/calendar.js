@@ -422,8 +422,10 @@ accCalendar.makeCalendar = function(campaigns) {
         campaign = campaigns[i];
 
         tr = accCalendar.appendTr("border-style:hidden;");
-
-        accCalendar.appendTd(tr, calendarData.beginDay - 1, null, "campaign");
+        
+        if (calendarData.beginDay - 1 != 0) {
+          accCalendar.appendTd(tr, calendarData.beginDay - 1, null, "campaign");
+        }
 
         accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
     }
