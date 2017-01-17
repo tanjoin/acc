@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 121,
+      "service_title": "BURGER KING",
+      "title": "ワッパージュニア半額 ¥180",
+      "urls": [
+          "https://burgerkingjapan.co.jp/campaign/cp193.html"
+      ],
+      "img": "https://burgerkingjapan.co.jp/campaign/img/img_cp193.jpg",
+      "date": {
+          "start": "2017/01/13",
+          "end": "2017/01/19"
+      },
+      "on": [
+          "All"
+      ]
+    }
+    {
       "id": 120,
       "service_title": "dカード",
       "title": "ご利用金額1万円（税込/ケータイ料金のお支払いを除く）を1口として抽選で豪華賞品をプレゼント!",
