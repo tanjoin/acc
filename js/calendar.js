@@ -434,7 +434,9 @@ accCalendar.makeCalendar = function(campaigns) {
     }
     week++;
 
-    while (date <= calendarData.end.getDate()) {
+    var endDate = new Date(calendarData.end.getDate());
+    endDate.setDate(endDate.getDate() + 1);
+    while (date.getTime() < endDate.getTime()) {
         tr = accCalendar.appendTr();
 
         first = date;
