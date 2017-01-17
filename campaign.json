@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+      "id": 122,
+      "service_title": "BURGER KING",
+      "title": "（クーポン番号 177）ワッパー¥300",
+      "description": "LINE クーポン",
+      "urls": [
+          "http://line.naver.jp/ti/p/%40burgerking_japan"
+      ],
+      "date": {
+          "end": "2017/01/22"
+      },
+      "on": [
+          "All"
+      ]
+    },
+    {
       "id": 121,
       "service_title": "BURGER KING",
       "title": "ワッパージュニア半額 ¥180",
