@@ -311,7 +311,12 @@ accCalendar.judge = function(campaign, first, last, calendarData) {
 
 accCalendar.createCampaignBar = function(tr, campaign, calendarData, first, last, idPrefix) {
     var campaignStart = new Date(Date.parse(campaign.date.start));
-    var campaignEnd = new Date(Date.parse(campaign.date.end));
+    var campaignEnd = null;  
+    if (campaign.date.end != null && campaign.date.end.length == 10) {
+      campaignEnd = new Date(Date.parse(campaign.date.end + " 23:59"));
+    } else if (campaign.date.end != null) {
+      campaignEnd = new Date(Date.parse(campaign.date.end));      
+    }
     var firstDate = new Date(calendarData.begin.getTime());
     firstDate.setDate(first);
     var lastDate = new Date(calendarData.begin.getTime());
