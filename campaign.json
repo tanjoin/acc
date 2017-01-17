@@ -1,5 +1,21 @@
 {
   "campaigns": [
+{
+    "id": 125,
+    "service_title": "ANA",
+    "title": "国内線機内販売でSuicaポイント10倍キャンペーン実施中!",
+    "description": "キャンペーン期間中、Suicaポイントクラブに登録したSuicaを使って、ANAの国内線機内販売でお買い物をすると、Suicaポイントが通常の10倍たまるキャンペーンを実施中!\n\n※キャンペーン期間中は、200円につき10Suicaポイントがたまります。(通常は200円につき1Suicaポイント)\n※機内で交通系電子マネーへの入金(チャージ)はできません。\n※Suicaポイント10倍キャンペーンは、予めSuicaポイントクラブに登録したSuicaを使ってお支払いいただいた場合のみ対象です。",
+    "urls": [
+        "http://www.jreast.co.jp/suicamoney/cp/161226ana/pdf/161226ana.pdf"
+    ],
+    "date": {
+        "start": "2017/01/01",
+        "end": "2017/02/28"
+    },
+    "on": [
+        "All"
+    ]
+},
     {
       "id": 124,
       "service_title": "docomo",
