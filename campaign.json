@@ -1,5 +1,20 @@
 {
   "campaigns": [
+    {
+      "id": 127,
+      "service_title": "吉野家",
+      "title": "10種のサイドメニューいづれか1品50円引き",
+      "description": "LINE クーポン\n167\n(ｾｯﾄ)163",
+      "urls": [
+        "http://line.naver.jp/ti/p/%40yoshinoya"
+      ],
+      "date": {
+          "end": "2017/01/28 0:00"
+      },
+      "on": [
+          "All"
+      ]
+    },
 {
     "id": 126,
     "service_title": "LAWSON",
