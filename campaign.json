@@ -4,12 +4,27 @@
       "id": 127,
       "service_title": "吉野家",
       "title": "10種のサイドメニューいづれか1品50円引き",
+      "description": "167\n(ｾｯﾄ)163\n丼(皿)・定食・カレー・鍋膳のいずれか1食を購入され、別途サラダ、お新香、キムチ、玉子、半熟玉子、ねぎ玉子、みそ汁、とん汁、けんちん汁、チーズのいずれかを購入された場合に1回ご利用いただけます。",
+      "urls": [
+        "https://www.yoshinoya.com/lcoupon/47051164.html"
+      ],
+      "date": {
+          "end": "2017/01/29"
+      },
+      "on": [
+          "All"
+      ]
+    },
+    {
+      "id": 127,
+      "service_title": "吉野家",
+      "title": "【LINEクーポン】10種のサイドメニューいづれか1品50円引き",
       "description": "LINE クーポン\n167\n(ｾｯﾄ)163",
       "urls": [
         "http://line.naver.jp/ti/p/%40yoshinoya"
       ],
       "date": {
-          "end": "2017/01/28"
+          "end": "2017/01/29"
       },
       "on": [
           "All"
