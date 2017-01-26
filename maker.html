@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="">
 </head>
 
-<body>    
+<body>
     <nav>
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo">Acc</a>
@@ -31,7 +31,7 @@
         </ul>
       </div>
     </nav>
-    
+
     <div id="contents">
       <div class="row">
         <form class="col s12">
@@ -280,16 +280,37 @@
             return campaigns;
         };
 
+        /** Get URL Query Parameters. */
+        accMaker.getUrlQuery = function() {
+            var url = window.location.search;
+            var hash = url.slice(1).split(acc.URL_QUERY_AND);
+            var queries = [];
+            for (var i = 0; i < hash.length; i++) {
+                var splitedData = hash[i].split(acc.URL_QUERY_EQUAL);
+                queries.push(splitedData[0]);
+                queries[splitedData[0]] = splitedData[1];
+            }
+            return queries;
+        };
+
         window.onload = function() {
             accMaker.getCampaign(function() {
               var campaigns = accMaker.convertData(this.responseText);
               var lastId = campaigns[0].id;
               document.getElementById("content_id").value = parseInt(lastId) + 1;
+
+              var urlQuery = acc.getUrlQuery();
+              if (urlQuery != null && urlQuery.title != null && urlQuery.title.length > 0) {
+                document.getElementById("content_title").value = urlQuery.title;
+              }
+              if (urlQuery != null && urlQuery.url != null && urlQuery.url.length > 0) {
+                document.getElementById("content_url").value = urlQuery.url;
+              }
             });
         };
 
         new Clipboard('.clipboard');
-        
+
         $(".button-collapse").sideNav();
     </script>
 </body>
