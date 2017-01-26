@@ -301,10 +301,10 @@
 
               var urlQuery = accMaker.getUrlQuery();
               if (urlQuery != null && urlQuery.title != null && urlQuery.title.length > 0) {
-                document.getElementById("content_title").value = urlQuery.title;
+                document.getElementById("content_title").value = decodeURIComponent(urlQuery.title);
               }
               if (urlQuery != null && urlQuery.url != null && urlQuery.url.length > 0) {
-                document.getElementById("content_url").value = urlQuery.url;
+                document.getElementById("content_url").value = decodeURIComponent(urlQuery.url);
               }
             });
         };
