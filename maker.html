@@ -283,10 +283,10 @@
         /** Get URL Query Parameters. */
         accMaker.getUrlQuery = function() {
             var url = window.location.search;
-            var hash = url.slice(1).split(acc.URL_QUERY_AND);
+            var hash = url.slice(1).split("&");
             var queries = [];
             for (var i = 0; i < hash.length; i++) {
-                var splitedData = hash[i].split(acc.URL_QUERY_EQUAL);
+                var splitedData = hash[i].split("=");
                 queries.push(splitedData[0]);
                 queries[splitedData[0]] = splitedData[1];
             }
