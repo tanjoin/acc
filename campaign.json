@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+    "id": 136,
+    "service_title": "吉野家",
+    "title": "丼(皿)・定食・カレー・鍋膳のいずれか1食に限り50円引き",
+    "description": "LINEクーポン\n「ソビト」と入力すると出てくる",
+    "urls": [
+        "http://line.naver.jp/ti/p/%40yoshinoya",
+        "https://www.yoshinoya.com/lcoupon/34551032.html"
+    ],
+    "date": {
+        "end": "2017/02/13"
+    },
+    "on": [
+        "All"
+    ]
+},
+    {
     "id": 135,
     "service_title": "イオン銀行",
     "title": "イオン銀行　WAONご利用キャンペーン ｜キャンペーン｜イオン銀行",
