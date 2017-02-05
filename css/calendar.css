@@ -22,7 +22,7 @@ div.changepage {
   }
 }
 
-td.campaign {
+td.campaign-hidden {
   display: hidden;
   padding: 0px;
   margin: 0px;
@@ -33,11 +33,11 @@ td.campaign {
   text-overflow: ellipsis;
 }
 
-td.campaign a {
+td.campaign-hidden a {
   color: black;
 }
 
-td.campaign a:hover {
+td.campaign-hidden a:hover {
   color: black;
   text-decoration: underline;
 }
