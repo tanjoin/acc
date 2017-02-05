@@ -22,26 +22,6 @@ div.changepage {
   }
 }
 
-td.campaign-hidden {
-  display:none;
-  padding: 0px;
-  margin: 0px;
-  font-size: small;
-  max-width: 0px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-td.campaign-hidden a {
-  color: black;
-}
-
-td.campaign-hidden a:hover {
-  color: black;
-  text-decoration: underline;
-}
-
 td.campaign {
   padding: 0px;
   margin: 0px;
