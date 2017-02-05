@@ -338,7 +338,7 @@ accCalendar.createCampaignBar = function(tr, campaign, calendarData, first, last
                     tr.appendChild(td);
                 }
                 td = document.createElement("td");
-                td.setAttribute("class", "campaign");
+                td.setAttribute("class", "campaign-hidden");
                 td.colSpan = 1;
             }
             isEmpty = true;
