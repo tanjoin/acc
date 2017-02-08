@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+    "id": 139,
+    "service_title": "Subway",
+    "title": "クーポン",
+    "description": "セットが690円くらいになる",
+    "urls": [
+        " http://subway.jp/201701300335684/"
+    ],
+    "date": {
+        "start": "2017/02/08",
+        "end": "2017/02/14"
+    },
+    "on": [
+        "All"
+    ]
+},
+    {
     "id": 138,
     "service_title": "LAWSON",
     "title": "「Newベビースター」キャンペーン ！｜ローソン研究所",
