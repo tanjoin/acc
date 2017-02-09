@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+    "id": 140,
+    "service_title": "吉野家",
+    "title": "170209配信LINEクーポン",
+    "description": "牛カルビ丼各種、牛カルビ定食各種のいずれか1食を50円引きいたします。",
+    "urls": [
+        "https://www.yoshinoya.com/lcoupon/99724085.html?utm_source"
+    ],
+    "date": {
+        "end": "2017/02/19"
+    },
+    "on": [
+        "All"
+    ]
+},
+    {
     "id": 139,
     "service_title": "Subway",
     "title": "クーポン",
