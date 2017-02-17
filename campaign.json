@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+      "id": 145,
+      "service_title": "ブックパス",
+      "title": "春読むフェス",
+      "description": "ブックパスの春読むフェスが遂にスタート！\n全員コインプレゼントに加え、期間中の購入で最大50%の全品コイン還元を実施中！\n【キャンペーン期限】3/21（火） 11:59まで\n\n1000コイン貰える",
+      "urls": [
+        "https://www.bookpass.auone.jp/info/haruyomu/"
+      ],
+      "date": {
+        "end": "2017/03/21 11:59"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 144,
       "service_title": "松屋",
       "title": "松屋モバイル限定クーポン | 松屋フーズ",
