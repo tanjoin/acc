@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 147,
+      "service_title": "モスバーガー",
+      "title": "【モス】3日間限定クーポン♪115",
+      "description": "モスバーガー新橋二丁目店ご利用のWEB会員限定\n\n＝＝＝＝＝＝＝＝＝＝\n商品お買い上げいただくと、ポテトＳサイズが100円☆\n＝＝＝＝＝＝＝＝＝＝\n",
+      "urls": [
+          "https://mail.google.com/mail/u/0/#advanced-search/subject=【モス】3日間限定クーポン♪115"
+      ],
+      "date": {
+          "start": "2017/02/23",
+          "end": "2017/02/25"
+      },
+      "on": [
+          "All"
+      ]
+    },
+    {
       "id": 146,
       "service_title": "リクルートカード（VISA）",
       "title": "［リクルートカード会員様限定］もれなく1,000円分ポイントプレゼント！｜NEWS+PLUS（ニュースプラス）｜三菱UFJニコス",
