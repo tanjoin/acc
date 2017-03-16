@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 157,
+      "service_title": "LINE Pay",
+      "title": "※3/14開始※【LINE Pay】ゆうちょ銀行からのチャージでいまならLINEポイントプレゼント！ : LINE公式ブログ",
+      "description": "3/14からの対象期間中に、ゆうちょ銀行口座からLINE Payに1回で1,000円以上チャージをすると、LINEポイント50ポイントをプレゼントします！（1人1回まで / ポイント付与は4月中旬予定）",
+      "urls": [
+          "http://official-blog.line.me/ja/archives/69379069.html"
+      ],
+      "date": {
+          "start": "2017/03/14 0:05",
+          "end": "2017/03/31 23:55"
+      },
+      "on": [
+          "All"
+      ]
+    },
+    {
       "id": 156,
       "service_title": "ファミマTカード",
       "title": "ポケットカード会員専用ネットサービス",
