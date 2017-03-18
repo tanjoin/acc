@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+    "id": 159,
+    "service_title": "吉野家",
+    "title": "170317配信LINEクーポン｜吉野家公式サイト",
+    "description": "・丼(皿)・定食・カレーのいずれか1食に限り50円引きいたします。\n",
+    "urls": [
+        "https://www.yoshinoya.com/lcoupon/09016284.html"
+    ],
+    "img": "https://www.yoshinoya.com/_static/page/html/lcoupon/09016284.jpg",
+    "date": {
+        "end": "2017/03/22"
+    },
+    "on": [
+        "All"
+    ]
+},
+    {
       "id": 158,
       "service_title": "壱角家　新橋店",
       "title": "LINEクーポン 友だち追加記念♪ネギチャ丼プレゼント☆",
