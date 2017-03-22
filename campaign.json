@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+        "id": 161,
+        "service_title": "マクドナルド",
+        "title": "決済で旧態依然ーー日本マクドナルドがクレカ・交通系ICについに対応、2017年下半期より - Engadget 日本版",
+        "description": "http://japanese.engadget.com/2017/03/21/ic-2017/",
+        "urls": [
+            "https://www.smbc-card.com/mem/company/news/news0001247.jsp"
+        ],
+        "date": {
+            "start": "2017/07/01"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 160,
         "service_title": "ファミマTカード",
         "title": "Apple Payダブルキャンペーン | ポケットカード株式会社",
