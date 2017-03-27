@@ -1,6 +1,24 @@
 {
   "campaigns": [
     {
+        "id": 162,
+        "service_title": "すき家",
+        "title": "すき家のApplePay キャンペーン | キャンペーン | すき家",
+        "description": "①下記よりで読み込んだクーポン券画像をお会計時に提示し支払方法を「Apple Payで」とお伝えください。\n②一部ショッピングセンターなど、Apple Payでの支払ができない店舗は本キャンペーンを対象外とさせていただきます。\n【値引金額】\n1回のお会計につき メイン商品1品70円引き\n\n【条　　件】\n期間中 Apple Payでお支払いいただいたメイン商品\n\n【期　　間】\n2017年3月15日(水)朝9：00～4月14日(金)朝8：00まで\n\n【対象商品】\n牛丼、豚丼、カレー、まぐろ商品、その他の丼、定食、お子様商品\n\n【対 象 外】\nメイン商品以外すべて\n※黒毛和牛のビーフカレーは対象外\n※朝食は対象外\n\n【取扱店舗】\n店舗検索にて、iD利用可またはQUICPay利用可、交通系電子マネー利用可のアイコンが付いているすべての店舗",
+        "urls": [
+            "http://www.sukiya.jp/campaign/2017/applepay/?utm_source",
+            "http://cp.sukiya.jp/cpn/c/fe6fe032aa280ee1b04eba97973847c5"
+        ],
+        "img": "http://www.sukiya.jp/campaign/2017/applepay/img/bnr_vi_applepay.jpg",
+        "date": {
+            "start": "2017/03/15 :09:00",
+            "end": "2017/04/14 08:00"
+        },
+        "on": [
+            "All"
+        ]
+    },    
+    {
         "id": 161,
         "service_title": "マクドナルド",
         "title": "決済で旧態依然ーー日本マクドナルドがクレカ・交通系ICについに対応、2017年下半期より - Engadget 日本版",
