@@ -68,3 +68,7 @@ div#month_next {
 div#contents {
   margin-bottom: 300px;
 }
+
+tr.borderhidden {
+  border-style: hidden;
+}
