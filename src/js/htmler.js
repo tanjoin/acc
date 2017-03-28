@@ -98,7 +98,7 @@ module.exports.i = function(type, className, opt_id) {
   }
   var element = document.createElement("i");
   if (type) {
-    element.type = type;
+    element.innerText = type;
   }
   if (className) {
     element.className = className;

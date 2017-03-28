@@ -530,13 +530,16 @@ module.exports.a = function(href, opt_text, target, opt_className, opt_id) {
 };
 
 /** <p> 作成 */
-module.exports.p = function(opt_className, opt_id) {
+module.exports.p = function(opt_className, opt_id, opt_text) {
   var element = document.createElement("p");
   if (opt_className) {
     element.className = opt_className;
   }
   if (opt_id) {
     element.id = opt_id;
+  }
+  if (opt_text) {
+    element.innerText = opt_text;
   }
   return element;
 };
@@ -584,7 +587,7 @@ module.exports.i = function(type, className, opt_id) {
   }
   var element = document.createElement("i");
   if (type) {
-    element.type = type;
+    element.innerText = type;
   }
   if (className) {
     element.className = className;

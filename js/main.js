@@ -285,7 +285,7 @@ module.exports.i = function(type, className, opt_id) {
   }
   var element = document.createElement("i");
   if (type) {
-    element.type = type;
+    element.innerText = type;
   }
   if (className) {
     element.className = className;
@@ -476,66 +476,55 @@ var sortCampaigns = function(a, b) {
   return 0;
 };
 
-/** service_title が一致するかどうか */
-acc.validateServiceTitle = function(campaign, serviceTitle) {
-    if (campaign != null && campaign.serviceTitle == serviceTitle) {
-        return true;
-    }
-    return false;
-};
-
-acc.hideCampaign = function() {
-  var id = this.campaignId;
+var hideCampaign = function() {
+  var id = this.campaign;
   var count = 0;
   var urlQuery = info.getUrlQuery();
-  if (id == null) {
+  if (!id) {
     return true;
   }
-  var url = window.location.origin + window.location.pathname + "?";
+  var query = "?";
 
   var serviceTitle = info.getServiceTitle(urlQuery);
-  if (serviceTitle != null && serviceTitle.length > 0) {
-    url = url + "service_title=" + serviceTitle + "&";
+  if (serviceTitle && serviceTitle.length > 0) {
+    query += "service_title=" + serviceTitle;
   }
-  url = url + "hide[" + count + "]=" + id;
-  count = count + 1;
+  if (query.length > 1) {
+    query += "&";
+  }
+  query += "hide[" + (count++) + "]=" + id;
+  var hideId;
   for (var i = 0; i < urlQuery.length; i++) {
-      var hideId = urlQuery["hide[" + i + "]"];
-      if (null == hideId) {
-        break;
-      }
-      url = url + "&hide[" + count + "]=" + hideId;
-      count = count + 1;
+    hideId = urlQuery["hide[" + i + "]"];
+    if (!hideId) {
+      break;
+    }
+    query += "&hide[" + (count++) + "]=" + hideId;
   }
-  document.location = url;
+  history.pushState(null, null, query);
+  showContents();
   return false;
 };
 
-acc.validateHide = function(campaign, urlQuery) {
-    for (var i = 0; i < urlQuery.length; i++) {
-        if (campaign.id == urlQuery["hide[" + i + "]"]) {
-            return false;
-        }
-    }
-    return true;
-}
+var validateHide = function(campaign, urlQuery) {
+  for (var i = 0; i < urlQuery.length; i++) {
+      if (campaign.id == urlQuery["hide[" + i + "]"]) {
+          return false;
+      }
+  }
+  return true;
+};
 
-acc.insertDiv = function(content, className, opt_innerText, opt_appendChild, opt_isEnableNullOrEmpty) {
-    var div = htmler.div(className);
-    if (opt_innerText != null) {
-        div.innerText = opt_innerText;
-    }
-    if (opt_appendChild != null) {
-        div.appendChild(opt_appendChild);
-    }
-    if (opt_isEnableNullOrEmpty == null || opt_isEnableNullOrEmpty == false) {
-        content.appendChild(div);
-    } else {
-        if (opt_innerText != null && opt_innerText.length > 0) {
-            content.appendChild(div);
-        }
-    }
+var insertDiv = function(content, className, opt_innerText, opt_appendChild, opt_isEnableNullOrEmpty) {
+  var div = htmler.div(className, null, opt_innerText);
+  if (opt_appendChild) {
+    div.appendChild(opt_appendChild);
+  }
+  if (opt_isEnableNullOrEmpty && (!opt_innerText || opt_innerText.length === 0)) {
     return div;
+  }
+  content.appendChild(div);
+  return div;
 };
 
 acc.bindView = function(row, campaign) {
@@ -561,12 +550,18 @@ acc.bindView = function(row, campaign) {
     acc.insertDiv(cardContent, "blue-text col s10", campaign.id);
     var doneIcon = htmler.i("clear");
     doneIcon.className = doneIcon.className + " hidebutton";
-    doneIcon.campaignId = campaign.id;
-    doneIcon.onclick = acc.hideCampaign;
+    doneIcon.campaign = campaign.id;
+    doneIcon.onclick = hideCampaign;
     acc.insertDiv(cardContent, "col s2", null, doneIcon);
     acc.insertDiv(cardContent, "card-title", campaign.title);
 
-    var cardServicelink = htmler.a("/acc/?service_title=" + campaign.serviceTitle);
+    var cardServicelink = htmler.a("?service_title=" + campaign.serviceTitle);
+    cardServicelink.onclick = function() {
+      history.pushState(null, null, "?service_title=" + campaign.serviceTitle);
+      showServiceTitle(acc.campaigns, campaign.serviceTitle);
+      $('#modal').modal("close");
+      return false;
+    };
     acc.insertDiv(cardServicelink, "chip blue-grey darken-1 amber-text", campaign.serviceTitle);
     cardContent.appendChild(cardServicelink);
 
@@ -587,7 +582,7 @@ acc.bindView = function(row, campaign) {
     }
 };
 
-var showDetail = function(campaigns, id, urlQuery) {
+var showDetail = function(campaigns, id) {
   id = parseInt(id);
   var filtered = campaigns.filter((campaign) => {
     return campaign.id === id;
@@ -603,7 +598,7 @@ var showDetail = function(campaigns, id, urlQuery) {
     var a = htmler.a("?service_title=" + target.serviceTitle, target.serviceTitle);
     a.onclick = function() {
       history.pushState(null, null, "?service_title=" + target.serviceTitle);
-      showServiceTitle(campaigns, target.serviceTitle, urlQuery);
+      showServiceTitle(campaigns, target.serviceTitle);
       $('#modal').modal("close");
       return false;
     };
@@ -626,71 +621,65 @@ var showDetail = function(campaigns, id, urlQuery) {
   }
 };
 
-var showServiceTitle = function(campaigns, serviceTitle, urlQuery) {
+var showServiceTitle = function(campaigns, serviceTitle) {
   if (!serviceTitle) {
     return;
   }
+  document.getElementById("logo").innerText = "Acc : " + serviceTitle;
   campaigns = campaigns.filter((data) => data.serviceTitle === serviceTitle);
   campaigns.sort(sortCampaigns);
-  showCampaigns(campaigns, serviceTitle, urlQuery);
+  showCampaigns(campaigns);
 };
 
-var showCampaigns = function(campaigns, serviceTitle, urlQuery, now, row) {
-  if (typeof now === 'undefined') {
-    now = new Date();
-  }
-  if (typeof row === 'undefined') {
-    row = htmler.div("row");
-  }
-
+var showCampaigns = function(campaigns) {
+  var now = new Date();
+  var row = htmler.div("row");
+  var urlQuery = info.getUrlQuery();
   var contents = document.getElementById("contents");
   while (contents.firstChild) {
     contents.removeChild(contents.firstChild);
   }
   contents.appendChild(row);
 
-  // TODO: check
   for (var i = 0; i < campaigns.length; i++) {
     var campaign = campaigns[i];
     var isShow = campaign.isShow(now);
-    isShow = isShow && acc.validateHide(campaign, urlQuery);
-    if (serviceTitle) {
-      isShow = isShow && acc.validateServiceTitle(serviceTitle);
-    }
+    isShow = isShow && validateHide(campaign, urlQuery);
     if (isShow) {
       acc.bindView(row, campaign);
     }
   }
 };
 
-window.onload = function() {
-  info.getCampaigns(function(campaigns, serviceTitles) {
-    showContents(campaigns, serviceTitles);
-  });
-};
-
-var showContents = function(campaigns, serviceTitles) {
-  acc.campaigns = campaigns;
-  acc.serviceTitles = serviceTitles;
+var showContents = function() {
   var urlQuery = info.getUrlQuery();
   var id = info.getId(urlQuery);
+  document.getElementById("logo").innerText = "Acc";
   if (id) {
-    showDetail(campaigns, id, urlQuery);
+    showDetail(acc.campaigns, id);
     return;
   }
   var serviceTitle = info.getServiceTitle(urlQuery);
   if (serviceTitle) {
-    showServiceTitle(campaigns, serviceTitle, urlQuery);
+    showServiceTitle(acc.campaigns, serviceTitle);
     return;
   }
   // 通常表示
-  campaigns.sort(sortCampaigns);
-  showCampaigns(campaigns, null, urlQuery);
+  acc.campaigns.sort(sortCampaigns);
+  showCampaigns(acc.campaigns);
+};
+
+window.onload = function() {
+  info.getCampaigns(function(campaigns, serviceTitles) {
+    acc.campaigns = campaigns;
+    acc.serviceTitles = serviceTitles;
+    showContents();
+  });
 };
 
 window.onpopstate = function(event) {
   if (event.isTrusted) {
-    showContents(acc.campaigns, acc.serviceTitles);
+    showContents();
   }
 };
 
