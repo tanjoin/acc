@@ -10,7 +10,7 @@ var Campaign = function(opt_jsonData) {
   if (opt_jsonData) {
     this.id = opt_jsonData.id;
     this.title = opt_jsonData.title;
-    this.serviceTitle = opt_jsonData.serviceTitle;
+    this.serviceTitle = opt_jsonData.service_title;
     this.date = opt_jsonData.date;
     this.on = opt_jsonData.on;
     this.urls = opt_jsonData.urls;
@@ -51,7 +51,7 @@ Campaign.prototype.containsInOn = function(on) {
 };
 
 /** @private */
-constants.Campaign.prototype.validateOn_ = function(now) {
+Campaign.prototype.validateOn_ = function(now) {
     if (!this.on) {
         return false;
     }
@@ -98,4 +98,4 @@ Campaign.prototype.validateDate_ = function(now) {
     return true;
 };
 
-module.exports.Campaign = Campaign;
+module.exports = Campaign;

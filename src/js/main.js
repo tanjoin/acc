@@ -5,24 +5,6 @@ var htmler = require('./htmler');
 
 var acc = {};
 
-/** @enum {string} */
-acc.ViewType = {
-    ALL: "all",
-    SERVICE_TITLE: "service_title",
-    CATEGORY: "category"
-};
-
-/** ViewType を選別 */
-acc.getViewType = function(urlQuery) {
-    if (urlQuery.service_title != null) {
-        return acc.ViewType.SERVICE_TITLE;
-    }
-    if (urlQuery.category != null) {
-        return acc.ViewTYpe.CATEGORY;
-    }
-    return acc.ViewType.ALL;
-};
-
 /** Campaign をソート */
 var sortCampaigns = function(a, b) {
   if (!a.containsInOn(constants.On.ALL) && !b.containsInOn(constants.On.ALL)) {
@@ -183,51 +165,117 @@ acc.bindView = function(row, campaign) {
     }
 };
 
-var showDetail = function(campaigns, id) {
-  // TODO: ID
+var showDetail = function(campaigns, id, urlQuery) {
+  id = parseInt(id);
+  var filtered = campaigns.filter((campaign) => {
+    return campaign.id === id;
+  });
+  if (filtered && filtered.length > 0) {
+    var modalContent = htmler.div("modal-content");
+    var target = filtered[0];
+    if (target.img && target.img.length > 0) {
+      modalContent.appendChild(htmler.img(target.img, null, null, "responsive-img"));
+    }
+    modalContent.appendChild(htmler.h4("[" + target.id + "] " + target.title));
+    var chip = htmler.div("chip");
+    var a = htmler.a("?service_title=" + target.serviceTitle, target.serviceTitle);
+    a.onclick = function() {
+      history.pushState(null, null, "?service_title=" + target.serviceTitle);
+      showServiceTitle(campaigns, target.serviceTitle, urlQuery);
+      $('#modal').modal("close");
+      return false;
+    };
+    chip.appendChild(a);
+    modalContent.appendChild(chip);
+    modalContent.appendChild(htmler.p(null, null, target.dayText()));
+    modalContent.appendChild(htmler.p(null, null, target.description));
+    for (var i = 0; i < target.length; i++) {
+      var div = htmler.div();
+      div.appendChild(htmler.a(target.urls[i], "リンク" + i));
+      modalContent.appendChild(div);
+    }
+    var modal = document.getElementById("modal");
+    while (modal.firstChild) {
+      modal.removeChild(modal.firstChild);
+    }
+    modal.appendChild(modalContent);
+    $('#modal').modal();
+    $('#modal').modal("open");
+  }
+};
+
+var showServiceTitle = function(campaigns, serviceTitle, urlQuery) {
+  if (!serviceTitle) {
+    return;
+  }
+  campaigns = campaigns.filter((data) => data.serviceTitle === serviceTitle);
+  campaigns.sort(sortCampaigns);
+  showCampaigns(campaigns, serviceTitle, urlQuery);
+};
+
+var showCampaigns = function(campaigns, serviceTitle, urlQuery, now, row) {
+  if (typeof now === 'undefined') {
+    now = new Date();
+  }
+  if (typeof row === 'undefined') {
+    row = htmler.div("row");
+  }
+
+  var contents = document.getElementById("contents");
+  while (contents.firstChild) {
+    contents.removeChild(contents.firstChild);
+  }
+  contents.appendChild(row);
+
+  // TODO: check
+  for (var i = 0; i < campaigns.length; i++) {
+    var campaign = campaigns[i];
+    var isShow = campaign.isShow(now);
+    isShow = isShow && acc.validateHide(campaign, urlQuery);
+    if (serviceTitle) {
+      isShow = isShow && acc.validateServiceTitle(serviceTitle);
+    }
+    if (isShow) {
+      acc.bindView(row, campaign);
+    }
+  }
 };
 
 window.onload = function() {
-  var urlQuery = info.getUrlQuery();
-
-  var viewType = acc.getViewType(urlQuery);
-
-  info.getCampaign(function(campaigns, serviceTitles) {
-    var now = new Date();
-    var id = info.getId(urlQuery);
-    if (id) {
-      showDetail(campaigns, id);
-      return;
-    }
-    var serviceTitle = info.getServiceTitle(urlQuery);
-    if (serviceTitle) {
-      campaigns = campaigns
-          .filter((data) => data.serviceTitle === serviceTitle);
-    }
-    campaigns.sort(sortCampaigns);
-
-    var row = htmler.div("row");
-    document.getElementById("contents").appendChild(row);
-
-    // TODO: check
-    for (var i = 0; i < campaigns.length; i++) {
-      var campaign = campaigns[i];
-      var isShow = campaign.isShow(now);
-      isShow = isShow && acc.validateHide(campaign, urlQuery);
-      if (viewType == acc.ViewType.SERVICE_TITLE) {
-        isShow = isShow && acc.validateServiceTitle(serviceTitle);
-      }
-      if (isShow) {
-        acc.bindView(row, campaign);
-      }
-    }
+  info.getCampaigns(function(campaigns, serviceTitles) {
+    showContents(campaigns, serviceTitles);
   });
+};
+
+var showContents = function(campaigns, serviceTitles) {
+  acc.campaigns = campaigns;
+  acc.serviceTitles = serviceTitles;
+  var urlQuery = info.getUrlQuery();
+  var id = info.getId(urlQuery);
+  if (id) {
+    showDetail(campaigns, id, urlQuery);
+    return;
+  }
+  var serviceTitle = info.getServiceTitle(urlQuery);
+  if (serviceTitle) {
+    showServiceTitle(campaigns, serviceTitle, urlQuery);
+    return;
+  }
+  // 通常表示
+  campaigns.sort(sortCampaigns);
+  showCampaigns(campaigns, null, urlQuery);
+};
+
+window.onpopstate = function(event) {
+  if (event.isTrusted) {
+    showContents(acc.campaigns, acc.serviceTitles);
+  }
 };
 
 // Materialize code
 
 $(document).ready(function(){
-    $('.materialboxed').materialbox();
+  $('.materialboxed').materialbox();
 });
 
 $(".button-collapse").sideNav();

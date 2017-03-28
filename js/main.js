@@ -1,4 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var constants = require('./constants');
+
 /** @constructor */
 var Campaign = function(opt_jsonData) {
   /**
@@ -9,13 +11,28 @@ var Campaign = function(opt_jsonData) {
   if (opt_jsonData) {
     this.id = opt_jsonData.id;
     this.title = opt_jsonData.title;
-    this.serviceTitle = opt_jsonData.serviceTitle;
+    this.serviceTitle = opt_jsonData.service_title;
     this.date = opt_jsonData.date;
     this.on = opt_jsonData.on;
     this.urls = opt_jsonData.urls;
     this.img = opt_jsonData.img;
     this.description = opt_jsonData.description;
   }
+};
+
+Campaign.prototype.startText = function() {
+  return this.date.start || '';
+};
+
+Campaign.prototype.endText = function() {
+  return this.date.end || '';
+};
+
+Campaign.prototype.dayText = function() {
+  if (this.startText().length > 0 || this.endText().length > 0) {
+    return this.startText() + "〜" + this.endText();
+  }
+  return "";
 };
 
 Campaign.prototype.hasUrl = function() {
@@ -35,21 +52,21 @@ Campaign.prototype.containsInOn = function(on) {
 };
 
 /** @private */
-acc.Campaign.prototype.validateOn_ = function(now) {
+Campaign.prototype.validateOn_ = function(now) {
     if (!this.on) {
         return false;
     }
-    if (this.containsInOn(acc.On.ALL)) {
+    if (this.containsInOn(constants.On.ALL)) {
       return true;
     }
     var key;
-    for (key in acc.On.DAY) {
-      if (this.validateOnForDay_(now, acc.On.DAY[key])) {
+    for (key in constants.On.DAY) {
+      if (this.validateOnForDay_(now, constants.On.DAY[key])) {
         return true;
       }
     }
-    for (key in acc.On.DATE) {
-      if (this.validateOnForDate_(now, acc.On.DATE[key])) {
+    for (key in constants.On.DATE) {
+      if (this.validateOnForDate_(now, constants.On.DATE[key])) {
         return true;
       }
     }
@@ -82,76 +99,32 @@ Campaign.prototype.validateDate_ = function(now) {
     return true;
 };
 
-module.exports.Campaign = Campaign;
+module.exports = Campaign;
 
-},{}],2:[function(require,module,exports){
-var Campaign = require('./campaign');
+},{"./constants":2}],2:[function(require,module,exports){
+module.exports.Color = [
+  "red",
+  "pink",
+  "purple",
+  "deep-purple",
+  "indigo",
+  "blue",
+  "light-blue",
+  "cyan",
+  "teal",
+  "green",
+  "light-green",
+  "lime",
+  "yellow",
+  "amber",
+  "orange",
+  "deep-orange",
+  "brown",
+  "grey",
+  "blue-grey"
+];
 
-var ACC_URL = "https://tanjo.in/acc/campaign.json";
-
-/** キャンペーン情報を取得する. */
-module.exports.getCampaigns = function(callback) {
-  var request = new XMLHttpRequest();
-  request.open('GET', ACC_URL, true);
-  request.onload = function() {
-    var data = JSON.parse(this.responseText);
-    var campaigns = data.campaigns.map((data) => new Campaign(data));
-    var serviceTitles = campaigns
-        .map((c) => c.serviceTitle)
-        .filter((x, i, self) => self.indexOf(x) === i);
-    callback(campaigns, serviceTitles);
-  };
-  request.send(null);
-};
-
-},{"./campaign":1}],3:[function(require,module,exports){
-var Campaign = require('./campaign');
-var info = require('./info');
-
-var acc = {};
-
-/** @const */
-acc.URL_QUERY_EQUAL = "=";
-
-/** @const */
-acc.URL_QUERY_AND = "&";
-
-/** @const */
-acc.API_METHOD_GET = "get";
-
-/** @const */
-acc.API_PATH_GET_CAMPAIGN = "https://tanjo.in/acc/campaign.json";
-
-/** @const */
-acc.ELEMENT_ID_CONTENTS = "contents";
-
-/** @const */
-acc.ELEMENT_DIV = "div";
-
-/** @const */
-acc.ELEMENT_A = "a";
-
-/** @const */
-acc.ELEMENT_P = "p";
-
-/** @const */
-acc.ELEMENT_I = "i";
-
-/** @const */
-acc.ELEMENT_IMG = "img";
-
-/** @const */
-acc.CLASS_NAME_MATERIAL_ICONS = "material-icons";
-
-/** @enum {string} */
-acc.ViewType = {
-    ALL: "all",
-    SERVICE_TITLE: "service_title",
-    CATEGORY: "category"
-};
-
-/** @enum {Object} */
-acc.On = {
+module.exports.On = {
     ALL: "All",
     DAY: {
         SUN: {
@@ -211,111 +184,296 @@ acc.On = {
     }
 };
 
+},{}],3:[function(require,module,exports){
+/** <div> 作成 */
+module.exports.div = function(opt_className, opt_id, opt_text) {
+  var element = document.createElement("div");
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  if (opt_text) {
+    element.innerText = opt_text;
+  }
+  return element;
+};
+
+/** <a> 作成 */
+module.exports.a = function(href, opt_text, target, opt_className, opt_id) {
+  if (typeof target === 'undefined') { // 未定義の場合は target="_blank"
+    opt_target = '_blank';
+  }
+  if (typeof href === 'undefined') {
+    href = 'https://tanjoin.github.io';
+  }
+  var element = document.createElement("a");
+  if (href) {
+    element.href = href;
+  }
+  if (target) {
+    element.target = target;
+  }
+  if (opt_text) {
+    element.innerText = opt_text;
+  }
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <p> 作成 */
+module.exports.p = function(opt_className, opt_id, opt_text) {
+  var element = document.createElement("p");
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  if (opt_text) {
+    element.innerText = opt_text;
+  }
+  return element;
+};
+
+/** <img> 作成 */
+module.exports.img = function(src, width, height, className, opt_id) {
+  if (typeof src === 'undefined') {
+    src = 'https://tanjoin.github.io/acc/img/404.png';
+  }
+  if (typeof width === 'undefined') {
+    width = "100%";
+  }
+  if (typeof height === 'undefined') {
+    height = "100%";
+  }
+  if (typeof className === 'undefined') {
+    className = 'materialboxed';
+  }
+  var element = document.createElement("img");
+  if (src) {
+    element.src = src;
+  }
+  if (width) {
+    element.width = width;
+  }
+  if (height) {
+    element.height = height;
+  }
+  if (className) {
+    element.className = className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <i> 作成 */
+module.exports.i = function(type, className, opt_id) {
+  if (typeof type === 'undefined') {
+    type = "";
+  }
+  if (typeof className === 'undefined') {
+    className = "material-icons";
+  }
+  var element = document.createElement("i");
+  if (type) {
+    element.type = type;
+  }
+  if (className) {
+    element.className = className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <tbody> 作成 */
+module.exports.tbody = function(opt_className, opt_id) {
+  var element = document.createElement('tbody');
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <td> 作成 */
+module.exports.td = function(opt_colspan, opt_className, opt_id) {
+  var element = document.createElement('td');
+  if (opt_colspan) {
+    td.colspan = opt_colspan;
+  }
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <tr> 作成 */
+module.exports.tr = function(opt_className, opt_id) {
+  var element = document.createElement('tr');
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <h1> 作成 */
+module.exports.h1 = function(text, opt_className, opt_id) {
+  if (typeof text === 'undefined') {
+    text = "";
+  }
+  var element = document.createElement('h1');
+  if (text) {
+    element.text = text;
+  }
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <h4> 作成 */
+module.exports.h4 = function(text, opt_className, opt_id) {
+  if (typeof text === 'undefined') {
+    text = "";
+  }
+  var element = document.createElement('h4');
+  if (text) {
+    element.innerText = text;
+  }
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+},{}],4:[function(require,module,exports){
+var Campaign = require('./campaign');
+
+var ACC_URL = "https://tanjo.in/acc/campaign.json";
+
+/** キャンペーン情報を取得する. */
+module.exports.getCampaigns = function(callback) {
+  var request = new XMLHttpRequest();
+  request.open('GET', ACC_URL, true);
+  request.onload = function() {
+    /** JSON データを Campaign に変換. */
+    var data = JSON.parse(this.responseText);
+    var campaigns = data.campaigns.map((data) => new Campaign(data));
+    var serviceTitles = campaigns
+        .map((c) => c.serviceTitle)
+        .filter((x, i, self) => self.indexOf(x) === i);
+    callback(campaigns, serviceTitles);
+  };
+  request.send(null);
+};
+
 /** Get URL Query Parameters. */
-acc.getUrlQuery = function() {
+module.exports.getUrlQuery = function() {
     var url = window.location.search;
-    var hash = url.slice(1).split(acc.URL_QUERY_AND);
+    var hash = url.slice(1).split("&");
     var queries = [];
     for (var i = 0; i < hash.length; i++) {
-        var splitedData = hash[i].split(acc.URL_QUERY_EQUAL);
+        var splitedData = hash[i].split("=");
         queries.push(splitedData[0]);
         queries[splitedData[0]] = splitedData[1];
     }
     return queries;
 };
 
-/** JSON データを Campaign に変換. */
-acc.convertData = function(responseText) {
-    var data = JSON.parse(responseText);
-    var campaigns = [];
-    for (var i = 0; i < data.campaigns.length; i++) {
-        var campaign = new Campaign(data.campaigns[i]);
-        campaigns.push(campaign);
-    }
-    return campaigns;
+module.exports.getId = function(urlQuery) {
+  if (urlQuery && urlQuery.id) {
+    return decodeURIComponent(urlQuery.id);
+  }
+  return null;
 };
 
-/** URL Query から service_title を取得する */
-acc.getServiceTitle = function(urlQuery) {
-    if (urlQuery != null && urlQuery.service_title != null && urlQuery.service_title.length > 0) {
-        return decodeURI(urlQuery.service_title);
-    }
-    return null;
+module.exports.getServiceTitle = function(urlQuery) {
+  if (urlQuery && urlQuery.service_title && urlQuery.service_title.length > 0) {
+    return decodeURIComponent(urlQuery.service_title);
+  }
+  return null;
 };
 
-/** ViewType を選別 */
-acc.getViewType = function(urlQuery) {
-    if (urlQuery.service_title != null) {
-        return acc.ViewType.SERVICE_TITLE;
-    }
-    if (urlQuery.category != null) {
-        return acc.ViewTYpe.CATEGORY;
-    }
-    return acc.ViewType.ALL;
-};
+},{"./campaign":1}],5:[function(require,module,exports){
+var Campaign = require('./campaign');
+var info = require('./info');
+var constants = require('./constants');
+var htmler = require('./htmler');
 
-/** Campaign をフィルタリング. */
-acc.filterCampaigns = function(campaigns, serviceTitle) {
-    var result = [];
-    for (var j = 0; j < campaigns.length; j++) {
-        var campaign = campaigns[j];
-        if (campaign.serviceTitle == serviceTitle) {
-            result.push(campaign);
-        }
-    }
-    return result;
-};
+var acc = {};
 
 /** Campaign をソート */
-acc.sortCampaigns = function(campaigns) {
-  campaigns.sort(function(a, b) {
-    if (!a.containsInOn(acc.On.ALL) && !b.containsInOn(acc.On.ALL)) {
-      if (a.id > b.id) {
-        return -1;
-      }
-      if (a.id < b.id) {
-        return 1;
-      }
-      return 0;
-    }
-
-    if (!a.containsInOn(acc.On.ALL)) {
+var sortCampaigns = function(a, b) {
+  if (!a.containsInOn(constants.On.ALL) && !b.containsInOn(constants.On.ALL)) {
+    if (a.id > b.id) {
       return -1;
     }
-    if (!b.containsInOn(acc.On.ALL)) {
+    if (a.id < b.id) {
       return 1;
-    }
-
-    var aDate = new Date(Date.parse(a.date.end));
-    var bDate = new Date(Date.parse(b.date.end));
-
-    if (isNaN(aDate.getTime()) && isNaN(bDate.getTime())) {
-      if (a.id > b.id) {
-        return -1;
-      }
-      if (a.id < b.id) {
-        return 1;
-      }
-      return 0;
-    }
-
-    if (isNaN(aDate.getTime())) {
-      return 1;
-    }
-    if (isNaN(bDate.getTime())) {
-      return -1;
-    }
-
-    if (aDate.getTime() > bDate.getTime()) {
-      return 1;
-    }
-
-    if (aDate.getTime() < bDate.getTime()) {
-      return -1;
     }
     return 0;
-  });
-  return campaigns;
+  }
+
+  if (!a.containsInOn(constants.On.ALL)) {
+    return -1;
+  }
+  if (!b.containsInOn(constants.On.ALL)) {
+    return 1;
+  }
+
+  var aDate = new Date(Date.parse(a.date.end));
+  var bDate = new Date(Date.parse(b.date.end));
+
+  if (isNaN(aDate.getTime()) && isNaN(bDate.getTime())) {
+    if (a.id > b.id) {
+      return -1;
+    }
+    if (a.id < b.id) {
+      return 1;
+    }
+    return 0;
+  }
+
+  if (isNaN(aDate.getTime())) {
+    return 1;
+  }
+  if (isNaN(bDate.getTime())) {
+    return -1;
+  }
+
+  if (aDate.getTime() > bDate.getTime()) {
+    return 1;
+  }
+
+  if (aDate.getTime() < bDate.getTime()) {
+    return -1;
+  }
+  return 0;
 };
 
 /** service_title が一致するかどうか */
@@ -326,68 +484,16 @@ acc.validateServiceTitle = function(campaign, serviceTitle) {
     return false;
 };
 
-/** <div> 作成 */
-acc.createDiv = function(opt_className) {
-    var div = document.createElement(acc.ELEMENT_DIV);
-    if (opt_className != null) {
-        div.className = opt_className;
-    }
-    return div;
-};
-
-/** <a> 作成 */
-acc.createA = function(opt_href) {
-    var a = document.createElement(acc.ELEMENT_A);
-    if (opt_href != null) {
-        a.href = opt_href;
-    }
-    return a;
-};
-
-/** <p> 作成 */
-acc.createP = function(opt_className) {
-    var p = document.createElement(acc.ELEMENT_P);
-    if (opt_className != null) {
-        p.className = opt_className;
-    }
-    return p;
-};
-
-/** <img> 作成 */
-acc.createImg = function(opt_src) {
-    var img = document.createElement(acc.ELEMENT_IMG);
-    img.setAttribute("width", "100%");
-    img.setAttribute("height", "100%");
-    img.className = "materialboxed";
-    if (opt_src != null) {
-        img.src = opt_src;
-    }
-    return img;
-};
-
-/** <i> 作成 */
-acc.createIcon  = function(opt_type) {
-    var icon = document.createElement(acc.ELEMENT_I);
-    icon.className = acc.CLASS_NAME_MATERIAL_ICONS;
-    icon.innerText = opt_type;
-    return icon;
-};
-
-/** <div id="contents"> に要素を追加 */
-acc.insertInContents = function(element) {
-    document.getElementById(acc.ELEMENT_ID_CONTENTS).appendChild(element);
-};
-
 acc.hideCampaign = function() {
   var id = this.campaignId;
   var count = 0;
-  var urlQuery = acc.getUrlQuery();
+  var urlQuery = info.getUrlQuery();
   if (id == null) {
     return true;
   }
   var url = window.location.origin + window.location.pathname + "?";
 
-  var serviceTitle = acc.getServiceTitle(urlQuery);
+  var serviceTitle = info.getServiceTitle(urlQuery);
   if (serviceTitle != null && serviceTitle.length > 0) {
     url = url + "service_title=" + serviceTitle + "&";
   }
@@ -405,36 +511,6 @@ acc.hideCampaign = function() {
   return false;
 };
 
-acc.onload = function(urlQuery) {
-    var viewType = acc.getViewType(urlQuery);
-    var serviceTitle = acc.getServiceTitle(urlQuery);
-
-    info.getCampaign(function(campaigns, serviceTitles) {
-        var now = new Date();
-
-        if (viewType == acc.ViewType.SERVICE_TITLE) {
-            campaigns = acc.filterCampaigns(campaigns, serviceTitle);
-        }
-
-        campaigns = acc.sortCampaigns(campaigns);
-
-        var row = acc.createDiv("row");
-        acc.insertInContents(row);
-
-        for (var i = 0; i < campaigns.length; i++) {
-            var campaign = campaigns[i];
-            var isShow = campaign.isShow(now);
-            isShow = isShow && acc.validateHide(campaign, urlQuery);
-            if (viewType == acc.ViewType.SERVICE_TITLE) {
-                isShow = isShow && acc.validateServiceTitle(serviceTitle);
-            }
-            if (isShow) {
-                acc.bindView(row, campaign);
-            }
-        }
-    });
-};
-
 acc.validateHide = function(campaign, urlQuery) {
     for (var i = 0; i < urlQuery.length; i++) {
         if (campaign.id == urlQuery["hide[" + i + "]"]) {
@@ -445,7 +521,7 @@ acc.validateHide = function(campaign, urlQuery) {
 }
 
 acc.insertDiv = function(content, className, opt_innerText, opt_appendChild, opt_isEnableNullOrEmpty) {
-    var div = acc.createDiv(className);
+    var div = htmler.div(className);
     if (opt_innerText != null) {
         div.innerText = opt_innerText;
     }
@@ -463,53 +539,47 @@ acc.insertDiv = function(content, className, opt_innerText, opt_appendChild, opt
 };
 
 acc.bindView = function(row, campaign) {
-    var col = acc.createDiv("col s12 m6 l3");
+    var col = htmler.div("col s12 m6 l3");
     row.appendChild(col);
 
     var card;
     if (campaign.hasUrl()) {
-        var cardLink = acc.createA(campaign.urls[0]);
-        card = acc.createDiv("card blue-grey darken-3 z-depth-0");
+        var cardLink = htmler.a(campaign.urls[0]);
+        card = htmler.div("card blue-grey darken-3 z-depth-0");
         cardLink.appendChild(card);
         col.appendChild(cardLink);
     } else {
-        card = acc.createDiv("card blue-grey darken-3 z-depth-0");
+        card = htmler.div("card blue-grey darken-3 z-depth-0");
         col.appendChild(card);
     }
 
     if (campaign.hasImage()) {
-        acc.insertDiv(card, "img", null, acc.createImg(campaign.img));
+        acc.insertDiv(card, "img", null, htmler.img(campaign.img));
     }
 
     var cardContent = acc.insertDiv(card, "card-content white-text");
     acc.insertDiv(cardContent, "blue-text col s10", campaign.id);
-    var doneIcon = acc.createIcon("clear");
+    var doneIcon = htmler.i("clear");
     doneIcon.className = doneIcon.className + " hidebutton";
     doneIcon.campaignId = campaign.id;
     doneIcon.onclick = acc.hideCampaign;
     acc.insertDiv(cardContent, "col s2", null, doneIcon);
     acc.insertDiv(cardContent, "card-title", campaign.title);
 
-    var cardServicelink = acc.createA("/acc/?service_title=" + campaign.serviceTitle);
+    var cardServicelink = htmler.a("/acc/?service_title=" + campaign.serviceTitle);
     acc.insertDiv(cardServicelink, "chip blue-grey darken-1 amber-text", campaign.serviceTitle);
     cardContent.appendChild(cardServicelink);
 
-    var dayText;
-    var startText = campaign.date.start || '';
-    var endText = campaign.date.end || '';
-    if (startText.length != 0 || endText.length != 0) {
-      dayText = startText + "～" + endText;
-    }
-    acc.insertDiv(cardContent, "grey-text", dayText, null, true);
+    acc.insertDiv(cardContent, "grey-text", campaign.dayText(), null, true);
 
-    var description = acc.createP();
+    var description = htmler.p();
     description.innerText = campaign.description;
     cardContent.appendChild(description);
 
     if (campaign.hasUrl()) {
       for (var j = 1; j < campaign.urls.length; j++) {
-          var div = acc.createDiv();
-          var a = acc.createA(campaign.urls[j]);
+          var div = htmler.div();
+          var a = htmler.a(campaign.urls[j]);
           a.innerText = "その" + (j + 1);
           div.appendChild(a);
           cardContent.appendChild(div);
@@ -517,17 +587,119 @@ acc.bindView = function(row, campaign) {
     }
 };
 
+var showDetail = function(campaigns, id, urlQuery) {
+  id = parseInt(id);
+  var filtered = campaigns.filter((campaign) => {
+    return campaign.id === id;
+  });
+  if (filtered && filtered.length > 0) {
+    var modalContent = htmler.div("modal-content");
+    var target = filtered[0];
+    if (target.img && target.img.length > 0) {
+      modalContent.appendChild(htmler.img(target.img, null, null, "responsive-img"));
+    }
+    modalContent.appendChild(htmler.h4("[" + target.id + "] " + target.title));
+    var chip = htmler.div("chip");
+    var a = htmler.a("?service_title=" + target.serviceTitle, target.serviceTitle);
+    a.onclick = function() {
+      history.pushState(null, null, "?service_title=" + target.serviceTitle);
+      showServiceTitle(campaigns, target.serviceTitle, urlQuery);
+      $('#modal').modal("close");
+      return false;
+    };
+    chip.appendChild(a);
+    modalContent.appendChild(chip);
+    modalContent.appendChild(htmler.p(null, null, target.dayText()));
+    modalContent.appendChild(htmler.p(null, null, target.description));
+    for (var i = 0; i < target.length; i++) {
+      var div = htmler.div();
+      div.appendChild(htmler.a(target.urls[i], "リンク" + i));
+      modalContent.appendChild(div);
+    }
+    var modal = document.getElementById("modal");
+    while (modal.firstChild) {
+      modal.removeChild(modal.firstChild);
+    }
+    modal.appendChild(modalContent);
+    $('#modal').modal();
+    $('#modal').modal("open");
+  }
+};
+
+var showServiceTitle = function(campaigns, serviceTitle, urlQuery) {
+  if (!serviceTitle) {
+    return;
+  }
+  campaigns = campaigns.filter((data) => data.serviceTitle === serviceTitle);
+  campaigns.sort(sortCampaigns);
+  showCampaigns(campaigns, serviceTitle, urlQuery);
+};
+
+var showCampaigns = function(campaigns, serviceTitle, urlQuery, now, row) {
+  if (typeof now === 'undefined') {
+    now = new Date();
+  }
+  if (typeof row === 'undefined') {
+    row = htmler.div("row");
+  }
+
+  var contents = document.getElementById("contents");
+  while (contents.firstChild) {
+    contents.removeChild(contents.firstChild);
+  }
+  contents.appendChild(row);
+
+  // TODO: check
+  for (var i = 0; i < campaigns.length; i++) {
+    var campaign = campaigns[i];
+    var isShow = campaign.isShow(now);
+    isShow = isShow && acc.validateHide(campaign, urlQuery);
+    if (serviceTitle) {
+      isShow = isShow && acc.validateServiceTitle(serviceTitle);
+    }
+    if (isShow) {
+      acc.bindView(row, campaign);
+    }
+  }
+};
+
 window.onload = function() {
-    var urlQuery = acc.getUrlQuery();
-    acc.onload(urlQuery);
+  info.getCampaigns(function(campaigns, serviceTitles) {
+    showContents(campaigns, serviceTitles);
+  });
+};
+
+var showContents = function(campaigns, serviceTitles) {
+  acc.campaigns = campaigns;
+  acc.serviceTitles = serviceTitles;
+  var urlQuery = info.getUrlQuery();
+  var id = info.getId(urlQuery);
+  if (id) {
+    showDetail(campaigns, id, urlQuery);
+    return;
+  }
+  var serviceTitle = info.getServiceTitle(urlQuery);
+  if (serviceTitle) {
+    showServiceTitle(campaigns, serviceTitle, urlQuery);
+    return;
+  }
+  // 通常表示
+  campaigns.sort(sortCampaigns);
+  showCampaigns(campaigns, null, urlQuery);
+};
+
+window.onpopstate = function(event) {
+  if (event.isTrusted) {
+    showContents(acc.campaigns, acc.serviceTitles);
+  }
 };
 
 // Materialize code
 
 $(document).ready(function(){
-    $('.materialboxed').materialbox();
+  $('.materialboxed').materialbox();
 });
 
 $(".button-collapse").sideNav();
 
-},{"./campaign":1,"./info":2}]},{},[3]);
+},{"./campaign":1,"./constants":2,"./htmler":3,"./info":4}]},{},[5]);

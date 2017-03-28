@@ -1,5 +1,5 @@
 /** <div> 作成 */
-module.exports.div = function(opt_className, opt_id) {
+module.exports.div = function(opt_className, opt_id, opt_text) {
   var element = document.createElement("div");
   if (opt_className) {
     element.className = opt_className;
@@ -7,11 +7,14 @@ module.exports.div = function(opt_className, opt_id) {
   if (opt_id) {
     element.id = opt_id;
   }
+  if (opt_text) {
+    element.innerText = opt_text;
+  }
   return element;
 };
 
 /** <a> 作成 */
-module.exports.a = function(href, target, opt_className, opt_id) {
+module.exports.a = function(href, opt_text, target, opt_className, opt_id) {
   if (typeof target === 'undefined') { // 未定義の場合は target="_blank"
     opt_target = '_blank';
   }
@@ -25,6 +28,9 @@ module.exports.a = function(href, target, opt_className, opt_id) {
   if (target) {
     element.target = target;
   }
+  if (opt_text) {
+    element.innerText = opt_text;
+  }
   if (opt_className) {
     element.className = opt_className;
   }
@@ -35,13 +41,16 @@ module.exports.a = function(href, target, opt_className, opt_id) {
 };
 
 /** <p> 作成 */
-module.exports.p = function(opt_className, opt_id) {
+module.exports.p = function(opt_className, opt_id, opt_text) {
   var element = document.createElement("p");
   if (opt_className) {
     element.className = opt_className;
   }
   if (opt_id) {
     element.id = opt_id;
+  }
+  if (opt_text) {
+    element.innerText = opt_text;
   }
   return element;
 };
@@ -110,7 +119,7 @@ module.exports.tbody = function(opt_className, opt_id) {
     element.id = opt_id;
   }
   return element;
-}
+};
 
 /** <td> 作成 */
 module.exports.td = function(opt_colspan, opt_className, opt_id) {
@@ -147,6 +156,24 @@ module.exports.h1 = function(text, opt_className, opt_id) {
   var element = document.createElement('h1');
   if (text) {
     element.text = text;
+  }
+  if (opt_className) {
+    element.className = opt_className;
+  }
+  if (opt_id) {
+    element.id = opt_id;
+  }
+  return element;
+};
+
+/** <h4> 作成 */
+module.exports.h4 = function(text, opt_className, opt_id) {
+  if (typeof text === 'undefined') {
+    text = "";
+  }
+  var element = document.createElement('h4');
+  if (text) {
+    element.innerText = text;
   }
   if (opt_className) {
     element.className = opt_className;
