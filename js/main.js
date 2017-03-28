@@ -584,9 +584,7 @@ acc.bindView = function(row, campaign) {
 
 var showDetail = function(campaigns, id) {
   id = parseInt(id);
-  var filtered = campaigns.filter((campaign) => {
-    return campaign.id === id;
-  });
+  var filtered = campaigns.filter((campaign) => campaign.id === id);
   if (filtered && filtered.length > 0) {
     var modalContent = htmler.div("modal-content");
     var target = filtered[0];
