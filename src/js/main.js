@@ -51,6 +51,7 @@ var sortCampaigns = function(a, b) {
   if (aDate.getTime() < bDate.getTime()) {
     return -1;
   }
+
   return 0;
 };
 
@@ -93,18 +94,6 @@ var validateHide = function(campaign, urlQuery) {
   return true;
 };
 
-var insertDiv = function(content, className, opt_innerText, opt_appendChild, opt_isEnableNullOrEmpty) {
-  var div = htmler.div(className, null, opt_innerText);
-  if (opt_appendChild) {
-    div.appendChild(opt_appendChild);
-  }
-  if (opt_isEnableNullOrEmpty && (!opt_innerText || opt_innerText.length === 0)) {
-    return div;
-  }
-  content.appendChild(div);
-  return div;
-};
-
 acc.bindView = function(row, campaign) {
     var col = htmler.div("col s12 m6 l3");
     row.appendChild(col);
@@ -121,17 +110,24 @@ acc.bindView = function(row, campaign) {
     }
 
     if (campaign.hasImage()) {
-        acc.insertDiv(card, "img", null, htmler.img(campaign.img));
+      var div = htmler.div("img");
+      div.appendChild(htmler.img(campaign.img));
+      card.appendChild(div);
     }
 
-    var cardContent = acc.insertDiv(card, "card-content white-text");
-    acc.insertDiv(cardContent, "blue-text col s10", campaign.id);
+    var cardContent = htmler.div("card-content white-text");
+    cardContent.appendChild(htmler.div("blue-text col s10", null, campaign.id));
+    card.appendChild(cardContent);
+
     var doneIcon = htmler.i("clear");
     doneIcon.className = doneIcon.className + " hidebutton";
     doneIcon.campaign = campaign.id;
     doneIcon.onclick = hideCampaign;
-    acc.insertDiv(cardContent, "col s2", null, doneIcon);
-    acc.insertDiv(cardContent, "card-title", campaign.title);
+    var div2 = htmler.div("col s2");
+    div2.appendChild(doneIcon);
+    cardContent.appendChild(div2);
+    var div3 = htmler.div("card-title", null, campaign.title);
+    cardContent.appendChild(div3);
 
     var cardServicelink = htmler.a("?service_title=" + campaign.serviceTitle);
     cardServicelink.onclick = function() {
@@ -140,11 +136,13 @@ acc.bindView = function(row, campaign) {
       $('#modal').modal("close");
       return false;
     };
-    acc.insertDiv(cardServicelink, "chip blue-grey darken-1 amber-text", campaign.serviceTitle);
+    cardServicelink.appendChild(htmler.div("chip blue-grey darken-1 amber-text", null, campaign.serviceTitle));
     cardContent.appendChild(cardServicelink);
 
-    acc.insertDiv(cardContent, "grey-text", campaign.dayText(), null, true);
-
+    var div4 = htmler.div("grey-text", null, campaign.dayText());
+    if (div4.innerText && div4.innerText.length > 0) {
+      cardContent.appendChild(div4);
+    }
     var description = htmler.p();
     description.innerText = campaign.description;
     cardContent.appendChild(description);
