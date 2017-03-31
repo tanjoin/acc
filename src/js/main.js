@@ -1,9 +1,12 @@
 var Campaign = require('./campaign');
 var info = require('./info');
 var constants = require('./constants');
-var htmler = require('./htmler');
+var HtmlBuilder = require('./html-builder');
 
-var acc = {};
+var acc = {
+  campaigns: [],
+  serviceTitles: []
+};
 
 /** Campaign をソート */
 var sortCampaigns = function(a, b) {
@@ -85,111 +88,102 @@ var hideCampaign = function() {
   return false;
 };
 
-var validateHide = function(campaign, urlQuery) {
-  for (var i = 0; i < urlQuery.length; i++) {
-      if (campaign.id == urlQuery["hide[" + i + "]"]) {
-          return false;
-      }
-  }
-  return true;
+var bindCardContent = function(cardContent, campaign) {
+  var url = "?service_title=" + campaign.serviceTitle;
+  var urlOfId = "?id=" + campaign.id;
+  new HtmlBuilder(cardContent)
+  .a(urlOfId, null, null, () => {
+    history.pushState(null, null, urlOfId);
+    showDetail(acc.campaigns, campaign.id);
+    return false;
+  })
+  .div("blue-text col s10")
+  .text(campaign.id)
+  .div("col s2")
+  .i("hidebutton material-icons")
+  .intercept((icon) => {
+    icon.campaign = campaign.id;
+    icon.onclick = hideCampaign;
+  })
+  .text("clear")
+  .div("card-title")
+  .text(campaign.title)
+  .a(url, null, null, () => {
+    history.pushState(null, null, url);
+    showServiceTitle(acc.campaigns, campaign.serviceTitle);
+    $('#modal').modal("close");
+    return false;
+  })
+  .div("chip blue-grey darken-1 amber-text")
+  .text(campaign.serviceTitle)
+  .then(campaign.hasDayText(), (self) => self.div("grey-text").text(campaign.dayText()))
+  // .p(campaign.description)
+  // .build()
+  .then(campaign.hasUrl(), (self) => {
+    for (var j = 1; j < campaign.urls.length; j++) {
+      self.div().a(campaign.urls[j]).text("その" + (j + 1)).build();
+    }
+  })
+  .build();
 };
 
-acc.bindView = function(row, campaign) {
-    var col = htmler.div("col s12 m6 l3");
-    row.appendChild(col);
+var bindCard = function(card, campaign) {
 
-    var card;
-    if (campaign.hasUrl()) {
-        var cardLink = htmler.a(campaign.urls[0]);
-        card = htmler.div("card blue-grey darken-3 z-depth-0");
-        cardLink.appendChild(card);
-        col.appendChild(cardLink);
-    } else {
-        card = htmler.div("card blue-grey darken-3 z-depth-0");
-        col.appendChild(card);
-    }
+  new HtmlBuilder(card)
+  .then(campaign.hasImage(), (self) => self.div("img").img(campaign.img, "materialboxed"))
+  .div("card-content white-text")
+  .intercept((cardContent, builder) => bindCardContent(cardContent, campaign))
+  .build();
+};
 
-    if (campaign.hasImage()) {
-      var div = htmler.div("img");
-      div.appendChild(htmler.img(campaign.img));
-      card.appendChild(div);
-    }
+var bindView = function(row, campaign) {
+  new HtmlBuilder(row)
+  .div("col s12 m6 l3")
+  .a(campaign.urls[0])
+  .div("card blue-grey darken-3 z-depth-0")
+  .intercept((card, builder) => bindCard(card, campaign))
+  .build();
+};
 
-    var cardContent = htmler.div("card-content white-text");
-    cardContent.appendChild(htmler.div("blue-text col s10", null, campaign.id));
-    card.appendChild(cardContent);
+var createModalContent = function(modalContent, campaign) {
+  var url = "?service_title=" + campaign.serviceTitle;
+  new HtmlBuilder(modalContent)
+  .h4()
+  .text("[" + campaign.id + "] " + campaign.title)
+  .div("chip")
+  .a(url, null, null, ((e) => {
+    history.pushState(null, null, url);
+    showServiceTitle(acc.campaigns, campaign.serviceTitle);
+    $('#modal').modal("close");
+    return false;
+  }))
+  .text(campaign.serviceTitle)
+  .p(campaign.dayText())
+  .build()
+  .p(campaign.description)
+  .build();
 
-    var doneIcon = htmler.i("clear");
-    doneIcon.className = doneIcon.className + " hidebutton";
-    doneIcon.campaign = campaign.id;
-    doneIcon.onclick = hideCampaign;
-    var div2 = htmler.div("col s2");
-    div2.appendChild(doneIcon);
-    cardContent.appendChild(div2);
-    var div3 = htmler.div("card-title", null, campaign.title);
-    cardContent.appendChild(div3);
-
-    var cardServicelink = htmler.a("?service_title=" + campaign.serviceTitle);
-    cardServicelink.onclick = function() {
-      history.pushState(null, null, "?service_title=" + campaign.serviceTitle);
-      showServiceTitle(acc.campaigns, campaign.serviceTitle);
-      $('#modal').modal("close");
-      return false;
-    };
-    cardServicelink.appendChild(htmler.div("chip blue-grey darken-1 amber-text", null, campaign.serviceTitle));
-    cardContent.appendChild(cardServicelink);
-
-    var div4 = htmler.div("grey-text", null, campaign.dayText());
-    if (div4.innerText && div4.innerText.length > 0) {
-      cardContent.appendChild(div4);
-    }
-    var description = htmler.p();
-    description.innerText = campaign.description;
-    cardContent.appendChild(description);
-
-    if (campaign.hasUrl()) {
-      for (var j = 1; j < campaign.urls.length; j++) {
-          var div = htmler.div();
-          var a = htmler.a(campaign.urls[j]);
-          a.innerText = "その" + (j + 1);
-          div.appendChild(a);
-          cardContent.appendChild(div);
-      }
-    }
+  for (var i = 0; i < campaign.urls.length; i++) {
+    new HtmlBuilder(modalContent)
+    .div()
+    .a(campaign.urls[i])
+    .text("リンク" + (i + 1))
+    .build();
+  }
 };
 
 var showDetail = function(campaigns, id) {
   id = parseInt(id);
   var filtered = campaigns.filter((campaign) => campaign.id === id);
   if (filtered && filtered.length > 0) {
-    var modalContent = htmler.div("modal-content");
-    var target = filtered[0];
-    if (target.img && target.img.length > 0) {
-      modalContent.appendChild(htmler.img(target.img, null, null, "responsive-img"));
-    }
-    modalContent.appendChild(htmler.h4("[" + target.id + "] " + target.title));
-    var chip = htmler.div("chip");
-    var a = htmler.a("?service_title=" + target.serviceTitle, target.serviceTitle);
-    a.onclick = function() {
-      history.pushState(null, null, "?service_title=" + target.serviceTitle);
-      showServiceTitle(campaigns, target.serviceTitle);
-      $('#modal').modal("close");
-      return false;
-    };
-    chip.appendChild(a);
-    modalContent.appendChild(chip);
-    modalContent.appendChild(htmler.p(null, null, target.dayText()));
-    modalContent.appendChild(htmler.p(null, null, target.description));
-    for (var i = 0; i < target.length; i++) {
-      var div = htmler.div();
-      div.appendChild(htmler.a(target.urls[i], "リンク" + i));
-      modalContent.appendChild(div);
-    }
-    var modal = document.getElementById("modal");
-    while (modal.firstChild) {
-      modal.removeChild(modal.firstChild);
-    }
-    modal.appendChild(modalContent);
+    var campaign = filtered[0];
+    new HtmlBuilder("modal")
+    .clean()
+    .div("modal-content")
+    .intercept((modalContent) => createModalContent(modalContent, campaign))
+    .then(campaign.hasImage(), (self) => self.img(campaign.img, "responsive-img"))
+    .build();
+
     $('#modal').modal();
     $('#modal').modal("open");
   }
@@ -207,22 +201,15 @@ var showServiceTitle = function(campaigns, serviceTitle) {
 
 var showCampaigns = function(campaigns) {
   var now = new Date();
-  var row = htmler.div("row");
   var urlQuery = info.getUrlQuery();
-  var contents = document.getElementById("contents");
-  while (contents.firstChild) {
-    contents.removeChild(contents.firstChild);
-  }
-  contents.appendChild(row);
-
-  for (var i = 0; i < campaigns.length; i++) {
-    var campaign = campaigns[i];
-    var isShow = campaign.isShow(now);
-    isShow = isShow && validateHide(campaign, urlQuery);
-    if (isShow) {
-      acc.bindView(row, campaign);
+  new HtmlBuilder("contents").clean().div("row").intercept(function(row) {
+    for (var i = 0; i < campaigns.length; i++) {
+      var campaign = campaigns[i];
+      if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
+        bindView(row, campaign);
+      }
     }
-  }
+  }).build();
 };
 
 var showContents = function() {
@@ -231,7 +218,8 @@ var showContents = function() {
   document.getElementById("logo").innerText = "Acc";
   if (id) {
     showDetail(acc.campaigns, id);
-    return;
+  } else {
+    $('#modal').modal("close");
   }
   var serviceTitle = info.getServiceTitle(urlQuery);
   if (serviceTitle) {

@@ -35,6 +35,11 @@ Campaign.prototype.dayText = function() {
   return "";
 };
 
+Campaign.prototype.hasDayText = function() {
+  var dayText = this.dayText();
+  return dayText && dayText.length > 0;
+};
+
 Campaign.prototype.hasUrl = function() {
     return this.urls && this.urls.length > 0;
 };
@@ -49,6 +54,16 @@ Campaign.prototype.isShow = function(now) {
 
 Campaign.prototype.containsInOn = function(on) {
     return this.on && this.on.indexOf(on) !== -1;
+};
+
+// URLクエリにある hide[N]=id の id が一致したかどうか
+Campaign.prototype.validateHide = function(urlQuery) {
+  for (var i = 0; i < urlQuery.length; i++) {
+      if (this.id == urlQuery["hide[" + i + "]"]) {
+          return false;
+      }
+  }
+  return true;
 };
 
 /** @private */
@@ -185,191 +200,227 @@ module.exports.On = {
 };
 
 },{}],3:[function(require,module,exports){
-/** <div> 作成 */
-module.exports.div = function(opt_className, opt_id, opt_text) {
-  var element = document.createElement("div");
-  if (opt_className) {
-    element.className = opt_className;
+/** @constructor */
+var HtmlBuilder = function(element) {
+  if (typeof element === "string") {
+    this.element = document.getElementById(element);
+  } else if (typeof element === "object") {
+    this.element = element;
   }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  if (opt_text) {
-    element.innerText = opt_text;
-  }
-  return element;
+  this.paragraph = [];
 };
 
-/** <a> 作成 */
-module.exports.a = function(href, opt_text, target, opt_className, opt_id) {
-  if (typeof target === 'undefined') { // 未定義の場合は target="_blank"
-    opt_target = '_blank';
-  }
-  if (typeof href === 'undefined') {
-    href = 'https://tanjoin.github.io';
-  }
-  var element = document.createElement("a");
-  if (href) {
-    element.href = href;
-  }
-  if (target) {
-    element.target = target;
-  }
-  if (opt_text) {
-    element.innerText = opt_text;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <p> 作成 */
-module.exports.p = function(opt_className, opt_id, opt_text) {
-  var element = document.createElement("p");
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  if (opt_text) {
-    element.innerText = opt_text;
-  }
-  return element;
-};
-
-/** <img> 作成 */
-module.exports.img = function(src, width, height, className, opt_id) {
-  if (typeof src === 'undefined') {
-    src = 'https://tanjoin.github.io/acc/img/404.png';
-  }
-  if (typeof width === 'undefined') {
-    width = "100%";
-  }
-  if (typeof height === 'undefined') {
-    height = "100%";
-  }
-  if (typeof className === 'undefined') {
-    className = 'materialboxed';
-  }
-  var element = document.createElement("img");
-  if (src) {
+HtmlBuilder.prototype = {
+  then : function(conditoin, callback) {
+    if (callback && conditoin) {
+      var result = callback(this);
+      if (result) {
+        return result;
+      }
+    }
+    return this;
+  },
+  ifElse : function(conditoin, trueCallback, falseCallback) {
+    if (conditoin) {
+      if (trueCallback) {
+        var trueResult = rueCallback(this);
+        if (trueResult) {
+          return trueResult;
+        }
+      }
+    } else {
+      if (falseCallback) {
+        var falseResult = falseCallback(this);
+        if (falseResult) {
+          return falseResult;
+        }
+      }
+    }
+    return this;
+  },
+  clean : function() {
+    var element = this.toElement();
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+    return this;
+  },
+  intercept : function(callback) {
+    callback(this.toElement(), this);
+    return this;
+  },
+  toElement : function() {
+    if (this.paragraph.length > 0) {
+      return this.paragraph[this.paragraph.length - 1];
+    } else if (this.element) {
+      return this.element;
+    }
+    return null;
+  },
+  build : function() {
+    for (var i = 0; i < this.paragraph.length; i++) {
+      if (i === 0) {
+        if (this.element) {
+          this.element.appendChild(this.paragraph[i]);
+        } else {
+          this.element = this.paragraph[i];
+        }
+      } else {
+        this.paragraph[i - 1].appendChild(this.paragraph[i]);
+      }
+    }
+    this.paragraph = [];
+    return this;
+  },
+  div : function(opt_className, opt_id) {
+    var element = document.createElement("div");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  text : function(text) {
+    this.paragraph.push(document.createTextNode(text));
+    return this.build();
+  },
+  a : function(href, opt_className, opt_id, opt_onclick) {
+    if (href) {
+      var element = document.createElement("a");
+      element.href = href;
+      if (opt_className) {
+        element.className = opt_className;
+      }
+      if (opt_id) {
+        element.id = opt_id;
+      }
+      if (opt_onclick) {
+        element.onclick = opt_onclick;
+      }
+      this.paragraph.push(element);
+    }
+    return this;
+  },
+  p : function(opt_innerText, opt_className, opt_id) {
+    var element = document.createElement("p");
+    if (opt_innerText) {
+      element.innerText = opt_innerText;
+    }
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  img : function(src, opt_className, opt_id) {
+    var element = document.createElement("img");
     element.src = src;
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this.build();
+  },
+  i : function(opt_className, opt_id) {
+    var element = document.createElement("i");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  tbody : function(opt_className, opt_id) {
+    var element = document.createElement("tbody");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  tr : function(opt_className, opt_id) {
+    var element = document.createElement("tr");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  td : function(opt_className, opt_id) {
+    var element = document.createElement("td");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h1 : function(opt_className, opt_id) {
+    var element = document.createElement("h1");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h2 : function(opt_className, opt_id) {
+    var element = document.createElement("h2");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h3 : function(opt_className, opt_id) {
+    var element = document.createElement("h3");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h4 : function(opt_className, opt_id) {
+    var element = document.createElement("h4");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
   }
-  if (width) {
-    element.width = width;
-  }
-  if (height) {
-    element.height = height;
-  }
-  if (className) {
-    element.className = className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
 };
 
-/** <i> 作成 */
-module.exports.i = function(type, className, opt_id) {
-  if (typeof type === 'undefined') {
-    type = "";
-  }
-  if (typeof className === 'undefined') {
-    className = "material-icons";
-  }
-  var element = document.createElement("i");
-  if (type) {
-    element.innerText = type;
-  }
-  if (className) {
-    element.className = className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <tbody> 作成 */
-module.exports.tbody = function(opt_className, opt_id) {
-  var element = document.createElement('tbody');
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <td> 作成 */
-module.exports.td = function(opt_colspan, opt_className, opt_id) {
-  var element = document.createElement('td');
-  if (opt_colspan) {
-    td.colspan = opt_colspan;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <tr> 作成 */
-module.exports.tr = function(opt_className, opt_id) {
-  var element = document.createElement('tr');
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <h1> 作成 */
-module.exports.h1 = function(text, opt_className, opt_id) {
-  if (typeof text === 'undefined') {
-    text = "";
-  }
-  var element = document.createElement('h1');
-  if (text) {
-    element.text = text;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <h4> 作成 */
-module.exports.h4 = function(text, opt_className, opt_id) {
-  if (typeof text === 'undefined') {
-    text = "";
-  }
-  var element = document.createElement('h4');
-  if (text) {
-    element.innerText = text;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
+module.exports = HtmlBuilder;
 
 },{}],4:[function(require,module,exports){
 var Campaign = require('./campaign');
@@ -423,9 +474,12 @@ module.exports.getServiceTitle = function(urlQuery) {
 var Campaign = require('./campaign');
 var info = require('./info');
 var constants = require('./constants');
-var htmler = require('./htmler');
+var HtmlBuilder = require('./html-builder');
 
-var acc = {};
+var acc = {
+  campaigns: [],
+  serviceTitles: []
+};
 
 /** Campaign をソート */
 var sortCampaigns = function(a, b) {
@@ -507,111 +561,102 @@ var hideCampaign = function() {
   return false;
 };
 
-var validateHide = function(campaign, urlQuery) {
-  for (var i = 0; i < urlQuery.length; i++) {
-      if (campaign.id == urlQuery["hide[" + i + "]"]) {
-          return false;
-      }
-  }
-  return true;
+var bindCardContent = function(cardContent, campaign) {
+  var url = "?service_title=" + campaign.serviceTitle;
+  var urlOfId = "?id=" + campaign.id;
+  new HtmlBuilder(cardContent)
+  .a(urlOfId, null, null, () => {
+    history.pushState(null, null, urlOfId);
+    showDetail(acc.campaigns, campaign.id);
+    return false;
+  })
+  .div("blue-text col s10")
+  .text(campaign.id)
+  .div("col s2")
+  .i("hidebutton material-icons")
+  .intercept((icon) => {
+    icon.campaign = campaign.id;
+    icon.onclick = hideCampaign;
+  })
+  .text("clear")
+  .div("card-title")
+  .text(campaign.title)
+  .a(url, null, null, () => {
+    history.pushState(null, null, url);
+    showServiceTitle(acc.campaigns, campaign.serviceTitle);
+    $('#modal').modal("close");
+    return false;
+  })
+  .div("chip blue-grey darken-1 amber-text")
+  .text(campaign.serviceTitle)
+  .then(campaign.hasDayText(), (self) => self.div("grey-text").text(campaign.dayText()))
+  // .p(campaign.description)
+  // .build()
+  .then(campaign.hasUrl(), (self) => {
+    for (var j = 1; j < campaign.urls.length; j++) {
+      self.div().a(campaign.urls[j]).text("その" + (j + 1)).build();
+    }
+  })
+  .build();
 };
 
-acc.bindView = function(row, campaign) {
-    var col = htmler.div("col s12 m6 l3");
-    row.appendChild(col);
+var bindCard = function(card, campaign) {
 
-    var card;
-    if (campaign.hasUrl()) {
-        var cardLink = htmler.a(campaign.urls[0]);
-        card = htmler.div("card blue-grey darken-3 z-depth-0");
-        cardLink.appendChild(card);
-        col.appendChild(cardLink);
-    } else {
-        card = htmler.div("card blue-grey darken-3 z-depth-0");
-        col.appendChild(card);
-    }
+  new HtmlBuilder(card)
+  .then(campaign.hasImage(), (self) => self.div("img").img(campaign.img, "materialboxed"))
+  .div("card-content white-text")
+  .intercept((cardContent, builder) => bindCardContent(cardContent, campaign))
+  .build();
+};
 
-    if (campaign.hasImage()) {
-      var div = htmler.div("img");
-      div.appendChild(htmler.img(campaign.img));
-      card.appendChild(div);
-    }
+var bindView = function(row, campaign) {
+  new HtmlBuilder(row)
+  .div("col s12 m6 l3")
+  .a(campaign.urls[0])
+  .div("card blue-grey darken-3 z-depth-0")
+  .intercept((card, builder) => bindCard(card, campaign))
+  .build();
+};
 
-    var cardContent = htmler.div("card-content white-text");
-    cardContent.appendChild(htmler.div("blue-text col s10", null, campaign.id));
-    card.appendChild(cardContent);
+var createModalContent = function(modalContent, campaign) {
+  var url = "?service_title=" + campaign.serviceTitle;
+  new HtmlBuilder(modalContent)
+  .h4()
+  .text("[" + campaign.id + "] " + campaign.title)
+  .div("chip")
+  .a(url, null, null, ((e) => {
+    history.pushState(null, null, url);
+    showServiceTitle(acc.campaigns, campaign.serviceTitle);
+    $('#modal').modal("close");
+    return false;
+  }))
+  .text(campaign.serviceTitle)
+  .p(campaign.dayText())
+  .build()
+  .p(campaign.description)
+  .build();
 
-    var doneIcon = htmler.i("clear");
-    doneIcon.className = doneIcon.className + " hidebutton";
-    doneIcon.campaign = campaign.id;
-    doneIcon.onclick = hideCampaign;
-    var div2 = htmler.div("col s2");
-    div2.appendChild(doneIcon);
-    cardContent.appendChild(div2);
-    var div3 = htmler.div("card-title", null, campaign.title);
-    cardContent.appendChild(div3);
-
-    var cardServicelink = htmler.a("?service_title=" + campaign.serviceTitle);
-    cardServicelink.onclick = function() {
-      history.pushState(null, null, "?service_title=" + campaign.serviceTitle);
-      showServiceTitle(acc.campaigns, campaign.serviceTitle);
-      $('#modal').modal("close");
-      return false;
-    };
-    cardServicelink.appendChild(htmler.div("chip blue-grey darken-1 amber-text", null, campaign.serviceTitle));
-    cardContent.appendChild(cardServicelink);
-
-    var div4 = htmler.div("grey-text", null, campaign.dayText());
-    if (div4.innerText && div4.innerText.length > 0) {
-      cardContent.appendChild(div4);
-    }
-    var description = htmler.p();
-    description.innerText = campaign.description;
-    cardContent.appendChild(description);
-
-    if (campaign.hasUrl()) {
-      for (var j = 1; j < campaign.urls.length; j++) {
-          var div = htmler.div();
-          var a = htmler.a(campaign.urls[j]);
-          a.innerText = "その" + (j + 1);
-          div.appendChild(a);
-          cardContent.appendChild(div);
-      }
-    }
+  for (var i = 0; i < campaign.urls.length; i++) {
+    new HtmlBuilder(modalContent)
+    .div()
+    .a(campaign.urls[i])
+    .text("リンク" + (i + 1))
+    .build();
+  }
 };
 
 var showDetail = function(campaigns, id) {
   id = parseInt(id);
   var filtered = campaigns.filter((campaign) => campaign.id === id);
   if (filtered && filtered.length > 0) {
-    var modalContent = htmler.div("modal-content");
-    var target = filtered[0];
-    if (target.img && target.img.length > 0) {
-      modalContent.appendChild(htmler.img(target.img, null, null, "responsive-img"));
-    }
-    modalContent.appendChild(htmler.h4("[" + target.id + "] " + target.title));
-    var chip = htmler.div("chip");
-    var a = htmler.a("?service_title=" + target.serviceTitle, target.serviceTitle);
-    a.onclick = function() {
-      history.pushState(null, null, "?service_title=" + target.serviceTitle);
-      showServiceTitle(campaigns, target.serviceTitle);
-      $('#modal').modal("close");
-      return false;
-    };
-    chip.appendChild(a);
-    modalContent.appendChild(chip);
-    modalContent.appendChild(htmler.p(null, null, target.dayText()));
-    modalContent.appendChild(htmler.p(null, null, target.description));
-    for (var i = 0; i < target.length; i++) {
-      var div = htmler.div();
-      div.appendChild(htmler.a(target.urls[i], "リンク" + i));
-      modalContent.appendChild(div);
-    }
-    var modal = document.getElementById("modal");
-    while (modal.firstChild) {
-      modal.removeChild(modal.firstChild);
-    }
-    modal.appendChild(modalContent);
+    var campaign = filtered[0];
+    new HtmlBuilder("modal")
+    .clean()
+    .div("modal-content")
+    .intercept((modalContent) => createModalContent(modalContent, campaign))
+    .then(campaign.hasImage(), (self) => self.img(campaign.img, "responsive-img"))
+    .build();
+
     $('#modal').modal();
     $('#modal').modal("open");
   }
@@ -629,22 +674,15 @@ var showServiceTitle = function(campaigns, serviceTitle) {
 
 var showCampaigns = function(campaigns) {
   var now = new Date();
-  var row = htmler.div("row");
   var urlQuery = info.getUrlQuery();
-  var contents = document.getElementById("contents");
-  while (contents.firstChild) {
-    contents.removeChild(contents.firstChild);
-  }
-  contents.appendChild(row);
-
-  for (var i = 0; i < campaigns.length; i++) {
-    var campaign = campaigns[i];
-    var isShow = campaign.isShow(now);
-    isShow = isShow && validateHide(campaign, urlQuery);
-    if (isShow) {
-      acc.bindView(row, campaign);
+  new HtmlBuilder("contents").clean().div("row").intercept(function(row) {
+    for (var i = 0; i < campaigns.length; i++) {
+      var campaign = campaigns[i];
+      if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
+        bindView(row, campaign);
+      }
     }
-  }
+  }).build();
 };
 
 var showContents = function() {
@@ -653,7 +691,8 @@ var showContents = function() {
   document.getElementById("logo").innerText = "Acc";
   if (id) {
     showDetail(acc.campaigns, id);
-    return;
+  } else {
+    $('#modal').modal("close");
   }
   var serviceTitle = info.getServiceTitle(urlQuery);
   if (serviceTitle) {
@@ -687,4 +726,4 @@ $(document).ready(function(){
 
 $(".button-collapse").sideNav();
 
-},{"./campaign":1,"./constants":2,"./htmler":3,"./info":4}]},{},[5]);
+},{"./campaign":1,"./constants":2,"./html-builder":3,"./info":4}]},{},[5]);

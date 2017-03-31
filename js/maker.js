@@ -35,6 +35,11 @@ Campaign.prototype.dayText = function() {
   return "";
 };
 
+Campaign.prototype.hasDayText = function() {
+  var dayText = this.dayText();
+  return dayText && dayText.length > 0;
+};
+
 Campaign.prototype.hasUrl = function() {
     return this.urls && this.urls.length > 0;
 };
@@ -49,6 +54,16 @@ Campaign.prototype.isShow = function(now) {
 
 Campaign.prototype.containsInOn = function(on) {
     return this.on && this.on.indexOf(on) !== -1;
+};
+
+// URLクエリにある hide[N]=id の id が一致したかどうか
+Campaign.prototype.validateHide = function(urlQuery) {
+  for (var i = 0; i < urlQuery.length; i++) {
+      if (this.id == urlQuery["hide[" + i + "]"]) {
+          return false;
+      }
+  }
+  return true;
 };
 
 /** @private */
