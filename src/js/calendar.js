@@ -6,11 +6,12 @@ var HtmlBuilder = require('./html-builder');
 
 var accCalendar = {
   campaigns: [],
-  serviceTitles: []
+  serviceTitles: [],
+  target: new Date()
 };
 
 /** 月初 **/
-accCalendar.getBeginningOfMonth = function(target, num) {
+var getBeginningOfMonth = function(target, num) {
   var date = new Date(target.getTime());
   if (num) {
     date.setDate(num);
@@ -21,16 +22,16 @@ accCalendar.getBeginningOfMonth = function(target, num) {
 };
 
 /** 月末 **/
-accCalendar.getEndOfMonth = function(target) {
-    var date = new Date(target.getTime());
-    date.setDate(1);
-    date.setMonth(date.getMonth() + 1);
-    date.setDate(0);
-    return date;
+var getEndOfMonth = function(target) {
+  var date = new Date(target.getTime());
+  date.setDate(1);
+  date.setMonth(date.getMonth() + 1);
+  date.setDate(0);
+  return date;
 };
 
 /** 曜日の位置を取得する **/
-accCalendar.getIndexOfDay = function(date) {
+var getIndexOfDay = function(date) {
   var day = date.getDay();
   if (day === 0) {
     return 7;
@@ -39,49 +40,26 @@ accCalendar.getIndexOfDay = function(date) {
 };
 
 /** カレンダーの生成に必要な情報を取得 **/
-accCalendar.getCalendarData = function(target, num) {
-    var begin = accCalendar.getBeginningOfMonth(target, num);
-    var end = accCalendar.getEndOfMonth(target);
-    return {
-        "begin": begin,
-        "end": end,
-        "beginDay": accCalendar.getIndexOfDay(begin),
-        "endDay": accCalendar.getIndexOfDay(end)
-    };
+var getCalendarData = function(target, num) {
+  var begin = getBeginningOfMonth(target, num);
+  var end = getEndOfMonth(target);
+  return {
+    "begin": begin,
+    "end": end,
+    "beginDay": getIndexOfDay(begin),
+    "endDay": getIndexOfDay(end)
+  };
 };
 
 /** 今日の曜日を強調する **/
-accCalendar.setTodaysDay = function() {
-    var id;
+var setTodaysDay = function() {
     var today = new Date();
-    switch (today.getDay()) {
-        case 0:
-            id = "sun";
-            break;
-        case 1:
-            id = "mon";
-            break;
-        case 2:
-            id = "tue";
-            break;
-        case 3:
-            id = "wed";
-            break;
-        case 4:
-            id = "thu";
-            break;
-        case 5:
-            id = "fri";
-            break;
-        case 6:
-            id = "sat";
-            break;
-    }
-    var th = document.getElementById(id);
-    th.style.backgroundColor = "#eeeeee";
+    new HtmlBuilder(["sun", "mon", "tue", "wed", "thu", "fri", "sat"][today.getDay()])
+    .intercept((th) => th.style.backgroundColor = "#eeeeee")
+    .build();
 };
 
-accCalendar.clearHighlightDay = function() {
+var clearHighlightDay = function() {
     var list = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     for (var i = 0; i < list.length; i++) {
         var th = document.getElementById(list[i]);
@@ -89,30 +67,13 @@ accCalendar.clearHighlightDay = function() {
     }
 };
 
-accCalendar.setMonthHeaderText = function() {
-    var target = accCalendar.target;
-    var h1 = htmler.h1(target.getFullYear() + "年" + (target.getMonth() + 1) + "月", null, "month_header");
-    var monthHeader = document.getElementById("month_header");
-    if (monthHeader) {
-        monthHeader.parentNode.replaceChild(h1, monthHeader);
-    } else {
-        document.getElementById("month_area").appendChild(h1);
-    }
-};
-
-accCalendar.appendTr = function(opt_style) {
-    var tr = htmler.tr(opt_style);
-    document.getElementById("calendar_body").appendChild(tr);
-    return tr;
-};
-
-accCalendar.appendTd = function(tr, opt_colspan, opt_text, opt_className, opt_id) {
-    var td = htmler.td(opt_colspan, opt_className, opt_id);
-    if (opt_text) {
-      td.innerText = opt_text;
-    }
-    tr.appendChild(td);
-    return td;
+var setMonthHeaderText = function() {
+  var target = accCalendar.target;
+  new HtmlBuilder("month_area")
+  .clean()
+  .h1(null, "month_header")
+  .text(target.getFullYear() + "年" + (target.getMonth() + 1) + "月")
+  .build();
 };
 
 /** その月の第何週目かを返す **/
@@ -201,90 +162,106 @@ accCalendar.createCampaignBar = function(tr, campaign, calendarData, first, last
 };
 
 accCalendar.next = function() {
-    accCalendar.target.setMonth(accCalendar.target.getMonth() + 1);
-    accCalendar.makeCalendar(accCalendar.campaigns);
+  accCalendar.target.setMonth(accCalendar.target.getMonth() + 1);
+  makeCalendar();
 };
 
 accCalendar.prev = function() {
-    accCalendar.target.setMonth(accCalendar.target.getMonth() - 1);
-    accCalendar.makeCalendar(accCalendar.campaigns);
+  accCalendar.target.setMonth(accCalendar.target.getMonth() - 1);
+  makeCalendar();
 };
 
 /** カレンダー作成 **/
-accCalendar.makeCalendar = function(campaigns) {
-    var tr, td, date, week, i, campaign, first, last, result;
+var makeCalendar = function() {
+  var campaigns = accCalendar.campaigns;
+  var target = accCalendar.target;
+  var today = new Date();
 
-    var target = accCalendar.target;
-    var today = new Date();
+  var tr, td, date, week, i, campaign, first, last, result;
 
-    var tbody = htmler.tbody();
-    tbody.id = "calendar_body";
-    var oldtbody = document.getElementById("calendar_body");
-    oldtbody.parentNode.replaceChild(tbody, oldtbody);
+  new HtmlBuilder("calendar_body").clean();
 
-    accCalendar.setMonthHeaderText();
+  setMonthHeaderText();
 
     if (today.getMonth() == target.getMonth() && today.getFullYear() == target.getFullYear()) {
-        date = accCalendar.target.getDate();
-        accCalendar.setTodaysDay();
+        date = target.getDate();
+        setTodaysDay();
         document.getElementById("month_prev").onclick = null;
         document.getElementById("month_next").onclick = accCalendar.next;
     } else {
         date = 1;
-        accCalendar.clearHighlightDay();
+        clearHighlightDay();
         document.getElementById("month_prev").onclick = accCalendar.prev;
         document.getElementById("month_next").onclick = accCalendar.next;
     }
 
     week = accCalendar.getWeek(target);
-    var calendarData = accCalendar.getCalendarData(target, date);
+    var calendarData = getCalendarData(target, date);
 
-    tr = accCalendar.appendTr();
+    new HtmlBuilder("calendar_body")
+    .tr()
+    .intercept((tr) => {
+      var colSpan = calendarData.beginDay - 1;
+      new HtmlBuilder(tr)
+      .then(colSpan > 0, (self) => self.td(null, null, colSpan))
+      .build();
 
-    if (calendarData.beginDay - 1 > 0) {
-      accCalendar.appendTd(tr, calendarData.beginDay - 1);
-    }
+      first = date;
+      for (var i = calendarData.beginDay; i <= 7; i++) {
+          new HtmlBuilder(tr)
+          .td()
+          .then(opt_text, (self) => self.intercept((td) => td.innerText = date))
+          .build();
+          date++;
+      }
+      last = date;
 
-    first = date;
-    for (i = calendarData.beginDay; i <= 7; i++) {
-        accCalendar.appendTd(tr, null, date);
-        date++;
-    }
-    last = date;
+      for (i = 0; i < campaigns.length; i++) {
+          campaign = campaigns[i];
 
-    for (i = 0; i < campaigns.length; i++) {
-        campaign = campaigns[i];
-
-        tr = accCalendar.appendTr("borderhidden");
-
-        if (calendarData.beginDay - 1 > 0) {
-          accCalendar.appendTd(tr, calendarData.beginDay - 1, null, "campaign");
-        }
-
-        accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
-    }
-    week++;
-
-    while (date <= calendarData.end.getDate()) {
-        tr = accCalendar.appendTr();
-
-        first = date;
-        for (var i = 1; i <= 7; i++) {
-            if (date > calendarData.end.getDate()) {
-                break;
+          new HtmlBuilder("calendar_body")
+          .tr("borderhidden")
+          .intercept((tr) => {
+            var colSpan = calendarData.beginDay - 1;
+            if (colSpan > 0) {
+              new HtmlBuilder(tr)
+              .then(colSpan > 0, (self) => self.td("campaign", null, colSpan))
+              .build();
             }
-            accCalendar.appendTd(tr, null, date);
-            date++;
-        }
-        last = date;
-
-        for (var i = 0; i < campaigns.length; i++) {
-            tr = htmler.tr("borderhidden");
-            campaign = campaigns[i];
             accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
-        }
+          })
+          .build();
+      }
+      week++;
+
+      while (date <= calendarData.end.getDate()) {
+        new HtmlBuilder("calendar_body")
+        .tr()
+        .intercept((tr) => {
+          first = date;
+          for (var i = 1; i <= 7; i++) {
+              if (date > calendarData.end.getDate()) {
+                  break;
+              }
+              new HtmlBuilder(tr)
+              .td()
+              .then(date, (self) => self.intercept((td) => td.innerText = date))
+              .build();
+              date++;
+          }
+          last = date;
+
+          for (i = 0; i < campaigns.length; i++) {
+              tr = htmler.tr("borderhidden");
+              campaign = campaigns[i];
+              accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
+          }
+        })
+        .build();
         week++;
-    }
+      }
+    })
+    .build();
 };
 
 accCalendar.getThemeColorClass = function(seed) {
@@ -293,10 +270,9 @@ accCalendar.getThemeColorClass = function(seed) {
 
 window.onload = function() {
   info.getCampaigns(function(campaigns, serviceTitles) {
-      accCalendar.campaigns = campaigns;
-      accCalendar.serviceTitles = serviceTitles;
-      accCalendar.target = new Date();
-      accCalendar.target.setMonth(accCalendar.target.getMonth());
-      accCalendar.makeCalendar(accCalendar.campaigns);
+    accCalendar.campaigns = campaigns;
+    accCalendar.serviceTitles = serviceTitles;
+    accCalendar.target = new Date();
+    makeCalendar(accCalendar.campaigns);
   });
 };
