@@ -590,8 +590,8 @@ var bindCardContent = function(cardContent, campaign) {
   .div("chip blue-grey darken-1 amber-text")
   .text(campaign.serviceTitle)
   .then(campaign.hasDayText(), (self) => self.div("grey-text").text(campaign.dayText()))
-  // .p(campaign.description)
-  // .build()
+  .p(campaign.description)
+  .build()
   .then(campaign.hasUrl(), (self) => {
     for (var j = 1; j < campaign.urls.length; j++) {
       self.div().a(campaign.urls[j]).text("その" + (j + 1)).build();
