@@ -624,12 +624,12 @@ var createModalContent = function(modalContent, campaign) {
   .h4()
   .text("[" + campaign.id + "] " + campaign.title)
   .div("chip")
-  .a(url, null, null, ((e) => {
+  .a(url, null, null, (e) => {
     history.pushState(null, null, url);
     showServiceTitle(acc.campaigns, campaign.serviceTitle);
     $('#modal').modal("close");
     return false;
-  }))
+  })
   .text(campaign.serviceTitle)
   .p(campaign.dayText())
   .build()
