@@ -161,13 +161,16 @@ HtmlBuilder.prototype = {
     this.paragraph.push(element);
     return this;
   },
-  td : function(opt_className, opt_id) {
+  td : function(opt_className, opt_id, opt_colSpan) {
     var element = document.createElement("td");
     if (opt_className) {
       element.className = opt_className;
     }
     if (opt_id) {
       element.id = opt_id;
+    }
+    if (opt_colSpan) {
+      element.colSpan = opt_colSpan;
     }
     this.paragraph.push(element);
     return this;

@@ -128,7 +128,6 @@ var bindCardContent = function(cardContent, campaign) {
 };
 
 var bindCard = function(card, campaign) {
-
   new HtmlBuilder(card)
   .then(campaign.hasImage(), (self) => self.div("img").img(campaign.img, "materialboxed"))
   .div("card-content white-text")

@@ -2,20 +2,22 @@ var Campaign = require('./campaign');
 var info = require('./info');
 var constants = require('./constants');
 var htmler = require('./htmler');
+var HtmlBuilder = require('./html-builder');
 
-var accCalendar = {};
-
-accCalendar.serviceTitles = [];
+var accCalendar = {
+  campaigns: [],
+  serviceTitles: []
+};
 
 /** 月初 **/
 accCalendar.getBeginningOfMonth = function(target, num) {
-    var date = new Date(target.getTime());
-    if (num != null) {
-        date.setDate(num);
-    } else {
-        date.setDate(1);
-    }
-    return date;
+  var date = new Date(target.getTime());
+  if (num) {
+    date.setDate(num);
+  } else {
+    date.setDate(1);
+  }
+  return date;
 };
 
 /** 月末 **/
@@ -29,12 +31,12 @@ accCalendar.getEndOfMonth = function(target) {
 
 /** 曜日の位置を取得する **/
 accCalendar.getIndexOfDay = function(date) {
-    var day = date.getDay();
-    if (day == 0) {
-        return 7;
-    }
-    return day;
-}
+  var day = date.getDay();
+  if (day === 0) {
+    return 7;
+  }
+  return day;
+};
 
 /** カレンダーの生成に必要な情報を取得 **/
 accCalendar.getCalendarData = function(target, num) {
@@ -46,7 +48,7 @@ accCalendar.getCalendarData = function(target, num) {
         "beginDay": accCalendar.getIndexOfDay(begin),
         "endDay": accCalendar.getIndexOfDay(end)
     };
-}
+};
 
 /** 今日の曜日を強調する **/
 accCalendar.setTodaysDay = function() {
@@ -290,11 +292,11 @@ accCalendar.getThemeColorClass = function(seed) {
 };
 
 window.onload = function() {
-    info.getCampaign(function(campaigns, serviceTitles) {
-        accCalendar.campaigns = campaigns;
-        accCalendar.serviceTitles = serviceTitles;
-        accCalendar.target = new Date();
-        accCalendar.target.setMonth(accCalendar.target.getMonth());
-        accCalendar.makeCalendar(accCalendar.campaigns);
-    });
+  info.getCampaigns(function(campaigns, serviceTitles) {
+      accCalendar.campaigns = campaigns;
+      accCalendar.serviceTitles = serviceTitles;
+      accCalendar.target = new Date();
+      accCalendar.target.setMonth(accCalendar.target.getMonth());
+      accCalendar.makeCalendar(accCalendar.campaigns);
+  });
 };
