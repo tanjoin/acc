@@ -1,260 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Campaign = require('./campaign');
-var info = require('./info');
-var constants = require('./constants');
-var htmler = require('./htmler');
-var HtmlBuilder = require('./html-builder');
-
-var accCalendar = {
-  campaigns: [],
-  serviceTitles: [],
-  target: new Date()
-};
-
-/** 月初 **/
-var getBeginningOfMonth = function(target, num) {
-  var date = new Date(target.getTime());
-  if (num) {
-    date.setDate(num);
-  } else {
-    date.setDate(1);
-  }
-  return date;
-};
-
-/** 月末 **/
-var getEndOfMonth = function(target) {
-  var date = new Date(target.getTime());
-  date.setDate(1);
-  date.setMonth(date.getMonth() + 1);
-  date.setDate(0);
-  return date;
-};
-
-/** 曜日の位置を取得する **/
-var getIndexOfDay = function(date) {
-  var day = date.getDay();
-  if (day === 0) {
-    return 7;
-  }
-  return day;
-};
-
-/** カレンダーの生成に必要な情報を取得 **/
-var getCalendarData = function(target, num) {
-  var begin = getBeginningOfMonth(target, num);
-  var end = getEndOfMonth(target);
-  return {
-    "begin": begin,
-    "end": end,
-    "beginDay": getIndexOfDay(begin),
-    "endDay": getIndexOfDay(end)
-  };
-};
-
-/** 今日の曜日を強調する **/
-var setTodaysDay = function() {
-  var today = new Date();
-  new HtmlBuilder(constants.DAYOFTHEWEEK[today.getDay()])
-  .intercept((th) => th.style.backgroundColor = "#eeeeee")
-  .build();
-};
-
-var clearHighlightDay = function() {
-  for (var i = 0; i < constants.DAYOFTHEWEEK.length; i++) {
-    var th = document.getElementById(list[i]);
-    th.style.backgroundColor = "";
-  }
-};
-
-var setMonthHeaderText = function() {
-  var target = accCalendar.target;
-  new HtmlBuilder("month_area")
-  .clean()
-  .h1(null, "month_header")
-  .text(target.getFullYear() + "年" + (target.getMonth() + 1) + "月")
-  .build();
-};
-
-/** その月の第何週目かを返す **/
-var getWeek = function(date) {
-  var d = new Date(date.getTime());
-  return Math.floor((d.getDate() - d.getDay() + 12) / 7);
-};
-
-var createCampaignBar = function(tr, campaign, calendarData, first, last, idPrefix) {
-  var campaignStart = new Date(Date.parse(campaign.date.start));
-  var campaignEnd = null;
-  if (campaign.date.end && campaign.date.end.length === 10) {
-    campaignEnd = new Date(Date.parse(campaign.date.end + " 23:59"));
-  } else if (campaign.date.end) {
-    campaignEnd = new Date(Date.parse(campaign.date.end));
-  }
-  var firstDate = new Date(calendarData.begin.getTime());
-  firstDate.setDate(first);
-  var lastDate = new Date(calendarData.begin.getTime());
-  lastDate.setDate(last);
-
-  var date = firstDate;
-  var isEmpty = false;
-  var td = null;
-
-  while (date < lastDate) {
-    if (!campaign.validateOn_(date) || (campaignStart && campaignStart > date) || (campaignEnd && campaignEnd < date)) { // 開始前 or 終了済み
-      if (isEmpty && td) {
-        td.colSpan = td.colSpan + 1;
-      } else {
-        if (td) {
-          tr.appendChild(td);
-        }
-        td = htmler.td(1, "campaign");
-      }
-      isEmpty = true;
-    } else {
-      if (isEmpty || !td) {
-        if (td) {
-          tr.appendChild(td);
-        }
-        td = htmler.td(
-          1,
-          "campaign " + getThemeColorClass(campaign.serviceTitle) + " lighten-4",
-          idPrefix + campaign.id
-        );
-        var title = "【" + campaign.serviceTitle + "】" + campaign.title;
-        if (campaign.urls && campaign.urls.length > 0) {
-          td.appendChild(htmler.a(campaign.urls[0], title));
-        } else {
-          td.innerText = title;
-        }
-        // ツールチップの表示
-        td.title = title;
-      } else {
-        td.colSpan = td.colSpan + 1;
-      }
-      isEmpty = false;
-    }
-    date.setDate(date.getDate() + 1);
-  }
-  if (td) {
-    tr.appendChild(td);
-  }
-  document.getElementById("calendar_body").appendChild(tr);
-};
-
-var nextMonth = function() {
-  accCalendar.target.setMonth(accCalendar.target.getMonth() + 1);
-  makeCalendar();
-};
-
-var prevMonth = function() {
-  accCalendar.target.setMonth(accCalendar.target.getMonth() - 1);
-  makeCalendar();
-};
-
-/** カレンダー作成 **/
-var makeCalendar = function() {
-  var campaigns = accCalendar.campaigns;
-  var target = accCalendar.target;
-  var today = new Date();
-
-  new HtmlBuilder("calendar_body").clean();
-
-  setMonthHeaderText();
-
-  var isThisMonth = today.getMonth() == target.getMonth() && today.getFullYear() == target.getFullYear();
-  if (isThisMonth) {
-    date = target.getDate();
-    setTodaysDay();
-  } else {
-    date = 1;
-    clearHighlightDay();
-  }
-  document.getElementById("month_prev").onclick = isThisMonth ? null : prevMonth;
-  document.getElementById("month_next").onclick = nextMonth;
-
-  var week = getWeek(target);
-  var calendarData = getCalendarData(target, date);
-
-  new HtmlBuilder("calendar_body")
-  .tr()
-  .intercept((tr) => {
-    var colSpan = calendarData.beginDay - 1;
-    new HtmlBuilder(tr)
-    .then(colSpan > 0, (self) => self.td(null, null, colSpan))
-    .build();
-
-    first = date;
-    for (var i = calendarData.beginDay; i <= 7; i++) {
-      new HtmlBuilder(tr)
-      .td()
-      .build();
-      date++;
-    }
-    last = date;
-
-    for (i = 0; i < campaigns.length; i++) {
-      campaign = campaigns[i];
-
-      new HtmlBuilder("calendar_body")
-      .tr("borderhidden")
-      .intercept((tr) => {
-        var colSpan = calendarData.beginDay - 1;
-        if (colSpan > 0) {
-          new HtmlBuilder(tr)
-          .then(colSpan > 0, (self) => self.td("campaign", null, colSpan))
-          .build();
-        }
-        createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
-      })
-      .build();
-    }
-    week++;
-
-    while (date <= calendarData.end.getDate()) {
-      new HtmlBuilder("calendar_body")
-      .tr()
-      .intercept((tr) => {
-        first = date;
-        for (var i = 1; i <= 7; i++) {
-          if (date > calendarData.end.getDate()) {
-            break;
-          }
-          new HtmlBuilder(tr)
-          .td()
-          .then(date, (self) => self.intercept((td) => td.innerText = date))
-          .build();
-          date++;
-        }
-        last = date;
-
-        for (i = 0; i < campaigns.length; i++) {
-          tr = htmler.tr("borderhidden");
-          campaign = campaigns[i];
-          createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
-        }
-      })
-      .build();
-      week++;
-    }
-  })
-  .build();
-};
-
-var getThemeColorClass = function(serviceTitle) {
-  var seed = accCalendar.serviceTitles.indexOf(serviceTitle);
-  return constants.Colors[seed % constants.Colors.length];
-};
-
-window.onload = function() {
-  info.getCampaigns(function(campaigns, serviceTitles) {
-    accCalendar.campaigns = campaigns;
-    accCalendar.serviceTitles = serviceTitles;
-    accCalendar.target = new Date();
-    makeCalendar(accCalendar.campaigns);
-  });
-};
-
-},{"./campaign":2,"./constants":3,"./html-builder":4,"./htmler":5,"./info":6}],2:[function(require,module,exports){
 var constants = require('./constants');
 
 /** @constructor */
@@ -372,7 +116,7 @@ Campaign.prototype.validateDate_ = function(now) {
 
 module.exports = Campaign;
 
-},{"./constants":3}],3:[function(require,module,exports){
+},{"./constants":2}],2:[function(require,module,exports){
 module.exports.Colors = [
   "red",
   "pink",
@@ -457,7 +201,7 @@ module.exports.On = {
     }
 };
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /** @constructor */
 var HtmlBuilder = function(element) {
   if (typeof element === "string") {
@@ -683,194 +427,7 @@ HtmlBuilder.prototype = {
 
 module.exports = HtmlBuilder;
 
-},{}],5:[function(require,module,exports){
-/** <div> 作成 */
-module.exports.div = function(opt_className, opt_id, opt_text) {
-  var element = document.createElement("div");
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  if (opt_text) {
-    element.innerText = opt_text;
-  }
-  return element;
-};
-
-/** <a> 作成 */
-module.exports.a = function(href, opt_text, target, opt_className, opt_id) {
-  if (typeof target === 'undefined') { // 未定義の場合は target="_blank"
-    opt_target = '_blank';
-  }
-  if (typeof href === 'undefined') {
-    href = 'https://tanjoin.github.io';
-  }
-  var element = document.createElement("a");
-  if (href) {
-    element.href = href;
-  }
-  if (target) {
-    element.target = target;
-  }
-  if (opt_text) {
-    element.innerText = opt_text;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <p> 作成 */
-module.exports.p = function(opt_className, opt_id, opt_text) {
-  var element = document.createElement("p");
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  if (opt_text) {
-    element.innerText = opt_text;
-  }
-  return element;
-};
-
-/** <img> 作成 */
-module.exports.img = function(src, width, height, className, opt_id) {
-  if (typeof src === 'undefined') {
-    src = 'https://tanjoin.github.io/acc/img/404.png';
-  }
-  if (typeof width === 'undefined') {
-    width = "100%";
-  }
-  if (typeof height === 'undefined') {
-    height = "100%";
-  }
-  if (typeof className === 'undefined') {
-    className = 'materialboxed';
-  }
-  var element = document.createElement("img");
-  if (src) {
-    element.src = src;
-  }
-  if (width) {
-    element.width = width;
-  }
-  if (height) {
-    element.height = height;
-  }
-  if (className) {
-    element.className = className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <i> 作成 */
-module.exports.i = function(type, className, opt_id) {
-  if (typeof type === 'undefined') {
-    type = "";
-  }
-  if (typeof className === 'undefined') {
-    className = "material-icons";
-  }
-  var element = document.createElement("i");
-  if (type) {
-    element.innerText = type;
-  }
-  if (className) {
-    element.className = className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <tbody> 作成 */
-module.exports.tbody = function(opt_className, opt_id) {
-  var element = document.createElement('tbody');
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <td> 作成 */
-module.exports.td = function(opt_colspan, opt_className, opt_id) {
-  var element = document.createElement('td');
-  if (opt_colspan) {
-    element.colspan = opt_colspan;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <tr> 作成 */
-module.exports.tr = function(opt_className, opt_id) {
-  var element = document.createElement('tr');
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <h1> 作成 */
-module.exports.h1 = function(text, opt_className, opt_id) {
-  if (typeof text === 'undefined') {
-    text = "";
-  }
-  var element = document.createElement('h1');
-  if (text) {
-    element.text = text;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-/** <h4> 作成 */
-module.exports.h4 = function(text, opt_className, opt_id) {
-  if (typeof text === 'undefined') {
-    text = "";
-  }
-  var element = document.createElement('h4');
-  if (text) {
-    element.innerText = text;
-  }
-  if (opt_className) {
-    element.className = opt_className;
-  }
-  if (opt_id) {
-    element.id = opt_id;
-  }
-  return element;
-};
-
-},{}],6:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var Campaign = require('./campaign');
 
 var ACC_URL = "https://tanjo.in/acc/campaign.json";
@@ -925,4 +482,266 @@ module.exports.getInverse = function(urlQuery) {
   return false;
 };
 
-},{"./campaign":2}]},{},[1]);
+},{"./campaign":1}],5:[function(require,module,exports){
+var Campaign = require('./campaign');
+var info = require('./info');
+var constants = require('./constants');
+var HtmlBuilder = require('./html-builder');
+
+var acc = {
+  campaigns: [],
+  serviceTitles: []
+};
+
+/** Campaign をソート */
+var sortCampaigns = function(a, b) {
+  if (!a.containsInOn(constants.On.ALL) && !b.containsInOn(constants.On.ALL)) {
+    if (a.id > b.id) {
+      return -1;
+    }
+    if (a.id < b.id) {
+      return 1;
+    }
+    return 0;
+  }
+
+  if (!a.containsInOn(constants.On.ALL)) {
+    return -1;
+  }
+  if (!b.containsInOn(constants.On.ALL)) {
+    return 1;
+  }
+
+  var aDate = new Date(Date.parse(a.date.end));
+  var bDate = new Date(Date.parse(b.date.end));
+
+  if (isNaN(aDate.getTime()) && isNaN(bDate.getTime())) {
+    if (a.id > b.id) {
+      return -1;
+    }
+    if (a.id < b.id) {
+      return 1;
+    }
+    return 0;
+  }
+
+  if (isNaN(aDate.getTime())) {
+    return 1;
+  }
+  if (isNaN(bDate.getTime())) {
+    return -1;
+  }
+
+  if (aDate.getTime() > bDate.getTime()) {
+    return 1;
+  }
+
+  if (aDate.getTime() < bDate.getTime()) {
+    return -1;
+  }
+
+  return 0;
+};
+
+var hideCampaign = function() {
+  var id = this.campaign;
+  var count = 0;
+  var urlQuery = info.getUrlQuery();
+  if (!id) {
+    return true;
+  }
+  var query = "?";
+
+  var serviceTitle = info.getServiceTitle(urlQuery);
+  if (serviceTitle && serviceTitle.length > 0) {
+    query += "service_title=" + serviceTitle;
+  }
+  if (query.length > 1) {
+    query += "&";
+  }
+  query += "hide[" + (count++) + "]=" + id;
+  var hideId;
+  for (var i = 0; i < urlQuery.length; i++) {
+    hideId = urlQuery["hide[" + i + "]"];
+    if (!hideId) {
+      break;
+    }
+    query += "&hide[" + (count++) + "]=" + hideId;
+  }
+  history.pushState(null, null, query);
+  showContents();
+  return false;
+};
+
+var bindCardContent = function(cardContent, campaign) {
+  var url = "?service_title=" + campaign.serviceTitle;
+  var urlOfId = "?id=" + campaign.id;
+  new HtmlBuilder(cardContent)
+  .a(urlOfId, null, null, () => {
+    history.pushState(null, null, urlOfId);
+    showDetail(acc.campaigns, campaign.id);
+    return false;
+  })
+  .div("blue-text col s10")
+  .text(campaign.id)
+  .div("col s2")
+  .i("hidebutton material-icons")
+  .intercept((icon) => {
+    icon.campaign = campaign.id;
+    icon.onclick = hideCampaign;
+  })
+  .text("clear")
+  .div("card-title")
+  .text(campaign.title)
+  .a(url, null, null, () => {
+    history.pushState(null, null, url);
+    showServiceTitle(acc.campaigns, campaign.serviceTitle);
+    $('#modal').modal("close");
+    return false;
+  })
+  .div("chip blue-grey darken-1 amber-text")
+  .text(campaign.serviceTitle)
+  .then(campaign.hasDayText(), (self) => self.div("grey-text").text(campaign.dayText()))
+  .p(campaign.description)
+  .build()
+  .then(campaign.hasUrl(), (self) => {
+    for (var j = 1; j < campaign.urls.length; j++) {
+      self.div().a(campaign.urls[j]).text("その" + (j + 1)).build();
+    }
+  })
+  .build();
+};
+
+var bindCard = function(card, campaign) {
+  new HtmlBuilder(card)
+  .then(campaign.hasImage(), (self) => self.div("img").img(campaign.img, "materialboxed"))
+  .div("card-content white-text")
+  .intercept((cardContent, builder) => bindCardContent(cardContent, campaign))
+  .build();
+};
+
+var bindView = function(row, campaign) {
+  new HtmlBuilder(row)
+  .div("col s12 m6 l3")
+  .a(campaign.urls[0])
+  .div("card blue-grey darken-3 z-depth-0")
+  .intercept((card, builder) => bindCard(card, campaign))
+  .build();
+};
+
+var createModalContent = function(modalContent, campaign) {
+  var url = "?service_title=" + campaign.serviceTitle;
+  new HtmlBuilder(modalContent)
+  .h4()
+  .text("[" + campaign.id + "] " + campaign.title)
+  .div("chip")
+  .a(url, null, null, (e) => {
+    history.pushState(null, null, url);
+    showServiceTitle(acc.campaigns, campaign.serviceTitle);
+    $('#modal').modal("close");
+    return false;
+  })
+  .text(campaign.serviceTitle)
+  .p(campaign.dayText())
+  .build()
+  .p(campaign.description)
+  .build();
+
+  for (var i = 0; i < campaign.urls.length; i++) {
+    new HtmlBuilder(modalContent)
+    .div()
+    .a(campaign.urls[i])
+    .text("リンク" + (i + 1))
+    .build();
+  }
+};
+
+var showDetail = function(campaigns, id) {
+  id = parseInt(id);
+  var filtered = campaigns.filter((campaign) => campaign.id === id);
+  if (filtered && filtered.length > 0) {
+    var campaign = filtered[0];
+    new HtmlBuilder("modal")
+    .clean()
+    .div("modal-content")
+    .intercept((modalContent) => createModalContent(modalContent, campaign))
+    .then(campaign.hasImage(), (self) => self.img(campaign.img, "responsive-img"))
+    .build();
+
+    $('#modal').modal();
+    $('#modal').modal("open");
+  }
+};
+
+var showServiceTitle = function(campaigns, serviceTitle) {
+  if (!serviceTitle) {
+    return;
+  }
+  document.getElementById("logo").innerText = "Acc : " + serviceTitle;
+  campaigns = campaigns.filter((data) => data.serviceTitle === serviceTitle);
+  campaigns.sort(sortCampaigns);
+  showCampaigns(campaigns);
+};
+
+var showCampaigns = function(campaigns) {
+  var now = new Date();
+  var urlQuery = info.getUrlQuery();
+  new HtmlBuilder("contents").clean().div("row").intercept((row) => {
+    for (var i = 0; i < campaigns.length; i++) {
+      var campaign = campaigns[i];
+      if (acc.inverse && acc.inverse === 'true') {
+        if (!campaign.isShow(now) && campaign.validateHide(urlQuery)) {
+          bindView(row, campaign);
+        }
+      } else {
+        if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
+          bindView(row, campaign);
+        }
+      }
+    }
+  }).build();
+};
+
+var showContents = function() {
+  var urlQuery = info.getUrlQuery();
+  var id = info.getId(urlQuery);
+  acc.inverse = info.getInverse(urlQuery);
+  document.getElementById("logo").innerText = "Acc";
+  if (id) {
+    showDetail(acc.campaigns, id);
+  } else {
+    $('#modal').modal("close");
+  }
+  var serviceTitle = info.getServiceTitle(urlQuery);
+  if (serviceTitle) {
+    showServiceTitle(acc.campaigns, serviceTitle);
+    return;
+  }
+  // 通常表示
+  acc.campaigns.sort(sortCampaigns);
+  showCampaigns(acc.campaigns);
+};
+
+window.onload = function() {
+  info.getCampaigns((campaigns, serviceTitles) => {
+    acc.campaigns = campaigns;
+    acc.serviceTitles = serviceTitles;
+    showContents();
+  });
+};
+
+window.onpopstate = function(event) {
+  if (event.isTrusted) {
+    showContents();
+  }
+};
+
+// Materialize code
+
+$(document).ready(function(){
+  $('.materialboxed').materialbox();
+});
+
+$(".button-collapse").sideNav();
+
+},{"./campaign":1,"./constants":2,"./html-builder":3,"./info":4}]},{},[5]);
