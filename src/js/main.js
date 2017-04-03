@@ -201,7 +201,7 @@ var showServiceTitle = function(campaigns, serviceTitle) {
 var showCampaigns = function(campaigns) {
   var now = new Date();
   var urlQuery = info.getUrlQuery();
-  new HtmlBuilder("contents").clean().div("row").intercept(function(row) {
+  new HtmlBuilder("contents").clean().div("row").intercept((row) => {
     for (var i = 0; i < campaigns.length; i++) {
       var campaign = campaigns[i];
       if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
@@ -231,7 +231,7 @@ var showContents = function() {
 };
 
 window.onload = function() {
-  info.getCampaigns(function(campaigns, serviceTitles) {
+  info.getCampaigns((campaigns, serviceTitles) => {
     acc.campaigns = campaigns;
     acc.serviceTitles = serviceTitles;
     showContents();

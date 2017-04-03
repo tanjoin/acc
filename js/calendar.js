@@ -3,304 +3,258 @@ var Campaign = require('./campaign');
 var info = require('./info');
 var constants = require('./constants');
 var htmler = require('./htmler');
+var HtmlBuilder = require('./html-builder');
 
-var accCalendar = {};
-
-accCalendar.serviceTitles = [];
+var accCalendar = {
+  campaigns: [],
+  serviceTitles: [],
+  target: new Date()
+};
 
 /** 月初 **/
-accCalendar.getBeginningOfMonth = function(target, num) {
-    var date = new Date(target.getTime());
-    if (num != null) {
-        date.setDate(num);
-    } else {
-        date.setDate(1);
-    }
-    return date;
+var getBeginningOfMonth = function(target, num) {
+  var date = new Date(target.getTime());
+  if (num) {
+    date.setDate(num);
+  } else {
+    date.setDate(1);
+  }
+  return date;
 };
 
 /** 月末 **/
-accCalendar.getEndOfMonth = function(target) {
-    var date = new Date(target.getTime());
-    date.setDate(1);
-    date.setMonth(date.getMonth() + 1);
-    date.setDate(0);
-    return date;
+var getEndOfMonth = function(target) {
+  var date = new Date(target.getTime());
+  date.setDate(1);
+  date.setMonth(date.getMonth() + 1);
+  date.setDate(0);
+  return date;
 };
 
 /** 曜日の位置を取得する **/
-accCalendar.getIndexOfDay = function(date) {
-    var day = date.getDay();
-    if (day == 0) {
-        return 7;
-    }
-    return day;
-}
+var getIndexOfDay = function(date) {
+  var day = date.getDay();
+  if (day === 0) {
+    return 7;
+  }
+  return day;
+};
 
 /** カレンダーの生成に必要な情報を取得 **/
-accCalendar.getCalendarData = function(target, num) {
-    var begin = accCalendar.getBeginningOfMonth(target, num);
-    var end = accCalendar.getEndOfMonth(target);
-    return {
-        "begin": begin,
-        "end": end,
-        "beginDay": accCalendar.getIndexOfDay(begin),
-        "endDay": accCalendar.getIndexOfDay(end)
-    };
-}
+var getCalendarData = function(target, num) {
+  var begin = getBeginningOfMonth(target, num);
+  var end = getEndOfMonth(target);
+  return {
+    "begin": begin,
+    "end": end,
+    "beginDay": getIndexOfDay(begin),
+    "endDay": getIndexOfDay(end)
+  };
+};
 
 /** 今日の曜日を強調する **/
-accCalendar.setTodaysDay = function() {
-    var id;
-    var today = new Date();
-    switch (today.getDay()) {
-        case 0:
-            id = "sun";
-            break;
-        case 1:
-            id = "mon";
-            break;
-        case 2:
-            id = "tue";
-            break;
-        case 3:
-            id = "wed";
-            break;
-        case 4:
-            id = "thu";
-            break;
-        case 5:
-            id = "fri";
-            break;
-        case 6:
-            id = "sat";
-            break;
-    }
-    var th = document.getElementById(id);
-    th.style.backgroundColor = "#eeeeee";
+var setTodaysDay = function() {
+  var today = new Date();
+  new HtmlBuilder(constants.DAYOFTHEWEEK[today.getDay()])
+  .intercept((th) => th.style.backgroundColor = "#eeeeee")
+  .build();
 };
 
-accCalendar.clearHighlightDay = function() {
-    var list = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    for (var i = 0; i < list.length; i++) {
-        var th = document.getElementById(list[i]);
-        th.style.backgroundColor = "";
-    }
+var clearHighlightDay = function() {
+  for (var i = 0; i < constants.DAYOFTHEWEEK.length; i++) {
+    var th = document.getElementById(list[i]);
+    th.style.backgroundColor = "";
+  }
 };
 
-accCalendar.setMonthHeaderText = function() {
-    var target = accCalendar.target;
-    var h1 = htmler.h1(target.getFullYear() + "年" + (target.getMonth() + 1) + "月", null, "month_header");
-    var monthHeader = document.getElementById("month_header");
-    if (monthHeader) {
-        monthHeader.parentNode.replaceChild(h1, monthHeader);
-    } else {
-        document.getElementById("month_area").appendChild(h1);
-    }
-};
-
-accCalendar.appendTr = function(opt_style) {
-    var tr = htmler.tr(opt_style);
-    document.getElementById("calendar_body").appendChild(tr);
-    return tr;
-};
-
-accCalendar.appendTd = function(tr, opt_colspan, opt_text, opt_className, opt_id) {
-    var td = htmler.td(opt_colspan, opt_className, opt_id);
-    if (opt_text) {
-      td.innerText = opt_text;
-    }
-    tr.appendChild(td);
-    return td;
+var setMonthHeaderText = function() {
+  var target = accCalendar.target;
+  new HtmlBuilder("month_area")
+  .clean()
+  .h1(null, "month_header")
+  .text(target.getFullYear() + "年" + (target.getMonth() + 1) + "月")
+  .build();
 };
 
 /** その月の第何週目かを返す **/
-accCalendar.getWeek = function(date) {
-    var d = new Date(date.getTime());
-    return Math.floor((d.getDate() - d.getDay() + 12) / 7);
+var getWeek = function(date) {
+  var d = new Date(date.getTime());
+  return Math.floor((d.getDate() - d.getDay() + 12) / 7);
 };
 
-/** いい感じの TD の値を返す **/
-accCalendar.judge = function(campaign, first, last, calendarData) {
-    var prefix, suffix, main, d;
+var createCampaignBar = function(tr, campaign, calendarData, first, last, idPrefix) {
+  var campaignStart = new Date(Date.parse(campaign.date.start));
+  var campaignEnd = null;
+  if (campaign.date.end && campaign.date.end.length === 10) {
+    campaignEnd = new Date(Date.parse(campaign.date.end + " 23:59"));
+  } else if (campaign.date.end) {
+    campaignEnd = new Date(Date.parse(campaign.date.end));
+  }
+  var firstDate = new Date(calendarData.begin.getTime());
+  firstDate.setDate(first);
+  var lastDate = new Date(calendarData.begin.getTime());
+  lastDate.setDate(last);
 
-    if (first == calendarData.begin.getDate()) {
-        prefix = calendarData.beginDay - 1;
-    }
+  var date = firstDate;
+  var isEmpty = false;
+  var td = null;
 
-    d = new Date(calendarData.begin.getTime());
-
-    for (var i = first; i <= last; i++) {
-        // TODO: 判定する
-    }
-};
-
-accCalendar.createCampaignBar = function(tr, campaign, calendarData, first, last, idPrefix) {
-    var campaignStart = new Date(Date.parse(campaign.date.start));
-    var campaignEnd = null;
-    if (campaign.date.end != null && campaign.date.end.length == 10) {
-      campaignEnd = new Date(Date.parse(campaign.date.end + " 23:59"));
-    } else if (campaign.date.end != null) {
-      campaignEnd = new Date(Date.parse(campaign.date.end));
-    }
-    var firstDate = new Date(calendarData.begin.getTime());
-    firstDate.setDate(first);
-    var lastDate = new Date(calendarData.begin.getTime());
-    lastDate.setDate(last);
-
-    var date = firstDate;
-    var isEmpty = false;
-    var td = null;
-
-    while (date < lastDate) {
-        if (!campaign.validateOn_(date) ||
-            (campaignStart != null && campaignStart > date) ||
-            (campaignEnd != null && campaignEnd < date)) { // 開始前 or 終了済み
-
-            if (isEmpty && td != null) {
-                td.colSpan = td.colSpan + 1;
-            } else {
-                if (td != null) {
-                    tr.appendChild(td);
-                }
-                td = htmler.td();
-                td.setAttribute("class", "campaign");
-                td.colSpan = 1;
-            }
-            isEmpty = true;
-        } else {
-            if (isEmpty || td == null) {
-                if (td != null) {
-                    tr.appendChild(td);
-                }
-                td = htmler.td();
-                var title = "【" + campaign.serviceTitle + "】" + campaign.title;
-                if (campaign.urls != null && campaign.urls.length > 0) {
-                  var a = htmler.a(campaign.urls[0]);
-                  a.innerText = title;
-                  td.appendChild(a);
-                } else {
-                  td.innerText = title;
-                }
-                td.title = title;
-                td.setAttribute("class", "campaign " + accCalendar.getThemeColorClass(accCalendar.serviceTitles.indexOf(campaign.serviceTitle)) + " lighten-4");
-                td.id = idPrefix + campaign.id;
-                td.colSpan = 1;
-            } else {
-                td.colSpan = td.colSpan + 1;
-            }
-            isEmpty = false;
+  while (date < lastDate) {
+    if (!campaign.validateOn_(date) || (campaignStart && campaignStart > date) || (campaignEnd && campaignEnd < date)) { // 開始前 or 終了済み
+      if (isEmpty && td) {
+        td.colSpan = td.colSpan + 1;
+      } else {
+        if (td) {
+          tr.appendChild(td);
         }
-        date.setDate(date.getDate() + 1);
+        td = htmler.td(1, "campaign");
+      }
+      isEmpty = true;
+    } else {
+      if (isEmpty || !td) {
+        if (td) {
+          tr.appendChild(td);
+        }
+        td = htmler.td(
+          1,
+          "campaign " + getThemeColorClass(campaign.serviceTitle) + " lighten-4",
+          idPrefix + campaign.id
+        );
+        var title = "【" + campaign.serviceTitle + "】" + campaign.title;
+        if (campaign.urls && campaign.urls.length > 0) {
+          td.appendChild(htmler.a(campaign.urls[0], title));
+        } else {
+          td.innerText = title;
+        }
+        // ツールチップの表示
+        td.title = title;
+      } else {
+        td.colSpan = td.colSpan + 1;
+      }
+      isEmpty = false;
     }
-    if (td != null) {
-        tr.appendChild(td);
-    }
-    document.getElementById("calendar_body").appendChild(tr);
+    date.setDate(date.getDate() + 1);
+  }
+  if (td) {
+    tr.appendChild(td);
+  }
+  document.getElementById("calendar_body").appendChild(tr);
 };
 
-accCalendar.next = function() {
-    accCalendar.target.setMonth(accCalendar.target.getMonth() + 1);
-    accCalendar.makeCalendar(accCalendar.campaigns);
+var nextMonth = function() {
+  accCalendar.target.setMonth(accCalendar.target.getMonth() + 1);
+  makeCalendar();
 };
 
-accCalendar.prev = function() {
-    accCalendar.target.setMonth(accCalendar.target.getMonth() - 1);
-    accCalendar.makeCalendar(accCalendar.campaigns);
+var prevMonth = function() {
+  accCalendar.target.setMonth(accCalendar.target.getMonth() - 1);
+  makeCalendar();
 };
 
 /** カレンダー作成 **/
-accCalendar.makeCalendar = function(campaigns) {
-    var tr, td, date, week, i, campaign, first, last, result;
+var makeCalendar = function() {
+  var campaigns = accCalendar.campaigns;
+  var target = accCalendar.target;
+  var today = new Date();
 
-    var target = accCalendar.target;
-    var today = new Date();
+  new HtmlBuilder("calendar_body").clean();
 
-    var tbody = htmler.tbody();
-    tbody.id = "calendar_body";
-    var oldtbody = document.getElementById("calendar_body");
-    oldtbody.parentNode.replaceChild(tbody, oldtbody);
+  setMonthHeaderText();
 
-    accCalendar.setMonthHeaderText();
+  var isThisMonth = today.getMonth() == target.getMonth() && today.getFullYear() == target.getFullYear();
+  if (isThisMonth) {
+    date = target.getDate();
+    setTodaysDay();
+  } else {
+    date = 1;
+    clearHighlightDay();
+  }
+  document.getElementById("month_prev").onclick = isThisMonth ? null : prevMonth;
+  document.getElementById("month_next").onclick = nextMonth;
 
-    if (today.getMonth() == target.getMonth() && today.getFullYear() == target.getFullYear()) {
-        date = accCalendar.target.getDate();
-        accCalendar.setTodaysDay();
-        document.getElementById("month_prev").onclick = null;
-        document.getElementById("month_next").onclick = accCalendar.next;
-    } else {
-        date = 1;
-        accCalendar.clearHighlightDay();
-        document.getElementById("month_prev").onclick = accCalendar.prev;
-        document.getElementById("month_next").onclick = accCalendar.next;
-    }
+  var week = getWeek(target);
+  var calendarData = getCalendarData(target, date);
 
-    week = accCalendar.getWeek(target);
-    var calendarData = accCalendar.getCalendarData(target, date);
-
-    tr = accCalendar.appendTr();
-
-    if (calendarData.beginDay - 1 > 0) {
-      accCalendar.appendTd(tr, calendarData.beginDay - 1);
-    }
+  new HtmlBuilder("calendar_body")
+  .tr()
+  .intercept((tr) => {
+    var colSpan = calendarData.beginDay - 1;
+    new HtmlBuilder(tr)
+    .then(colSpan > 0, (self) => self.td(null, null, colSpan))
+    .build();
 
     first = date;
-    for (i = calendarData.beginDay; i <= 7; i++) {
-        accCalendar.appendTd(tr, null, date);
-        date++;
+    for (var i = calendarData.beginDay; i <= 7; i++) {
+      new HtmlBuilder(tr)
+      .td()
+      .build();
+      date++;
     }
     last = date;
 
     for (i = 0; i < campaigns.length; i++) {
-        campaign = campaigns[i];
+      campaign = campaigns[i];
 
-        tr = accCalendar.appendTr("borderhidden");
-
-        if (calendarData.beginDay - 1 > 0) {
-          accCalendar.appendTd(tr, calendarData.beginDay - 1, null, "campaign");
+      new HtmlBuilder("calendar_body")
+      .tr("borderhidden")
+      .intercept((tr) => {
+        var colSpan = calendarData.beginDay - 1;
+        if (colSpan > 0) {
+          new HtmlBuilder(tr)
+          .then(colSpan > 0, (self) => self.td("campaign", null, colSpan))
+          .build();
         }
-
-        accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
+        createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
+      })
+      .build();
     }
     week++;
 
     while (date <= calendarData.end.getDate()) {
-        tr = accCalendar.appendTr();
-
+      new HtmlBuilder("calendar_body")
+      .tr()
+      .intercept((tr) => {
         first = date;
         for (var i = 1; i <= 7; i++) {
-            if (date > calendarData.end.getDate()) {
-                break;
-            }
-            accCalendar.appendTd(tr, null, date);
-            date++;
+          if (date > calendarData.end.getDate()) {
+            break;
+          }
+          new HtmlBuilder(tr)
+          .td()
+          .then(date, (self) => self.intercept((td) => td.innerText = date))
+          .build();
+          date++;
         }
         last = date;
 
-        for (var i = 0; i < campaigns.length; i++) {
-            tr = htmler.tr("borderhidden");
-            campaign = campaigns[i];
-            accCalendar.createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
+        for (i = 0; i < campaigns.length; i++) {
+          tr = htmler.tr("borderhidden");
+          campaign = campaigns[i];
+          createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
         }
-        week++;
+      })
+      .build();
+      week++;
     }
+  })
+  .build();
 };
 
-accCalendar.getThemeColorClass = function(seed) {
+var getThemeColorClass = function(serviceTitle) {
+  var seed = accCalendar.serviceTitles.indexOf(serviceTitle);
   return constants.Colors[seed % constants.Colors.length];
 };
 
 window.onload = function() {
-    info.getCampaign(function(campaigns, serviceTitles) {
-        accCalendar.campaigns = campaigns;
-        accCalendar.serviceTitles = serviceTitles;
-        accCalendar.target = new Date();
-        accCalendar.target.setMonth(accCalendar.target.getMonth());
-        accCalendar.makeCalendar(accCalendar.campaigns);
-    });
+  info.getCampaigns(function(campaigns, serviceTitles) {
+    accCalendar.campaigns = campaigns;
+    accCalendar.serviceTitles = serviceTitles;
+    accCalendar.target = new Date();
+    makeCalendar(accCalendar.campaigns);
+  });
 };
 
-},{"./campaign":2,"./constants":3,"./htmler":4,"./info":5}],2:[function(require,module,exports){
+},{"./campaign":2,"./constants":3,"./html-builder":4,"./htmler":5,"./info":6}],2:[function(require,module,exports){
 var constants = require('./constants');
 
 /** @constructor */
@@ -419,7 +373,7 @@ Campaign.prototype.validateDate_ = function(now) {
 module.exports = Campaign;
 
 },{"./constants":3}],3:[function(require,module,exports){
-module.exports.Color = [
+module.exports.Colors = [
   "red",
   "pink",
   "purple",
@@ -440,6 +394,8 @@ module.exports.Color = [
   "grey",
   "blue-grey"
 ];
+
+module.exports.DAYOFTHEWEEK = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 module.exports.On = {
     ALL: "All",
@@ -502,6 +458,232 @@ module.exports.On = {
 };
 
 },{}],4:[function(require,module,exports){
+/** @constructor */
+var HtmlBuilder = function(element) {
+  if (typeof element === "string") {
+    this.element = document.getElementById(element);
+  } else if (typeof element === "object") {
+    this.element = element;
+  }
+  this.paragraph = [];
+};
+
+HtmlBuilder.prototype = {
+  then : function(conditoin, callback) {
+    if (callback && conditoin) {
+      var result = callback(this);
+      if (result) {
+        return result;
+      }
+    }
+    return this;
+  },
+  ifElse : function(conditoin, trueCallback, falseCallback) {
+    if (conditoin) {
+      if (trueCallback) {
+        var trueResult = rueCallback(this);
+        if (trueResult) {
+          return trueResult;
+        }
+      }
+    } else {
+      if (falseCallback) {
+        var falseResult = falseCallback(this);
+        if (falseResult) {
+          return falseResult;
+        }
+      }
+    }
+    return this;
+  },
+  clean : function() {
+    var element = this.toElement();
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+    return this;
+  },
+  intercept : function(callback) {
+    callback(this.toElement(), this);
+    return this;
+  },
+  toElement : function() {
+    if (this.paragraph.length > 0) {
+      return this.paragraph[this.paragraph.length - 1];
+    } else if (this.element) {
+      return this.element;
+    }
+    return null;
+  },
+  build : function() {
+    for (var i = 0; i < this.paragraph.length; i++) {
+      if (i === 0) {
+        if (this.element) {
+          this.element.appendChild(this.paragraph[i]);
+        } else {
+          this.element = this.paragraph[i];
+        }
+      } else {
+        this.paragraph[i - 1].appendChild(this.paragraph[i]);
+      }
+    }
+    this.paragraph = [];
+    return this;
+  },
+  div : function(opt_className, opt_id) {
+    var element = document.createElement("div");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  text : function(text) {
+    this.paragraph.push(document.createTextNode(text));
+    return this.build();
+  },
+  a : function(href, opt_className, opt_id, opt_onclick) {
+    if (href) {
+      var element = document.createElement("a");
+      element.href = href;
+      if (opt_className) {
+        element.className = opt_className;
+      }
+      if (opt_id) {
+        element.id = opt_id;
+      }
+      if (opt_onclick) {
+        element.onclick = opt_onclick;
+      }
+      this.paragraph.push(element);
+    }
+    return this;
+  },
+  p : function(opt_innerText, opt_className, opt_id) {
+    var element = document.createElement("p");
+    if (opt_innerText) {
+      element.innerText = opt_innerText;
+    }
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  img : function(src, opt_className, opt_id) {
+    var element = document.createElement("img");
+    element.src = src;
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this.build();
+  },
+  i : function(opt_className, opt_id) {
+    var element = document.createElement("i");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  tbody : function(opt_className, opt_id) {
+    var element = document.createElement("tbody");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  tr : function(opt_className, opt_id) {
+    var element = document.createElement("tr");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  td : function(opt_className, opt_id, opt_colSpan) {
+    var element = document.createElement("td");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    if (opt_colSpan) {
+      element.colSpan = opt_colSpan;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h1 : function(opt_className, opt_id) {
+    var element = document.createElement("h1");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h2 : function(opt_className, opt_id) {
+    var element = document.createElement("h2");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h3 : function(opt_className, opt_id) {
+    var element = document.createElement("h3");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  },
+  h4 : function(opt_className, opt_id) {
+    var element = document.createElement("h4");
+    if (opt_className) {
+      element.className = opt_className;
+    }
+    if (opt_id) {
+      element.id = opt_id;
+    }
+    this.paragraph.push(element);
+    return this;
+  }
+};
+
+module.exports = HtmlBuilder;
+
+},{}],5:[function(require,module,exports){
 /** <div> 作成 */
 module.exports.div = function(opt_className, opt_id, opt_text) {
   var element = document.createElement("div");
@@ -629,7 +811,7 @@ module.exports.tbody = function(opt_className, opt_id) {
 module.exports.td = function(opt_colspan, opt_className, opt_id) {
   var element = document.createElement('td');
   if (opt_colspan) {
-    td.colspan = opt_colspan;
+    element.colspan = opt_colspan;
   }
   if (opt_className) {
     element.className = opt_className;
@@ -688,7 +870,7 @@ module.exports.h4 = function(text, opt_className, opt_id) {
   return element;
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var Campaign = require('./campaign');
 
 var ACC_URL = "https://tanjo.in/acc/campaign.json";

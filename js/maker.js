@@ -139,6 +139,8 @@ module.exports.Color = [
   "blue-grey"
 ];
 
+module.exports.DAYOFTHEWEEK = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
 module.exports.On = {
     ALL: "All",
     DAY: {
@@ -255,10 +257,10 @@ $('.datepicker').pickadate({
   selectYears: 15 // Creates a dropdown of 15 years to control year
 });
 
-$('input[type="checkbox"]').change(function() {
+$('input[type="checkbox"]').change(() => {
   if ($(this).is($('input#on_all'))) {
     if ($(this).is(':checked')) {
-      $('input[type="checkbox"]').each(function(){
+      $('input[type="checkbox"]').each(() => {
         $(this).prop("checked", false);
       });
       $(this).prop("checked", true);
@@ -268,7 +270,7 @@ $('input[type="checkbox"]').change(function() {
   }
 });
 
-$('#create_json').click(function() {
+$('#create_json').click(() => {
   var data = {};
   var val = $('#content_id').val();
   if (val && val.length > 0) {
@@ -322,7 +324,7 @@ $('#create_json').click(function() {
     }
   }
 
-  $('input[type="checkbox"]').each(function() {
+  $('input[type="checkbox"]').each(() => {
     if ($(this).is(':checked')) {
       if (!data.on) {
         data.on = [];
@@ -337,7 +339,7 @@ $('#create_json').click(function() {
 });
 
 window.onload = function() {
-  info.getCampaigns(function(campaigns, serviceTitles) {
+  info.getCampaigns((campaigns, serviceTitles) => {
     $('input#content_service_title').autocomplete({
       data: serviceTitles
     });

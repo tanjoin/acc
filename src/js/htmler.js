@@ -125,7 +125,7 @@ module.exports.tbody = function(opt_className, opt_id) {
 module.exports.td = function(opt_colspan, opt_className, opt_id) {
   var element = document.createElement('td');
   if (opt_colspan) {
-    td.colspan = opt_colspan;
+    element.colspan = opt_colspan;
   }
   if (opt_className) {
     element.className = opt_className;

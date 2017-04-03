@@ -139,6 +139,8 @@ module.exports.Color = [
   "blue-grey"
 ];
 
+module.exports.DAYOFTHEWEEK = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
 module.exports.On = {
     ALL: "All",
     DAY: {
@@ -363,13 +365,16 @@ HtmlBuilder.prototype = {
     this.paragraph.push(element);
     return this;
   },
-  td : function(opt_className, opt_id) {
+  td : function(opt_className, opt_id, opt_colSpan) {
     var element = document.createElement("td");
     if (opt_className) {
       element.className = opt_className;
     }
     if (opt_id) {
       element.id = opt_id;
+    }
+    if (opt_colSpan) {
+      element.colSpan = opt_colSpan;
     }
     this.paragraph.push(element);
     return this;
@@ -601,7 +606,6 @@ var bindCardContent = function(cardContent, campaign) {
 };
 
 var bindCard = function(card, campaign) {
-
   new HtmlBuilder(card)
   .then(campaign.hasImage(), (self) => self.div("img").img(campaign.img, "materialboxed"))
   .div("card-content white-text")
@@ -675,7 +679,7 @@ var showServiceTitle = function(campaigns, serviceTitle) {
 var showCampaigns = function(campaigns) {
   var now = new Date();
   var urlQuery = info.getUrlQuery();
-  new HtmlBuilder("contents").clean().div("row").intercept(function(row) {
+  new HtmlBuilder("contents").clean().div("row").intercept((row) => {
     for (var i = 0; i < campaigns.length; i++) {
       var campaign = campaigns[i];
       if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
@@ -705,7 +709,7 @@ var showContents = function() {
 };
 
 window.onload = function() {
-  info.getCampaigns(function(campaigns, serviceTitles) {
+  info.getCampaigns((campaigns, serviceTitles) => {
     acc.campaigns = campaigns;
     acc.serviceTitles = serviceTitles;
     showContents();

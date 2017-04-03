@@ -1,4 +1,4 @@
-module.exports.Color = [
+module.exports.Colors = [
   "red",
   "pink",
   "purple",
@@ -19,6 +19,8 @@ module.exports.Color = [
   "grey",
   "blue-grey"
 ];
+
+module.exports.DAYOFTHEWEEK = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 module.exports.On = {
     ALL: "All",
