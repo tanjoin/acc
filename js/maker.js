@@ -117,7 +117,7 @@ Campaign.prototype.validateDate_ = function(now) {
 module.exports = Campaign;
 
 },{"./constants":2}],2:[function(require,module,exports){
-module.exports.Color = [
+module.exports.Colors = [
   "red",
   "pink",
   "purple",
@@ -247,6 +247,13 @@ module.exports.getServiceTitle = function(urlQuery) {
     return decodeURIComponent(urlQuery.service_title);
   }
   return null;
+};
+
+module.exports.getInverse = function(urlQuery) {
+  if (urlQuery && urlQuery.inverse && urlQuery.inverse.length > 0) {
+    return decodeURIComponent(urlQuery.inverse);
+  }
+  return false;
 };
 
 },{"./campaign":1}],4:[function(require,module,exports){

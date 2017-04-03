@@ -117,7 +117,7 @@ Campaign.prototype.validateDate_ = function(now) {
 module.exports = Campaign;
 
 },{"./constants":2}],2:[function(require,module,exports){
-module.exports.Color = [
+module.exports.Colors = [
   "red",
   "pink",
   "purple",
@@ -475,6 +475,13 @@ module.exports.getServiceTitle = function(urlQuery) {
   return null;
 };
 
+module.exports.getInverse = function(urlQuery) {
+  if (urlQuery && urlQuery.inverse && urlQuery.inverse.length > 0) {
+    return decodeURIComponent(urlQuery.inverse);
+  }
+  return false;
+};
+
 },{"./campaign":1}],5:[function(require,module,exports){
 var Campaign = require('./campaign');
 var info = require('./info');
@@ -682,8 +689,14 @@ var showCampaigns = function(campaigns) {
   new HtmlBuilder("contents").clean().div("row").intercept((row) => {
     for (var i = 0; i < campaigns.length; i++) {
       var campaign = campaigns[i];
-      if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
-        bindView(row, campaign);
+      if (acc.inverse && acc.inverse === 'true') {
+        if (!campaign.isShow(now) && campaign.validateHide(urlQuery)) {
+          bindView(row, campaign);
+        }
+      } else {
+        if (campaign.isShow(now) && campaign.validateHide(urlQuery)) {
+          bindView(row, campaign);
+        }
       }
     }
   }).build();
@@ -692,6 +705,7 @@ var showCampaigns = function(campaigns) {
 var showContents = function() {
   var urlQuery = info.getUrlQuery();
   var id = info.getId(urlQuery);
+  acc.inverse = info.getInverse(urlQuery);
   document.getElementById("logo").innerText = "Acc";
   if (id) {
     showDetail(acc.campaigns, id);

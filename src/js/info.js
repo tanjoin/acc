@@ -44,3 +44,10 @@ module.exports.getServiceTitle = function(urlQuery) {
   }
   return null;
 };
+
+module.exports.getInverse = function(urlQuery) {
+  if (urlQuery && urlQuery.inverse && urlQuery.inverse.length > 0) {
+    return decodeURIComponent(urlQuery.inverse);
+  }
+  return false;
+};
