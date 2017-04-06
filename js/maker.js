@@ -364,6 +364,9 @@ window.onload = function() {
     if (urlQuery.url && urlQuery.url.length > 0) {
       document.getElementById("content_url").value = decodeURIComponent(urlQuery.url);
     }
+    if (urlQuery.description && urlQuery.description.length > 0) {
+      document.getElementById("content_description").value = decodeURIComponent(urlQuery.description);
+    }
   });
 };
 
