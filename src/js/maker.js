@@ -5,10 +5,10 @@ $('.datepicker').pickadate({
   selectYears: 15 // Creates a dropdown of 15 years to control year
 });
 
-$('input[type="checkbox"]').change(() => {
+$('input[type="checkbox"]').change(function() {
   if ($(this).is($('input#on_all'))) {
     if ($(this).is(':checked')) {
-      $('input[type="checkbox"]').each(() => {
+      $('input[type="checkbox"]').each(function() {
         $(this).prop("checked", false);
       });
       $(this).prop("checked", true);
@@ -18,7 +18,7 @@ $('input[type="checkbox"]').change(() => {
   }
 });
 
-$('#create_json').click(() => {
+$('#create_json').click(function() {
   var data = {};
   var val = $('#content_id').val();
   if (val && val.length > 0) {
@@ -72,7 +72,7 @@ $('#create_json').click(() => {
     }
   }
 
-  $('input[type="checkbox"]').each(() => {
+  $('input[type="checkbox"]').each(function() {
     if ($(this).is(':checked')) {
       if (!data.on) {
         data.on = [];
@@ -87,7 +87,7 @@ $('#create_json').click(() => {
 });
 
 window.onload = function() {
-  info.getCampaigns((campaigns, serviceTitles) => {
+  info.getCampaigns(function(campaigns, serviceTitles) {
     $('input#content_service_title').autocomplete({
       data: serviceTitles
     });
