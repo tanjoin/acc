@@ -367,6 +367,9 @@ window.onload = function() {
     if (urlQuery.description && urlQuery.description.length > 0) {
       document.getElementById("content_description").value = decodeURIComponent(urlQuery.description);
     }
+    if (urlQuery.service_title && urlQuery.service_title.length > 0) {
+      document.getElementById("content_service_title").value = decodeURIComponent(urlQuery.service_title);
+    }
   });
 };
 
