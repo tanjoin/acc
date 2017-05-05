@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 174,
+      "service_title": "QUICPay",
+      "title": "毎月総額919万円キャッシュバック！Apple PayでQUICPayキャンペーン！｜QUICPay",
+      "description": "期間中、コンビニエンスストアやスーパーマーケットなどの対象加盟店でApple Payに登録したクイックペイを月間合計5,000円（税込）以上利用すると、毎月抽選でキャッシュバック！\n発行会社が株式会社ジャックスのQUICPayをご利用の場合は、キャッシュバック金額分のJデポをプレゼントします。",
+      "urls": [
+          "http://www.quicpay.jp/campaign/applepay_qp.html"
+      ],
+      "date": {
+          "start": "2017/01/01",
+          "end": "2017/09/30"
+      },
+      "on": [
+          "All"
+      ]
+    },
+    {
         "id": 173,
         "service_title": "BURGER KING",
         "title": "ワッパージュニア半額 180円",
