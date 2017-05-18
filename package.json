@@ -11,5 +11,13 @@
     "url": "git@tanjoin:tanjoin/acc.git"
   },
   "author": "tanjoin",
-  "private": true
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "gulp": "^3.9.1",
+    "tsify": "^3.0.1",
+    "typescript": "^2.3.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
 }
