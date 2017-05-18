@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var typescript = require('gulp-typescript');
 
 gulp.task('main', function() {
   browserify( {
