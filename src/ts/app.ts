@@ -1,7 +1,7 @@
 "use strict";
 
-import Campaign from './campaign';
-import Day from "./day";
+import Campaign from './model/campaign';
+import Day from "./model/day";
 
 var campaign = new Campaign(`{
     "id": 175,

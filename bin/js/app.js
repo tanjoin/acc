@@ -33,6 +33,8 @@ var Campaign = (function () {
         this.particularDays = jsonObj["particular_days"];
         this.particularDates = jsonObj["particular_dates"];
     }
+    Campaign.prototype.getEntryPeriodStart = function () {
+    };
     return Campaign;
 }());
 exports.default = Campaign;
