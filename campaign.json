@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 178,
+        "service_title": "三井住友VISAカード",
+        "title": "プレミアムフライデーキャンペーン｜クレジットカードの三井住友VISAカード",
+        "description": "エントリーのうえ、月間（1日～末日）のカードご利用金額1万円（含む消費税等）以上\n各月のプレミアムフライデーにご利用いただけるギフトチケット（※）を、毎月抽選でプレゼントいたします。",
+        "urls": [
+            "https://www.smbc-card.com/mem/cardinfo/cardinfo7020231.jsp"
+        ],
+        "date": {
+            "start": "2017/05/01",
+            "end": "2017/08/31"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 177,
         "service_title": "nanaco",
         "title": "電子マネーnanacoのメールマガジン｢nanacoニュース｣新規登録キャンペーン｜電子マネー nanaco 【公式サイト】",
