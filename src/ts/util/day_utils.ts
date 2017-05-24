@@ -1,7 +1,7 @@
 import Day from "../model/day";
 
-export default class DayUtils {
-  static getDay(date: Date) : Day {
+module DayUtils {
+  export function getDay(date: Date) : Day {
     if (date) {
       switch (date.getDay()) {
         case 0:
@@ -23,7 +23,7 @@ export default class DayUtils {
     return null;
   }
 
-  static getDayIndex(day: Day) : number {
+  export function getDayIndex(day: Day) : number {
     if (day) {
       switch (day) {
         case Day.Sunday:
@@ -45,3 +45,5 @@ export default class DayUtils {
     return null;
   }
 }
+
+export default DayUtils

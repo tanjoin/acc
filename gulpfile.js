@@ -4,13 +4,13 @@ var source = require('vinyl-source-stream');
 
 gulp.task('ts', function() {
   return browserify({
-    entries: './src/ts/app.ts'
+    entries: './src/ts/main.ts'
   }).plugin('tsify')
   .bundle()
   .on('error', function(error) {
     console.log(error.message);
   })
-  .pipe(source('app.js'))
+  .pipe(source('main.js'))
   .pipe(gulp.dest('./bin/js'));
 });
 
