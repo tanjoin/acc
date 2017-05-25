@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+        "id": 197,
+        "service_title": "リクルートカード（VISA）",
+        "title": "毎月総額919万円キャッシュバック！Apple PayでQUICPayキャンペーン！｜NEWS+PLUS（ニュースプラス）｜三菱UFJニコス",
+        "description": "MUFGカード（Visa/Mastercard®）の個人カード\n※MUFGブランドであってもアメリカン・エキスプレス® ･カード、JCB、銀聯は本キャンペーンの対象となりません。また、MUFGカード（Visa/Mastercard®）の個人カードであっても一部対象外のカードがございます。\n",
+        "urls": [
+            "https://www2.cr.mufg.jp/newsplus/campaign/c27/20170501_1.html?unicaFlag=1"
+        ],
+        "img": "https://www2.cr.mufg.jp/newsplus/var/rev0/0004/0494/mv.gif",
+        "date": {
+            "start": "2017/01/01",
+            "end": "2017/09/30"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 196,
         "service_title": "セブンカード",
         "title": "10万円相当のカタログギフトが当たる！贅沢な一品プレゼントキャンペーン！｜セブンカードWEBサービス",
