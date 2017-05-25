@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 195,
+        "service_title": "JCB",
+        "title": "毎月総額919万円キャッシュバック！Apple PayでQUICPay（クイックペイ）TMキャンペーン！ | JCBのインターネットサービスMyJCB（マイジェーシービー）",
+        "description": "期間中、コンビニエンスストアやスーパーマーケットなどの対象加盟店でApple Payに登録したクイックペイを月間合計で5,000円（税込）以上利用すると、毎月抽選でキャッシュバック！\n\nエントリー不要\n\nセブンイレブンは対象外",
+        "urls": [
+            "https://my.jcb.co.jp/campaign/myj/qc16_016applepay_myj.html"
+        ],
+        "date": {
+            "start": "2017/01/01",
+            "end": "2017/09/30"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 194,
         "service_title": "JCB",
         "title": "インターネットショッピングで5,000円キャッシュバックキャンペーン | JCBのインターネットサービスMyJCB（マイジェーシービー）",
