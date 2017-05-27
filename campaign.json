@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+        "id": 199,
+        "service_title": "ガスト",
+        "title": "【期間限定】チーズINハンバーグ￥399(税抜)｜ガスト｜すかいらーくグループ",
+        "urls": [
+            "http://www.skylark.co.jp/gusto/cheese_in/index.html"
+        ],
+        "img": "http://www.skylark.co.jp/gusto/cheese_in/images/20170519_cheese_main_02.jpg",
+        "date": {
+            "end": "2017/06/14"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 198,
         "service_title": "ANAカード",
         "title": "ANAカード「支払い名人」で10,000円キャッシュバックキャンペーン",
