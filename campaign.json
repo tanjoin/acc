@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 200,
+        "service_title": "JCB",
+        "title": "毎月総額919万円キャッシュバック！Apple PayでQUICPay（クイックペイ）TMキャンペーン！",
+        "description": "期間中に、特定加盟店でApple Payに登録したクイックペイを月間合計5,000円（税込）以上利用した方。\n※キャンペーン対象店舗に変更等がある場合、本ページにてご案内します。\n\n「まいばすけっと」も対象店舗",
+        "urls": [
+            "http://www.jcb.co.jp/campaign/qc16_016applepay.html"
+        ],
+        "date": {
+            "start": "2017/01/01",
+            "end": "2017/09/30"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 199,
         "service_title": "ガスト",
         "title": "【期間限定】チーズINハンバーグ￥399(税抜)｜ガスト｜すかいらーくグループ",
