@@ -1,0 +1,21 @@
+.acc-card {
+  margin: 6px;
+  background: rgba(78, 188, 203, 0.7);
+}
+
+.acc-card > .mdl-card__actions {
+  height: 52px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.acc-card > .mdl-card__supporting-text {
+  padding-top: 0px;
+}
+
+.acc-card > .mdl-card__supporting-text > .mdl-button {
+  padding-left: 0px;
+}
+
+#progress_bar {
+  width: 100%;
+}
