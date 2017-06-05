@@ -2,15 +2,15 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 
-gulp.task('maker', function() {
+gulp.task('generator', function() {
   return browserify({
-    entries: './src/maker.ts'
+    entries: './src/generator.ts'
   }).plugin('tsify')
   .bundle()
   .on('error', function(error) {
     console.log(error.message);
   })
-  .pipe(source('maker.js'))
+  .pipe(source('generator.js'))
   .pipe(gulp.dest('./bin/js'));
 });
 
@@ -39,7 +39,7 @@ gulp.task('calendar', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./src/**', ['main', 'maker', 'calendar']);
+  gulp.watch('./src/**', ['main', 'generator', 'calendar']);
 });
 
-gulp.task('default', ['main', 'maker', 'calendar', 'watch']);
+gulp.task('default', ['main', 'generator', 'calendar', 'watch']);

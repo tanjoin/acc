@@ -1,11 +1,11 @@
 .acc-card {
   margin: 6px;
-  background: rgba(78, 188, 203, 0.7);
+  background: rgba(#4ebccb, 0.7);
 }
 
 .acc-card > .mdl-card__actions {
   height: 52px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(#000000, 0.2);
 }
 
 .acc-card > .mdl-card__supporting-text {
