@@ -1,9 +1,70 @@
+import * as moment from 'moment';
+
 export default class Generator {
 
-  onload() {
+  onload(window: Window) {
+    this.applyAutoSetId();
     this.applyAutoResize();
     this.applyCreateJson();
     this.applyCheckBoxSettings();
+    this.applyAutoDate(window);
+  }
+
+  private applyAutoSetId() {
+    // TODO: 最新のコンテンツのIDを取得する
+  }
+
+  private static getClipboardText(window: Window) : string {
+    var text = '';
+    if ((<any>window).clipboardData && (<any>window).clipboardData.getData) {
+      text = (<any>window).clipboardData.getData('Text');
+    } else if ((<any>event).clipboardData && (<any>event).clipboardData.getData) {
+      text = (<any>event).clipboardData.getData('text/plain');
+    }
+    return text;
+  }
+
+  // TODO: 時間表記がないものは 23:59:59 扱いにする
+  private static getSplitDateTextData(text: string, id: string) : any {
+    var data = {};
+    if (text.split('〜').length === 1) {
+      if (id === 'content_start') {
+        data['start'] = moment(text.split('〜')[0], "YYYYMMDD HH:mm").format("YYYY/MM/DD HH:mm");
+      } else {
+        data['end'] = moment(text.split('〜')[0], "YYYYMMDD HH:mm").format("YYYY/MM/DD HH:mm");
+      }
+    } else if (text.split('〜').length === 2) {
+      data['start'] = text.split('〜')[0] === "" ? "" : moment(text.split('〜')[0], "YYYYMMDD HH:mm").format("YYYY/MM/DD HH:mm");
+      data['end'] = text.split('〜')[1] === "" ? "" : moment(text.split('〜')[1], "YYYYMMDD HH:mm").format("YYYY/MM/DD HH:mm");
+    }
+    return data;
+  }
+
+  private applyAutoDate(window: Window) {
+    var start = (<HTMLInputElement>document.getElementById('content_start'));
+    var end = (<HTMLInputElement>document.getElementById('content_end'));
+    start.addEventListener('paste', function(event) {
+      (<any>event).preventDefault();
+      var text = Generator.getClipboardText(window);
+      var data = Generator.getSplitDateTextData(text, this.id);
+      if (typeof data['start'] !== 'undefined') {
+        start.value = data['start'];
+      }
+      if (typeof data['end'] !== 'undefined') {
+        end.value = data['end'];
+      }
+    });
+    end.addEventListener('paste', function(event) {
+      (<any>event).preventDefault();
+      var text = Generator.getClipboardText(window);
+      var data = Generator.getSplitDateTextData(text, this.id);
+      if (typeof data['start'] !== 'undefined') {
+        start.value = data['start'];
+      }
+      if (typeof data['end'] !== 'undefined') {
+        end.value = data['end'];
+      }
+    });
   }
 
   private applyCheckBoxSettings() {
@@ -12,7 +73,6 @@ export default class Generator {
     for (var i = 0; i < checkboxes.length; i++) {
       var checkbox = checkboxes[i];
       checkbox.addEventListener('change', function(event) {
-        console.log('change');
         if (this.checked) {
           if (this.id === 'checkbox-on__all') {
             Array.from(checkboxes)
@@ -30,11 +90,14 @@ export default class Generator {
     }
   }
 
+  private generateJson(event) {
+    document.getElementById('result_json').style.visibility = 'visible';
+    // TODO: JSON作成
+  }
+
   private applyCreateJson() {
     var createBtn = document.getElementById('create_btn');
-    createBtn.addEventListener('click', function(event) {
-      document.getElementById('result_json').style.visibility = 'visible';
-    });
+    createBtn.addEventListener('click', this.generateJson);
   }
 
   private applyAutoResize() {
@@ -58,5 +121,5 @@ export default class Generator {
 }
 
 window.onload = function() {
-  new Generator().onload();
+  new Generator().onload(window);
 };
