@@ -3,13 +3,41 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Generator {
     onload() {
-        this.autoResize();
+        this.applyAutoResize();
+        this.applyCreateJson();
+        this.applyCheckBoxSettings();
+    }
+    applyCheckBoxSettings() {
+        var labels = document.querySelectorAll('label.mdl-checkbox');
+        var checkboxes = document.querySelectorAll('input.mdl-checkbox__input');
+        for (var i = 0; i < checkboxes.length; i++) {
+            var checkbox = checkboxes[i];
+            checkbox.addEventListener('change', function (event) {
+                console.log('change');
+                if (this.checked) {
+                    if (this.id === 'checkbox-on__all') {
+                        Array.from(checkboxes)
+                            .filter((checkbox, index, array) => checkbox.id !== 'checkbox-on__all')
+                            .forEach((checkbox, index, array) => checkbox.checked = false);
+                        Array.from(labels)
+                            .filter((label, index, array) => label.getAttribute('for') !== 'checkbox-on__all')
+                            .forEach((label, index, array) => label.MaterialCheckbox.uncheck());
+                    }
+                    else {
+                        document.getElementById('checkbox-on__all').checked = false;
+                        document.querySelector('label[for=checkbox-on__all]').MaterialCheckbox.uncheck();
+                    }
+                }
+            });
+        }
+    }
+    applyCreateJson() {
         var createBtn = document.getElementById('create_btn');
         createBtn.addEventListener('click', function (event) {
             document.getElementById('result_json').style.visibility = 'visible';
         });
     }
-    autoResize() {
+    applyAutoResize() {
         var textarea = document.getElementById('content_description');
         textarea.addEventListener('focus', function (event) {
             event.target.style.height = 'auto';
