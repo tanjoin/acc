@@ -49,11 +49,11 @@ export default class Campaign {
 
   toJSON() : any {
     return Object.assign({}, this, {
-      image: null,
+      image_url: undefined,
       img: this.image_url,
       date: this.date.toJSON(),
       service_title: this.service,
-      service: null
+      service: undefined
     });
   }
 
@@ -65,11 +65,11 @@ export default class Campaign {
       jsonData = json;
     }
     return Object.assign(new Campaign(), jsonData, {
-      img: null,
+      img: undefined,
       image_url: jsonData.img,
       date: Period.fromJSON(jsonData),
       service: jsonData.service_title,
-      service_title: null
+      service_title: undefined
     });
   }
 }

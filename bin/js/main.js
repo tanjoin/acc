@@ -4597,11 +4597,11 @@ class Campaign {
     }
     toJSON() {
         return Object.assign({}, this, {
-            image: null,
+            image_url: undefined,
             img: this.image_url,
             date: this.date.toJSON(),
             service_title: this.service,
-            service: null
+            service: undefined
         });
     }
     static fromJSON(json) {
@@ -4613,11 +4613,11 @@ class Campaign {
             jsonData = json;
         }
         return Object.assign(new Campaign(), jsonData, {
-            img: null,
+            img: undefined,
             image_url: jsonData.img,
             date: period_1.default.fromJSON(jsonData),
             service: jsonData.service_title,
-            service_title: null
+            service_title: undefined
         });
     }
 }

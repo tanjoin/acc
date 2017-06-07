@@ -4466,16 +4466,67 @@ return hooks;
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const moment = require("moment");
-class Generator {
-    onload(window) {
-        this.applyAutoSetId();
-        this.applyAutoResize();
-        this.applyCreateJson();
-        this.applyCheckBoxSettings();
-        this.applyAutoDate(window);
+const campaign_1 = require("../model/campaign");
+class MainRequest {
+    getCampaigns(callback) {
+        var request = new XMLHttpRequest();
+        request.open('GET', MainRequest.GET_DATA_URL, true);
+        request.addEventListener('load', function () {
+            var data = JSON.parse(this.responseText);
+            var campaigns = data.campaigns.map((data) => campaign_1.default.fromJSON(data));
+            var services = campaigns.map((c) => c.service)
+                .filter((x, i, self) => self.indexOf(x) === i);
+            var urls = campaigns.map((c) => c.urls)
+                .filter((x, i, self) => x != null)
+                .reduce((prev, current, i, array) => prev.concat(current))
+                .filter((x, i, self) => self.indexOf(x) === i);
+            if (callback) {
+                callback(campaigns, services, urls);
+            }
+        });
+        request.send(null);
     }
-    applyAutoSetId() {
+}
+exports.MainRequest = MainRequest;
+(function (MainRequest) {
+    MainRequest.GET_DATA_URL = "https://tanjo.in/acc/campaign.json";
+})(MainRequest = exports.MainRequest || (exports.MainRequest = {}));
+exports.default = MainRequest;
+
+},{"../model/campaign":4}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const moment = require("moment");
+const campaign_1 = require("./model/campaign");
+const main_request_1 = require("./api/main_request");
+const url_utils_1 = require("./util/url_utils");
+const period_1 = require("./model/period");
+class Generator {
+    applyQuery(window) {
+        var queries = url_utils_1.default.getUrlQuery(window);
+    }
+    applyAutoSetId(campaigns) {
+        if (!campaigns || campaigns.length == 0) {
+            return;
+        }
+        var ids = campaigns.map((campaign) => campaign.id);
+        if (ids.length == 0) {
+            return;
+        }
+        ids.sort(function (a, b) {
+            if (b > a) {
+                return 1;
+            }
+            else if (a > b) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        });
+        var contentId = document.getElementById('content_id');
+        contentId.value = "" + (ids[0] + 1);
+        contentId.parentNode.MaterialTextfield.checkDirty();
     }
     static getClipboardText(window) {
         var text = '';
@@ -4503,6 +4554,17 @@ class Generator {
         }
         return data;
     }
+    applyValidateUrls(urls) {
+        var url = document.getElementById('content_url');
+        url.addEventListener('change', function (event) {
+            var path = url.value;
+            if (urls.indexOf(path) === -1) {
+                url.parentNode.className = url.className.replace(" is-invalid", "");
+                return;
+            }
+            url.parentNode.className += " is-invalid";
+        });
+    }
     applyAutoDate(window) {
         var start = document.getElementById('content_start');
         var end = document.getElementById('content_end');
@@ -4512,9 +4574,11 @@ class Generator {
             var data = Generator.getSplitDateTextData(text, this.id);
             if (typeof data['start'] !== 'undefined') {
                 start.value = data['start'];
+                start.parentNode.MaterialTextfield.checkDirty();
             }
             if (typeof data['end'] !== 'undefined') {
                 end.value = data['end'];
+                end.parentNode.MaterialTextfield.checkDirty();
             }
         });
         end.addEventListener('paste', function (event) {
@@ -4523,9 +4587,11 @@ class Generator {
             var data = Generator.getSplitDateTextData(text, this.id);
             if (typeof data['start'] !== 'undefined') {
                 start.value = data['start'];
+                start.parentNode.MaterialTextfield.checkDirty();
             }
             if (typeof data['end'] !== 'undefined') {
                 end.value = data['end'];
+                end.parentNode.MaterialTextfield.checkDirty();
             }
         });
     }
@@ -4536,17 +4602,18 @@ class Generator {
             var checkbox = checkboxes[i];
             checkbox.addEventListener('change', function (event) {
                 if (this.checked) {
-                    if (this.id === 'checkbox-on__all') {
+                    if (this.id === 'checkbox-on__All') {
                         Array.from(checkboxes)
-                            .filter((checkbox, index, array) => checkbox.id !== 'checkbox-on__all')
-                            .forEach((checkbox, index, array) => checkbox.checked = false);
-                        Array.from(labels)
-                            .filter((label, index, array) => label.getAttribute('for') !== 'checkbox-on__all')
-                            .forEach((label, index, array) => label.MaterialCheckbox.uncheck());
+                            .filter((checkbox, index, array) => checkbox.id !== 'checkbox-on__All')
+                            .forEach((checkbox, index, array) => {
+                            checkbox.checked = false;
+                            checkbox.parentNode.MaterialCheckbox.uncheck();
+                        });
                     }
                     else {
-                        document.getElementById('checkbox-on__all').checked = false;
-                        document.querySelector('label[for=checkbox-on__all]').MaterialCheckbox.uncheck();
+                        var all = document.getElementById('checkbox-on__All');
+                        all.checked = false;
+                        all.parentNode.MaterialCheckbox.uncheck();
                     }
                 }
             });
@@ -4554,6 +4621,25 @@ class Generator {
     }
     generateJson(event) {
         document.getElementById('result_json').style.visibility = 'visible';
+        var campaign = new campaign_1.default();
+        campaign.id = parseInt(document.getElementById('content_id').value);
+        campaign.title = document.getElementById('content_title').value;
+        campaign.description = document.getElementById('content_description').value;
+        campaign.service = document.getElementById('content_service').value;
+        campaign.date = new period_1.default();
+        campaign.date.start = document.getElementById('content_start').value;
+        campaign.date.end = document.getElementById('content_end').value;
+        var url = document.getElementById('content_url').value;
+        if (url && url.length > 0) {
+            campaign.urls = [url];
+        }
+        campaign.image_url = document.getElementById('content_img').value;
+        var checkboxes = document.querySelectorAll(':checked');
+        var on = Array.from(checkboxes).map((checkbox) => checkbox.id.replace("checkbox-on__", ""));
+        campaign.on = on;
+        console.log(campaign);
+        document.getElementById('result_json').innerHTML =
+            JSON.stringify(campaign.toJSON(), null, 4).replace(/\r?\n/g, '<br>').replace(/ /g, '&nbsp;');
     }
     applyCreateJson() {
         var createBtn = document.getElementById('create_btn');
@@ -4577,10 +4663,204 @@ class Generator {
             event.target.style.height = height;
         });
     }
+    onload(window) {
+        var request = new main_request_1.default();
+        request.getCampaigns((campaigns, services, urls) => {
+            this._campaigns = campaigns;
+            this._services = services;
+            this._urls = urls;
+            this.applyAutoSetId(this._campaigns);
+            this.applyValidateUrls(this._urls);
+        });
+        this.applyQuery(window);
+        this.applyAutoResize();
+        this.applyCreateJson();
+        this.applyCheckBoxSettings();
+        this.applyAutoDate(window);
+    }
 }
 exports.default = Generator;
 window.onload = function () {
     new Generator().onload(window);
 };
 
-},{"moment":1}]},{},[2]);
+},{"./api/main_request":2,"./model/campaign":4,"./model/period":6,"./util/url_utils":7,"moment":1}],4:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const period_1 = require("./period");
+const day_1 = require("./day");
+class Campaign {
+    hasUrls() {
+        return this.urls && this.urls.length > 0;
+    }
+    hasIamge() {
+        return this.image_url && this.image_url.length > 0;
+    }
+    isShow() {
+        return this.date.isShow() && this.isOnTheDay();
+    }
+    isOnTheDay() {
+        let now = new Date();
+        let day = day_1.default.toDay(now);
+        if (this.on && this.on.indexOf('All') != -1) {
+            return true;
+        }
+        if (this.on && this.on.indexOf(day) != -1) {
+            return true;
+        }
+        let dateString = now.getDate() + "th";
+        if (this.on && this.on.indexOf(dateString) != -1) {
+            return true;
+        }
+        return false;
+    }
+    toJSON() {
+        return Object.assign({}, this, {
+            image_url: undefined,
+            img: this.image_url,
+            date: this.date.toJSON(),
+            service_title: this.service,
+            service: undefined
+        });
+    }
+    static fromJSON(json) {
+        var jsonData;
+        if (typeof json === 'string') {
+            jsonData = JSON.parse(json);
+        }
+        else {
+            jsonData = json;
+        }
+        return Object.assign(new Campaign(), jsonData, {
+            img: undefined,
+            image_url: jsonData.img,
+            date: period_1.default.fromJSON(jsonData),
+            service: jsonData.service_title,
+            service_title: undefined
+        });
+    }
+}
+exports.default = Campaign;
+
+},{"./day":5,"./period":6}],5:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Day;
+(function (Day) {
+    Day.Mon = 'Mon';
+    Day.Tue = 'Tue';
+    Day.Wed = 'Wed';
+    Day.Thu = 'Thu';
+    Day.Fri = 'Fri';
+    Day.Sat = 'Sat';
+    Day.Sun = 'Sun';
+    function toDay(date) {
+        let day = date.getDay();
+        switch (day) {
+            case 0:
+                return Day.Sun;
+            case 1:
+                return Day.Mon;
+            case 2:
+                return Day.Tue;
+            case 3:
+                return Day.Wed;
+            case 4:
+                return Day.Thu;
+            case 5:
+                return Day.Fri;
+            case 6:
+                return Day.Sat;
+        }
+    }
+    Day.toDay = toDay;
+    function fromDay(day) {
+        switch (day) {
+            case Day.Sun:
+                return 0;
+            case Day.Mon:
+                return 1;
+            case Day.Tue:
+                return 2;
+            case Day.Wed:
+                return 3;
+            case Day.Thu:
+                return 4;
+            case Day.Fri:
+                return 5;
+            case Day.Sat:
+                return 6;
+        }
+    }
+    Day.fromDay = fromDay;
+})(Day || (Day = {}));
+exports.default = Day;
+
+},{}],6:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const moment = require("moment");
+class Period {
+    getStartText() {
+        return this.getStartMoment().format("YYYY/MM/DD HH:mm:ss");
+    }
+    getStartMoment() {
+        return moment(this.start, "YYYYMMDD HH:mm:ss");
+    }
+    getEndText() {
+        return this.getEndMoment().format("YYYY/MM/DD HH:mm:ss");
+    }
+    getEndMoment() {
+        return moment(this.end, "YYYYMMDD HH:mm:ss");
+    }
+    getPeriodText() {
+        return this.getStartText() + "〜" + this.getEndText();
+    }
+    compare(period) {
+        return this.getEndMoment().diff(period.getEndMoment(), "minute");
+    }
+    isShow() {
+        let startResult = moment().diff(this.getStartMoment(), "minute");
+        if (startResult && startResult < 0) {
+            return false;
+        }
+        let endResult = moment().diff(this.getEndMoment(), "minute");
+        if (endResult && endResult > 0) {
+            return false;
+        }
+        return true;
+    }
+    toJSON() {
+        return Object.assign({}, this);
+    }
+    static fromJSON(json) {
+        var jsonData;
+        if (typeof json === 'string') {
+            jsonData = JSON.parse(json);
+        }
+        else {
+            jsonData = json;
+        }
+        return Object.assign(new Period(), jsonData);
+    }
+}
+exports.default = Period;
+
+},{"moment":1}],7:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class UrlUtils {
+    static getUrlQuery(window) {
+        let url = window.location.search;
+        let hash = url.slice(1).split('&');
+        var queries = {};
+        for (var i = 0; i < hash.length; i++) {
+            let splitedData = hash[i].split('=');
+            queries[splitedData[0]] = splitedData[1];
+        }
+        return queries;
+    }
+}
+exports.default = UrlUtils;
+
+},{}]},{},[3]);
