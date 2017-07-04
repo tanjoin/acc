@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+        "id": 204,
+        "service_title": "LAWSON",
+        "title": "ローソンIDメール限定クーポン[LAWSON]",
+        "description": "ウチカフェスイーツ各種20円引（予約商品・ウチカフェドリンク・一部チルド商品を除く） \nご利用期間：7月1日（土）～7月31日（月）まで\n\n",
+        "urls": [
+            "http://www.lawson.co.jp/ml_coupon/"
+        ],
+        "img": "http://www.lawson.co.jp/ml_coupon/img/akiko_pre_1707.png",
+        "date": {
+            "start": "2017/07/01",
+            "end": "2017/07/31"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 203,
         "service_title": "LAWSON",
         "title": "Lチキ旨塩チキン・Lチキ旨辛チキン 10円引セール（7/4-7/10）｜ローソン研究所",
