@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+        "id": 209,
+        "service_title": "VIEWカード",
+        "title": "Apple PayでSuicaチャージ5倍ポイントキャンペーン：ビューカード",
+        "description": "キャンペーン期間中、ビューカードを登録したApple PayでのSuica関連(＊1)のお支払いに対して、ビューサンクスポイントが5倍（1,000円につき10ポイント）貯まります。\n＊1　Suicaチャージ、定期券購入、モバイルSuica特急券購入、Suicaグリーン券購入が対象です。\n\n※Visaブランドのビューカードは、QUICPay加盟店以外ではApple Payをご利用いただけません。（Suica関連の支払いを含む）\n※Apple Payへご登録いただいたビューカード1枚あたりの金額が対象となります。複数枚の合算金額ではございません。\n※ツーマークのあるカード、ビュー法人カードは本キャンペーン対象外です。",
+        "urls": [
+            "https://www.jreast.co.jp/card/campaign/ap/"
+        ],
+        "img": "https://www.jreast.co.jp/card/campaign/ap/img/img-main_pc.png",
+        "date": {
+            "start": "2017/08/01",
+            "end": "2017/10/31"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 208,
         "service_title": "三井住友VISAカード",
         "title": "モスカードチャージでポイント10倍キャンペーン｜クレジットカードの三井住友VISAカード",
