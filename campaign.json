@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+        "id": 212,
+        "service_title": "docomo",
+        "title": "ご利用いただけるサイト - Amazon｜ドコモのケータイ払い",
+        "urls": [
+            "http://ent.smt.docomo.ne.jp/keitai_payment/shop/shop_amazon.html"
+        ],
+        "date": {
+            "start": "2017/08/01",
+            "end": "2017/08/31"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
       "id": 211,
       "service_title": "ファミマTカード",
       "title": "ポケットカード会員専用ネットサービス",
