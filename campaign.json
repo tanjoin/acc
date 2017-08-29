@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 214,
+        "service_title": "松屋",
+        "title": "松屋モバイルクーポン | 松屋フーズ",
+        "urls": [
+            "https://www.matsuyafoods.co.jp/sp/line_cp/170829/"
+        ],
+        "img": "https://www.matsuyafoods.co.jp/line/images/cp_170829.jpg",
+        "date": {
+            "start": "2017/08/29 15:00",
+            "end": "2017/09/12 15:00"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 213,
         "service_title": "LAWSON",
         "title": "残暑に負けない！マチカフェ無料券と飲料無料券をプレゼントします。｜ローソン研究所",
