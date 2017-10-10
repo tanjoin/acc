@@ -202,6 +202,50 @@ module.exports.On = {
 };
 
 },{}],3:[function(require,module,exports){
+module.exports.makeUrl = function(content) {
+  if (!content) {
+    return "";
+  }
+  var date = getUTC(new Date());
+  return "https://www.google.com/calendar/event?action=TEMPLATE" +
+    "&text=" + getText(content) +
+    "&details=" + getDetails(content) +
+    "&dates=" + getUTC(new Date(Date.parse(content.date.start))) + "/" + getUTC(new Date(Date.parse(content.date.end)));
+};
+
+var getUTC = function(date) {
+  return date.getUTCFullYear() +
+    zerofill(date.getUTCMonth()+1) +
+    zerofill(date.getUTCDate()) +
+    'T' +
+    zerofill(date.getUTCHours()) +
+    zerofill(date.getUTCMinutes()) +
+    zerofill(date.getUTCSeconds()) +
+    'Z'
+};
+
+var zerofill = function(num) {
+  return ('0' + num).slice(-2);
+}
+
+var getText = function(content) {
+  return encodeURIComponent(
+    "【" + content.serviceTitle + "】" + content.title
+  );
+}
+
+var getDetails = function(content) {
+  var details = "";
+  for (var i = 0; i < content.urls.length; i++) {
+    details += content.urls[i] + "\n";
+  }
+  // details += content.on.join(",") + "\n";
+  details += content.description + "\n";
+  details += "https://tanjo.in/acc/?id=" + content.id;
+  return encodeURIComponent(details);
+}
+
+},{}],4:[function(require,module,exports){
 /** @constructor */
 var HtmlBuilder = function(element) {
   if (typeof element === "string") {
@@ -427,7 +471,7 @@ HtmlBuilder.prototype = {
 
 module.exports = HtmlBuilder;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var Campaign = require('./campaign');
 
 var ACC_URL = "https://tanjo.in/acc/campaign.json";
@@ -482,11 +526,12 @@ module.exports.getInverse = function(urlQuery) {
   return false;
 };
 
-},{"./campaign":1}],5:[function(require,module,exports){
+},{"./campaign":1}],6:[function(require,module,exports){
 var Campaign = require('./campaign');
 var info = require('./info');
 var constants = require('./constants');
 var HtmlBuilder = require('./html-builder');
+var GCalendar = require('./g_calendar');
 
 var acc = {
   campaigns: [],
@@ -654,6 +699,14 @@ var createModalContent = function(modalContent, campaign) {
     .text("リンク" + (i + 1))
     .build();
   }
+
+  if (campaign.date.start && campaign.date.end) {
+    new HtmlBuilder(modalContent)
+    .div("col s2")
+    .a(GCalendar.makeUrl(campaign))
+    .text("G")
+    .build();
+  }
 };
 
 var showDetail = function(campaigns, id) {
@@ -744,4 +797,4 @@ $(document).ready(function(){
 
 $(".button-collapse").sideNav();
 
-},{"./campaign":1,"./constants":2,"./html-builder":3,"./info":4}]},{},[5]);
+},{"./campaign":1,"./constants":2,"./g_calendar":3,"./html-builder":4,"./info":5}]},{},[6]);

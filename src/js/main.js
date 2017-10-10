@@ -2,6 +2,7 @@ var Campaign = require('./campaign');
 var info = require('./info');
 var constants = require('./constants');
 var HtmlBuilder = require('./html-builder');
+var GCalendar = require('./g_calendar');
 
 var acc = {
   campaigns: [],
@@ -167,6 +168,14 @@ var createModalContent = function(modalContent, campaign) {
     .div()
     .a(campaign.urls[i])
     .text("リンク" + (i + 1))
+    .build();
+  }
+
+  if (campaign.date.start && campaign.date.end) {
+    new HtmlBuilder(modalContent)
+    .div("col s2")
+    .a(GCalendar.makeUrl(campaign))
+    .text("Googlecalendarに登録")
     .build();
   }
 };
