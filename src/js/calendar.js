@@ -3,6 +3,7 @@ var info = require('./info');
 var constants = require('./constants');
 var htmler = require('./htmler');
 var HtmlBuilder = require('./html-builder');
+var HtmlBuilder2 = require('./html-builder2');
 
 var accCalendar = {
   campaigns: [],
@@ -53,15 +54,38 @@ var getCalendarData = function(target, num) {
 
 /** 今日の曜日を強調する **/
 var setTodaysDay = function() {
+  var id;
   var today = new Date();
-  new HtmlBuilder(constants.DAYOFTHEWEEK[today.getDay()])
-  .intercept((th) => th.style.backgroundColor = "#eeeeee")
-  .build();
+  switch (today.getDay()) {
+      case 0:
+          id = "sun";
+          break;
+      case 1:
+          id = "mon";
+          break;
+      case 2:
+          id = "tue";
+          break;
+      case 3:
+          id = "wed";
+          break;
+      case 4:
+          id = "thu";
+          break;
+      case 5:
+          id = "fri";
+          break;
+      case 6:
+          id = "sat";
+          break;
+  }
+  var th = document.getElementById(id);
+  th.style.backgroundColor = "#eeeeee";
 };
 
 var clearHighlightDay = function() {
   for (var i = 0; i < constants.DAYOFTHEWEEK.length; i++) {
-    var th = document.getElementById(list[i]);
+    var th = document.getElementById(constants.DAYOFTHEWEEK[i]);
     th.style.backgroundColor = "";
   }
 };
@@ -155,88 +179,65 @@ var makeCalendar = function() {
   var campaigns = accCalendar.campaigns;
   var target = accCalendar.target;
   var today = new Date();
+  var serviceTitles = accCalendar.serviceTitles;
 
   new HtmlBuilder("calendar_body").clean();
 
   setMonthHeaderText();
 
-  var isThisMonth = today.getMonth() == target.getMonth() && today.getFullYear() == target.getFullYear();
-  if (isThisMonth) {
+  if (today.getMonth() == target.getMonth() && today.getFullYear() == target.getFullYear()) {
     date = target.getDate();
     setTodaysDay();
+    document.getElementById("month_prev").onclick = null;
+    document.getElementById("month_next").onclick = nextMonth;
   } else {
     date = 1;
     clearHighlightDay();
+    document.getElementById("month_prev").onclick = prevMonth;
+    document.getElementById("month_next").onclick = nextMonth;
   }
-  document.getElementById("month_prev").onclick = isThisMonth ? null : prevMonth;
-  document.getElementById("month_next").onclick = nextMonth;
 
   var week = getWeek(target);
   var calendarData = getCalendarData(target, date);
 
-  new HtmlBuilder("calendar_body")
-  .tr()
-  .intercept((tr) => {
-    var colSpan = calendarData.beginDay - 1;
-    new HtmlBuilder(tr)
-    .then(colSpan > 0, (self) => self.td(null, null, colSpan))
-    .build();
-
+  var builder = new HtmlBuilder2("calendar_body");
+  builder.appendTr();
+  if (calendarData.beginDay - 1 > 0) {
+    builder.appendTdInTr(calendarData.beginDay - 1);
+  }
+  var first = date;
+  for (var i = calendarData.beginDay; i <= 7; i++) {
+    builder.appendTdInTr(null, date);
+    date++;
+  }
+  var last = date;
+  for (var i = 0; i < campaigns.length; i++) {
+    var campaign = campaigns[i];
+    builder.appendTr("border-style:hidden;");
+    if (calendarData.beginDay - 1 > 0) {
+      builder.appendTdInTr(calendarData.beginDay - 1, null, "campaign");
+    }
+    builder.createCampaignBarInTr(campaign, calendarData, first, last, week + "-", serviceTitles);
+  }
+  week++;
+  while(date <= calendarData.end.getDate()) {
+    builder.appendTr();
     first = date;
-    for (var i = calendarData.beginDay; i <= 7; i++) {
-      new HtmlBuilder(tr)
-      .td()
-      .build();
+    for (var i = 1; i <= 7; i++) {
+      if (date > calendarData.end.getDate()) {
+        break;
+      }
+      builder.appendTdInTr(null, date);
       date++;
     }
     last = date;
-
-    for (i = 0; i < campaigns.length; i++) {
+    for (var i = 0; i < campaigns.length; i++) {
+      builder.createTr("border-style:hidden;");
       campaign = campaigns[i];
-
-      new HtmlBuilder("calendar_body")
-      .tr("borderhidden")
-      .intercept((tr) => {
-        var colSpan = calendarData.beginDay - 1;
-        if (colSpan > 0) {
-          new HtmlBuilder(tr)
-          .then(colSpan > 0, (self) => self.td("campaign", null, colSpan))
-          .build();
-        }
-        createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
-      })
-      .build();
+      builder.createCampaignBarInTr(campaign, calendarData, first, last, week + "-", serviceTitles);
     }
     week++;
-
-    while (date <= calendarData.end.getDate()) {
-      new HtmlBuilder("calendar_body")
-      .tr()
-      .intercept((tr) => {
-        first = date;
-        for (var i = 1; i <= 7; i++) {
-          if (date > calendarData.end.getDate()) {
-            break;
-          }
-          new HtmlBuilder(tr)
-          .td()
-          .then(date, (self) => self.intercept((td) => td.innerText = date))
-          .build();
-          date++;
-        }
-        last = date;
-
-        for (i = 0; i < campaigns.length; i++) {
-          tr = htmler.tr("borderhidden");
-          campaign = campaigns[i];
-          createCampaignBar(tr, campaign, calendarData, first, last, week + "-");
-        }
-      })
-      .build();
-      week++;
-    }
-  })
-  .build();
+  }
 };
 
 var getThemeColorClass = function(serviceTitle) {
