@@ -239,11 +239,37 @@ var getDetails = function(content) {
   for (var i = 0; i < content.urls.length; i++) {
     details += content.urls[i] + "\n";
   }
-  // details += content.on.join(",") + "\n";
   details += content.description + "\n";
   details += "https://tanjo.in/acc/?id=" + content.id;
   return encodeURIComponent(details);
 }
+
+// var getRecurrence = function(content) {
+//   if (content.join(',') === "All") {
+//     return "";
+//   }
+//   var data = ""; // DAILY WEEKLY MONTHLY YEARLY
+//   // 毎週N曜日
+//   var byDay = content.join(',')
+//     .replace('Sun', 'SU')
+//     .replace('Mon', 'MO')
+//     .replace('Tue', 'TU')
+//     .replace('Wed', 'WE')
+//     .replace('Thu', 'TH')
+//     .replace('Fri', 'FR')
+//     .replace('Sat', 'SA');
+//   if (byDay && byDay.length > 0) {
+//     data += "FREQ=WEEKLY;BYDAY=" + byDay + ";";
+//   }
+//   // 毎月2,15日
+//   var byMonthDay = "FREQ=MONTHLY;BYMONTHDAY=" + content.join(',').replace('th', '');
+//   if (byMonthDay) {
+//     data += byMonthDay + ";";
+//   }
+//   var until = "UNTIL=" + getUTC(new Date(Date.parse(content.date.end)));
+//   data += until;
+//   return data;
+// }
 
 },{}],4:[function(require,module,exports){
 /** @constructor */
@@ -704,7 +730,7 @@ var createModalContent = function(modalContent, campaign) {
     new HtmlBuilder(modalContent)
     .div("col s2")
     .a(GCalendar.makeUrl(campaign))
-    .text("G")
+    .text("Googlecalendarに登録")
     .build();
   }
 };
