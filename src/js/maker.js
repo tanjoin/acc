@@ -88,8 +88,12 @@ $('#create_json').click(function() {
 
 window.onload = function() {
   info.getCampaigns(function(campaigns, serviceTitles) {
+    var serviceTitlesData = {};
+    for (key in serviceTitles) {
+      serviceTitlesData[key] = null;
+    }
     $('input#content_service_title').autocomplete({
-      data: serviceTitles
+      data: serviceTitlesData
     });
 
     var lastId = campaigns[0].id;
