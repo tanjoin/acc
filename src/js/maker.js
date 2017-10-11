@@ -88,9 +88,10 @@ $('#create_json').click(function() {
 
 window.onload = function() {
   info.getCampaigns(function(campaigns, serviceTitles) {
+    console.log(serviceTitles);
     var serviceTitlesData = {};
-    for (key in serviceTitles) {
-      serviceTitlesData[key] = null;
+    for (var i = 0; i < serviceTitles.length; i++) {
+      serviceTitlesData[serviceTitles[i]] = null;
     }
     $('input#content_service_title').autocomplete({
       data: serviceTitlesData
