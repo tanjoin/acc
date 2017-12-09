@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 237,
+        "service_title": "JCB",
+        "title": "JCB マジカル 2018 | JCBのインターネットサービスMyJCB（マイジェーシービー）",
+        "description": "キャンペーン概要\n\n35周年の東京ディズニーランド(R)を完全貸切！\n\n参加登録したJCBカードのご利用合計金額5万円（税込）を1口として抽選で当たる！\nキャンペーン期間中のご利用金額に応じて、当選確率が上がります。",
+        "urls": [
+            "https://my.jcb.co.jp/campaign/myj/c17_034magical_myj.html"
+        ],
+        "date": {
+            "start": "2017/12/16",
+            "end": "2018/06/15"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 236,
         "service_title": "LAWSON",
         "title": "おトクなクーポンのご案内｜ローソン",
