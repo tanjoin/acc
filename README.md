@@ -1,5 +1,5 @@
 # acc book
 
-- [https://tanjo.in/acc/](https://tanjo.in/acc/)
-- [https://tanjo.in/acc/maker.html](https://tanjo.in/acc/maker.html)
-- [https://tanjo.in/acc/calendar.html](https://tanjo.in/acc/calendar.html)
+- [https://tanjoin.github.io/acc/](https://tanjoin.github.io/acc/)
+- [https://tanjoin.github.io/acc/maker.html](https://tanjoin.github.io/acc/maker.html)
+- [https://tanjoin.github.io/acc/calendar.html](https://tanjoin.github.io/acc/calendar.html)
