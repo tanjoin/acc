@@ -36,7 +36,7 @@ var getDetails = function(content) {
     details += content.urls[i] + "\n";
   }
   details += content.description + "\n";
-  details += "https://tanjo.in/acc/?id=" + content.id;
+  details += "https://tanjoin.github.io/acc/?id=" + content.id;
   return encodeURIComponent(details);
 }
 

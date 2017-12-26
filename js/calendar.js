@@ -1008,7 +1008,7 @@ module.exports.h4 = function(text, opt_className, opt_id) {
 },{}],7:[function(require,module,exports){
 var Campaign = require('./campaign');
 
-var ACC_URL = "https://tanjo.in/acc/campaign.json";
+var ACC_URL = "https://tanjoin.github.io/acc/campaign.json";
 
 /** キャンペーン情報を取得する. */
 module.exports.getCampaigns = function(callback) {

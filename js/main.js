@@ -240,7 +240,7 @@ var getDetails = function(content) {
     details += content.urls[i] + "\n";
   }
   details += content.description + "\n";
-  details += "https://tanjo.in/acc/?id=" + content.id;
+  details += "https://tanjoin.github.io/acc/?id=" + content.id;
   return encodeURIComponent(details);
 }
 
@@ -500,7 +500,7 @@ module.exports = HtmlBuilder;
 },{}],5:[function(require,module,exports){
 var Campaign = require('./campaign');
 
-var ACC_URL = "https://tanjo.in/acc/campaign.json";
+var ACC_URL = "https://tanjoin.github.io/acc/campaign.json";
 
 /** キャンペーン情報を取得する. */
 module.exports.getCampaigns = function(callback) {
