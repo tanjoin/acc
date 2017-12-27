@@ -1,9 +1,44 @@
 var info = require('./info');
 
-$('.datepicker').pickadate({
-  selectMonths: true, // Creates a dropdown to control month
-  selectYears: 15 // Creates a dropdown of 15 years to control year
+// $('.datepicker').dblclick(function() {
+//   var input = $('.datepicker').pickadate({
+//     format: 'yyyy/mm/dd',
+//     close: 'OK',
+//     selectMonths: true, // Creates a dropdown to control month
+//     selectYears: 15 // Creates a dropdown of 15 years to control year
+//   });
+// });
+
+$('.datepicker').on('change', function() {
+  var string = $(this).val();
+  var isDateOnly = true;
+  if (string.split(' ').length == 2) {
+    isDateOnly = false;
+  }
+  var date = new Date(japanToSlash(string));
+  if (!isNaN(date)) {
+    $(this).val(formatDate(date, isDateOnly));
+  }
 });
+
+var formatDate = function(date, isDateOnly) {
+  var format = isDateOnly ? 'YYYY/MM/DD' : 'YYYY/MM/DD hh:mm';
+  format = format.replace(/YYYY/g, date.getFullYear());
+  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+  format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
+  format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+  format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+  return format;
+}
+
+var japanToSlash = function(string) {
+  string = string.replace('年', '/');
+  string = string.replace('月', '/');
+  string = string.replace('日', '');
+  string = string.replace('時', ':');
+  string = string.replace('分', '');
+  return string;
+}
 
 $('input[type="checkbox"]').change(function() {
   if ($(this).is($('input#on_all'))) {
@@ -111,7 +146,8 @@ window.onload = function() {
       document.getElementById("content_url").value = decodeURIComponent(urlQuery.url);
     }
     if (urlQuery.description && urlQuery.description.length > 0) {
-      document.getElementById("content_description").value = decodeURIComponent(urlQuery.description);
+      $('#content_description').val(decodeURIComponent(urlQuery.description));
+      $('#content_description').trigger('autoresize');
     }
     if (urlQuery.service_title && urlQuery.service_title.length > 0) {
       document.getElementById("content_service_title").value = decodeURIComponent(urlQuery.service_title);
