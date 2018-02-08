@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+        "id": 252,
+        "service_title": "イオンカード",
+        "title": "イオンウォレット新規ダウンロード&クレジットカードご利用特典｜暮らしのマネーサイト",
+        "urls": [
+            "http://www.aeon.co.jp/campaign/201801-10/index.html"
+        ],
+        "date": {
+            "start": "2018/01/21",
+            "end": "2018/02/20"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 251,
         "service_title": "LINE Pay",
         "title": "【LINE Pay】先着10万名様に300円プレゼント！セブン銀行ATMでチャージしよう♪ : LINE公式ブログ",
