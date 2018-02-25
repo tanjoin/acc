@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 256,
+        "service_title": "イオンカード",
+        "title": "Apple Pay・イオンiD ご利用キャンペーン | 暮らしのマネーサイト",
+        "description": "期間中、イオンマークのカードを設定したApple PayまたはイオンiDのクレジット払いご利用で、イオングループの対象店舗でのお買い物ならもれなくときめきポイントが基本の10倍(イオンJMBカードはマイルが4倍)。イオングループ対象店舗以外でのお買い物ならもれなくときめきポイントが基本の5倍(イオンJMBカードはマイルが2倍)プレゼントいたします。\n\n※基本とは200円(税込)ごとに1ポイント(イオンJMBカードは1マイル)付与をさします。\n※本キャンペーンでプレゼントされる倍付けポイントは2018年7月ご請求明細書にて付与予定です。(イオンJMBカードはマイル)\n",
+        "urls": [
+            "http://www.aeon.co.jp/campaign/201802-05/index.html"
+        ],
+        "date": {
+            "start": "2018/02/21",
+            "end": "2018/04/20"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 255,
         "service_title": "ファミマTカード",
         "title": "【ファミリーマートでクレジット払いするとポイント3倍！】",
@@ -8,6 +24,8 @@
         "urls": [
             "https://wis.pocketcard.co.jp/netservice/campaignApplication/confirmDetails?parntCampCntnuNo=656&sessionToken=63fcb9615ac699ea52fc00e5feb45f04"
         ],
+        "date": {
+        },
         "on": [
             "All"
         ]
