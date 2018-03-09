@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+        "id": 259,
+        "service_title": "ガスト",
+        "title": "チーズIN399フェア｜メニュー｜ガスト｜すかいらーくグループ",
+        "description": "チーズINハンバーグが399円",
+        "urls": [
+            "https://www.skylark.co.jp/gusto/menu/cheese_in/index.html"
+        ],
+        "img": "https://www.skylark.co.jp/gusto/menu/cheese_in/img/main_399.png",
+        "date": {
+            "start": "2018/03/08",
+            "end": "2018/03/28"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 258,
         "service_title": "JCB",
         "title": "JCBプレモカード 春のWEB販売キャンペーン",
