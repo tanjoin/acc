@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 261,
+        "service_title": "QUICPay",
+        "title": "全国の対象店舗で5％キャッシュバック！春のQUICPayまつり！｜QUICPay",
+        "description": "【キャンペーン賞品・特典】\nもれなくクイックペイご利用合計金額の5％を後日キャッシュバック\n\n期間中のご利用分をすべて集計し、まとめてキャッシュバックします。\n一部の発行会社では、キャッシュバック金額分のポイントバックになる場合がございます。\n\n【キャンペーン対象】\n期間中、対象店舗でクイックペイでお支払いただいた方\n\nApple Payのご利用分も対象となります。\n",
+        "urls": [
+            "http://www.quicpay.jp/campaign/spring2018.html"
+        ],
+        "date": {
+            "start": "2018/03/01",
+            "end": "2018/04/30"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 260,
         "service_title": "QUICPay",
         "title": "全国の対象店舗で5％キャッシュバック！春のQUICPayまつり！｜QUICPay",
