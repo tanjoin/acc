@@ -247,6 +247,13 @@ var getThemeColorClass = function(serviceTitle) {
 
 window.onload = function() {
   info.getCampaigns(function(campaigns, serviceTitles) {
+    var urlQuery = info.getUrlQuery();
+    if (urlQuery.service_title && urlQuery.service_title.length > 0) {
+      campaigns = campaigns.filter((c) => {
+        console.log(c.serviceTitle + " === " + urlQuery.service_title);
+        return c.serviceTitle === urlQuery.service_title
+      });
+    }
     accCalendar.campaigns = campaigns;
     accCalendar.serviceTitles = serviceTitles;
     accCalendar.target = new Date();

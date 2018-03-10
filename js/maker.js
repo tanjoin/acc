@@ -255,7 +255,7 @@ module.exports.getUrlQuery = function() {
     for (var i = 0; i < hash.length; i++) {
         var splitedData = hash[i].split("=");
         queries.push(splitedData[0]);
-        queries[splitedData[0]] = splitedData[1];
+        queries[decodeURIComponent(splitedData[0])] = decodeURIComponent(splitedData[1]);
     }
     return queries;
 };

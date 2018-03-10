@@ -248,6 +248,13 @@ var getThemeColorClass = function(serviceTitle) {
 
 window.onload = function() {
   info.getCampaigns(function(campaigns, serviceTitles) {
+    var urlQuery = info.getUrlQuery();
+    if (urlQuery.service_title && urlQuery.service_title.length > 0) {
+      campaigns = campaigns.filter((c) => {
+        console.log(c.serviceTitle + " === " + urlQuery.service_title);
+        return c.serviceTitle === urlQuery.service_title
+      });
+    }
     accCalendar.campaigns = campaigns;
     accCalendar.serviceTitles = serviceTitles;
     accCalendar.target = new Date();
@@ -1059,7 +1066,7 @@ module.exports.getUrlQuery = function() {
     for (var i = 0; i < hash.length; i++) {
         var splitedData = hash[i].split("=");
         queries.push(splitedData[0]);
-        queries[splitedData[0]] = splitedData[1];
+        queries[decodeURIComponent(splitedData[0])] = decodeURIComponent(splitedData[1]);
     }
     return queries;
 };
