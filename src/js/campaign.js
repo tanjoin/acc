@@ -51,6 +51,18 @@ Campaign.prototype.isShow = function(now) {
     return this.validateDate_(now) && this.validateOn_(now);
 };
 
+Campaign.prototype.isExpired = function(now) {
+  if (!now) {
+      now = new Date();
+  }
+
+  var end = new Date(Date.parse(this.date.end));
+  if (end && now.getTime() > end.getTime()) {
+      return true;
+  }
+  return false;
+}
+
 Campaign.prototype.containsInOn = function(on) {
     return this.on && this.on.indexOf(on) !== -1;
 };

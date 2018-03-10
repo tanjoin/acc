@@ -12,6 +12,15 @@ gulp.task('main', function() {
   .pipe(gulp.dest('js'));
 });
 
+gulp.task('export', () => {
+  browserify({
+    entries: ['./src/js/export.js']
+  }).bundle()
+  .pipe(source('export.js'))
+  .pipe(buffer())
+  .pipe(gulp.dest('js'));
+});
+
 gulp.task('maker', function() {
   browserify( {
     entries: ['./src/js/maker.js']
@@ -33,7 +42,8 @@ gulp.task('calendar', function() {
 gulp.task('watch', function() {
   gulp.watch('./src/js/main.js', ['main']);
   gulp.watch('./src/js/maker.js', ['maker']);
+  gulp.watch('./src/js/export.js', ['export']);
   gulp.watch('./src/js/calendar.js', ['calendar']);
 });
 
-gulp.task('default', ['main', 'maker', 'calendar', 'watch']);
+gulp.task('default', ['main', 'maker', 'export', 'calendar', 'watch']);

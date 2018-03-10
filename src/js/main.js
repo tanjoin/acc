@@ -137,12 +137,14 @@ var bindCard = function(card, campaign) {
 };
 
 var bindView = function(row, campaign) {
-  new HtmlBuilder(row)
-  .div("col s12 m6 l3")
-  .a(campaign.urls[0])
-  .div("card blue-grey darken-3 z-depth-0")
-  .intercept((card, builder) => bindCard(card, campaign))
-  .build();
+  var builder = new HtmlBuilder(row);
+  builder.div("col s12 m6 l3");
+  if (campaign.urls.length > 0) {
+    builder.a(campaign.urls[0]);
+  }
+  builder.div("card blue-grey darken-3 z-depth-0")
+  builder.intercept((card, builder) => bindCard(card, campaign))
+  builder.build();
 };
 
 var createModalContent = function(modalContent, campaign) {

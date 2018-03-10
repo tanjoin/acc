@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 var constants = require('./constants');
 
 /** @constructor */
@@ -51,6 +51,18 @@ Campaign.prototype.hasImage = function() {
 Campaign.prototype.isShow = function(now) {
     return this.validateDate_(now) && this.validateOn_(now);
 };
+
+Campaign.prototype.isExpired = function(now) {
+  if (!now) {
+      now = new Date();
+  }
+
+  var end = new Date(Date.parse(this.date.end));
+  if (end && now.getTime() > end.getTime()) {
+      return true;
+  }
+  return false;
+}
 
 Campaign.prototype.containsInOn = function(on) {
     return this.on && this.on.indexOf(on) !== -1;
@@ -692,12 +704,14 @@ var bindCard = function(card, campaign) {
 };
 
 var bindView = function(row, campaign) {
-  new HtmlBuilder(row)
-  .div("col s12 m6 l3")
-  .a(campaign.urls[0])
-  .div("card blue-grey darken-3 z-depth-0")
-  .intercept((card, builder) => bindCard(card, campaign))
-  .build();
+  var builder = new HtmlBuilder(row);
+  builder.div("col s12 m6 l3");
+  if (campaign.urls.length > 0) {
+    builder.a(campaign.urls[0]);
+  }
+  builder.div("card blue-grey darken-3 z-depth-0")
+  builder.intercept((card, builder) => bindCard(card, campaign))
+  builder.build();
 };
 
 var createModalContent = function(modalContent, campaign) {
