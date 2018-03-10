@@ -24,7 +24,9 @@ window.onload = () => {
     acc.serviceTitles = serviceTitles
     showRemovedInverseCampaignJson();
     var p = document.createElement('pre');
-    p.innerText = JSON.stringify(acc.underway, null, 2);
+    p.innerText = JSON.stringify({
+      campaigns: acc.underway
+    }, null, 2);
     p.id = 'result';
     p.className = 'clipboard';
     p.setAttribute("style", "margin:16px;");
