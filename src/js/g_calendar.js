@@ -3,10 +3,24 @@ module.exports.makeUrl = function(content) {
     return "";
   }
   var date = getUTC(new Date());
+  var start = null;
+  var end = content.date.end;
+  if (!content.date.start) {
+    start = new Date();
+  } else {
+    start = new Date(Date.parse(content.date.start));
+  }
+  if (!content.date.end) {
+    end = new Date();
+  } else if (content.date.end.length === 11) {
+    end = new Date(Date.parse(content.date.end + "23:59"));
+  } else {
+    end = new Date(Date.parse(content.date.end));
+  }
   return "https://www.google.com/calendar/event?action=TEMPLATE" +
     "&text=" + getText(content) +
     "&details=" + getDetails(content) +
-    "&dates=" + getUTC(new Date(Date.parse(content.date.start))) + "/" + getUTC(new Date(Date.parse(content.date.end)));
+    "&dates=" + getUTC(start) + "/" + getUTC(end);
 };
 
 var getUTC = function(date) {
