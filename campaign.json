@@ -1,6 +1,20 @@
 {
   "campaigns": [
     {
+        "id": 267,
+        "service_title": "Apple",
+        "title": "Apple Pay - お財布のいらない新生活を - Apple（日本）",
+        "description": "Apple Pay のキャンペーン公式まとめサイト",
+        "urls": [
+            "https://www.apple.com/jp/apple-pay/new-life/"
+        ],
+        "date": {
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 266,
         "service_title": "LINEデリマ",
         "title": "LINEデリマさんのツイート: \"＼初回注文で半額分／＼2回目以降の方でも20％分／ 本日と明日の土日限定で、大盤振る舞いのLINEポイントプレゼント！ ポイントを次回の出前にも利用できるので、とてもお得です♪ 初めてご注文される方： https://t.co/40ICksJSXC 2回目以降のご注文の方： https://t.co/hrmW4a0xwc… https://t.co/zfYBH0HrB1\"",
