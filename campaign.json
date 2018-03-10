@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+        "id": 266,
+        "service_title": "LINEデリマ",
+        "title": "LINEデリマさんのツイート: \"＼初回注文で半額分／＼2回目以降の方でも20％分／ 本日と明日の土日限定で、大盤振る舞いのLINEポイントプレゼント！ ポイントを次回の出前にも利用できるので、とてもお得です♪ 初めてご注文される方： https://t.co/40ICksJSXC 2回目以降のご注文の方： https://t.co/hrmW4a0xwc… https://t.co/zfYBH0HrB1\"",
+        "description": "＼初回注文で半額分／＼2回目以降の方でも20％分／\n本日と明日の土日限定で、大盤振る舞いのLINEポイントプレゼント！\nポイントを次回の出前にも利用できるので、とてもお得です♪\n\n初めてご注文される方：\nhttps://lin.ee/8HO7aJ9/prmt \n\n2回目以降のご注文の方：\nhttps://lin.ee/ciakzSn/prmt  \n\nhttps://twitter.com/LINEDELIMA_JP/status/972323692322611201",
+        "urls": [
+            "https://twitter.com/LINEDELIMA_JP/status/972323692322611201"
+        ],
+        "date": {
+            "start": "2018/03/10",
+            "end": "2018/03/11"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 265,
         "service_title": "Amazon",
         "title": "Amazon.co.jp: Amazonチャージ　ギフト券を現金チャージで最大2.5%ポイント: ギフト券 ",
