@@ -284,6 +284,10 @@ module.exports.getInverse = function(urlQuery) {
 },{"./campaign":1}],4:[function(require,module,exports){
 var info = require('./info');
 
+var acc = {
+  campaigns: []
+};
+
 // $('.datepicker').dblclick(function() {
 //   var input = $('.datepicker').pickadate({
 //     format: 'yyyy/mm/dd',
@@ -333,6 +337,30 @@ var japanToSlash = function(string) {
   string = string.replace('土', '');
   string = string.replace('日', '');
   return string;
+}
+
+$('#content_url').change(function() {
+  console.log($(this).val());
+  const target = $(this).val();
+  if (!target) {
+    return;
+  }
+  if (isSameUrl(target)) {
+    alert('すでに同じURLが存在します');
+  }
+});
+
+const isSameUrl = function(target) {
+  var c = acc.campaigns.filter((c) => {
+    if (c.urls && c.urls.length > 0) {
+      return c.urls.includes(target);
+    }
+    return false;
+  });
+  if (c.length > 0) {
+    return true;
+  }
+  return false;
 }
 
 $('input[type="checkbox"]').change(function() {
@@ -418,6 +446,7 @@ $('#create_json').click(function() {
 
 window.onload = function() {
   info.getCampaigns(function(campaigns, serviceTitles) {
+    acc.campaigns = campaigns;
     var serviceTitlesData = {};
     for (var i = 0; i < serviceTitles.length; i++) {
       serviceTitlesData[serviceTitles[i]] = null;
@@ -437,6 +466,9 @@ window.onload = function() {
       document.getElementById("content_title").value = decodeURIComponent(urlQuery.title);
     }
     if (urlQuery.url && urlQuery.url.length > 0) {
+      if (isSameUrl(urlQuery.url)) {
+        alert('すでに同じURLが存在します');
+      }
       document.getElementById("content_url").value = decodeURIComponent(urlQuery.url);
     }
     if (urlQuery.description && urlQuery.description.length > 0) {
