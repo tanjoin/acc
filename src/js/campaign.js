@@ -19,6 +19,19 @@ var Campaign = function(opt_jsonData) {
   }
 };
 
+Campaign.prototype.toJSON = function() {
+  return {
+    id: this.id,
+    service_title: this.serviceTitle,
+    title: this.title,
+    description: this.description,
+    urls: this.urls,
+    img: this.img,
+    date: this.date,
+    on: this.on
+  }
+}
+
 Campaign.prototype.startText = function() {
   return this.date.start || '';
 };

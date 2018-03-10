@@ -20,6 +20,19 @@ var Campaign = function(opt_jsonData) {
   }
 };
 
+Campaign.prototype.toJSON = function() {
+  return {
+    id: this.id,
+    service_title: this.serviceTitle,
+    title: this.title,
+    description: this.description,
+    urls: this.urls,
+    img: this.img,
+    date: this.date,
+    on: this.on
+  }
+}
+
 Campaign.prototype.startText = function() {
   return this.date.start || '';
 };
@@ -241,7 +254,7 @@ window.onload = () => {
     showRemovedInverseCampaignJson();
     var p = document.createElement('pre');
     p.innerText = JSON.stringify({
-      campaigns: acc.underway
+      campaigns: acc.underway.map((c) => c.toJSON())
     }, null, 2);
     p.id = 'result';
     p.className = 'clipboard';
