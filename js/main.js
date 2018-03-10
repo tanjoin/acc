@@ -719,7 +719,7 @@ var bindCard = function(card, campaign) {
 var bindView = function(row, campaign) {
   var builder = new HtmlBuilder(row);
   builder.div("col s12 m6 l3");
-  if (campaign.urls.length > 0) {
+  if (campaign.urls && campaign.urls.length > 0) {
     builder.a(campaign.urls[0]);
   }
   builder.div("card blue-grey darken-3 z-depth-0")
