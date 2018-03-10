@@ -298,7 +298,7 @@ var acc = {
 // });
 
 $('.datepicker').on('change', function() {
-  var string = $(this).val();
+  var string = eraseYoubi($(this).val());
   var isDateOnly = true;
   if (string.split(' ').length == 2) {
     isDateOnly = false;
@@ -319,23 +319,27 @@ var formatDate = function(date, isDateOnly) {
   return format;
 }
 
+var eraseYoubi = function(string) {
+  string = string.replace('(', ' ');
+  string = string.replace(')', ' ');
+  string = string.replace('（', ' ');
+  string = string.replace('）', ' ');
+  string = string.replace('月', ' ');
+  string = string.replace('火', ' ');
+  string = string.replace('水', ' ');
+  string = string.replace('木', ' ');
+  string = string.replace('金', ' ');
+  string = string.replace('土', ' ');
+  string = string.replace('日', ' ');
+  return string.replace(/ +/g, ' ');
+}
+
 var japanToSlash = function(string) {
   string = string.replace('年', '/');
   string = string.replace('月', '/');
   string = string.replace('日', '');
   string = string.replace('時', ':');
   string = string.replace('分', '');
-  string = string.replace('(', '');
-  string = string.replace(')', '');
-  string = string.replace('（', '');
-  string = string.replace('）', '');
-  string = string.replace('月', '');
-  string = string.replace('火', '');
-  string = string.replace('水', '');
-  string = string.replace('木', '');
-  string = string.replace('金', '');
-  string = string.replace('土', '');
-  string = string.replace('日', '');
   return string;
 }
 
