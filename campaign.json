@@ -8,6 +8,7 @@
         "urls": [
             "https://my.jcb.co.jp/campaign/myj/toroku_1803_myj.html"
         ],
+        "img" : "https://my.jcb.co.jp/campaign/images/toroku_1803_img01.jpg",
         "date": {
             "start": "2018/03/16",
             "end": "2018/09/15"
