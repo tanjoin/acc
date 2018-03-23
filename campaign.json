@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+        "id": 275,
+        "service_title": "JCB",
+        "title": "スーパー・コンビニのお買い物でキャッシュバックキャンペーン！ | JCBのインターネットサービスMyJCB（マイジェーシービー）",
+        "description": "キャンペーン概要\nキャンペーン参加登録したJCBカードを対象店舗で合計5,000円（税込）以上利用すると抽選でキャッシュバック！\nコンビニで3回以上利用するとWチャンスも！\n\n［対象店舗］\nスーパーマーケット・コンビニエンスストア・ドラッグストア・ショッピングセンター\n\nキャンペーン対象\n【対象店舗】\nスーパーマーケット・コンビニエンスストア・ドラッグストア・ショッピングセンター\n\n対象店舗（一部抜粋）\nスーパーマーケット・ショッピングセンターの対象加盟店\nhttps://www.jcb.co.jp/service/basic/scene/life/grocery/index.html\nコンビニエンスストアの対象加盟店\nhttps://www.jcb.co.jp/service/basic/scene/life/convenience-store/index.html\n\nキャンペーン期間\n2018年3月16日（金）～2018年9月15日（土）\n\n【ご利用集計期間】\n（1）と（2）はそれぞれの期間ごとに金額を集計し、抽選を行います。\n（1）2018年3月16日（金）～6月15日（金）\n（2）2018年6月16日（土）～9月15日（土）\n\n【Wチャンスのご利用集計期間】\n2018年3月16日（金）～9月15日（土）",
+        "urls": [
+            "https://my.jcb.co.jp/campaign/myj/nichijyo_1803_myj.html"
+        ],
+        "img": "https://my.jcb.co.jp/campaign/images/nichijyo_1803_img01.jpg",
+        "date": {
+            "start": "2018/03/16",
+            "end": "2018/09/15"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 274,
         "service_title": "JCB",
         "title": "春のQUICPay（クイックペイ）TMまつり | JCBのインターネットサービスMyJCB（マイジェーシービー）",
