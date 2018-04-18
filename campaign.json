@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+        "id": 280,
+        "service_title": "LINE",
+        "title": "【LINE Pay】新しい利用特典",
+        "description": "■新しい利用特典について\n\n2018年6月1日（金）からは、コード支払いをメインにLINE Payのサービスのご利用全体（LINE Pay カード含む）を対象にした利用特典プログラムに変更となります。LINE Payサービスのご利用度合いによって最大2％のLINEポイントが還元されます。\n\n詳しい内容は、近日中にこのLINE 公式ブログやLINE Pay公式LINEアカウント、LINE Pay公式Twitterなどでお知らせします。\nなお、LINE Pay カードは利用特典リニューアル後もご利用いただけますので、引き続きご利用ください。\n\n今後ともLINE Payをよろしくお願い致します。",
+        "urls": [
+            "http://official-blog.line.me/ja/archives/74986499.html#topic2"
+        ],
+        "date": {
+            "start": "2018/06/01"
+        },
+        "on": [
+            "All"
+        ]
+    },
+    {
         "id": 279,
         "service_title": "LINE",
         "title": "LINE Pay カードのLINEポイント特典2%",
