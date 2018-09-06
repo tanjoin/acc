@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+    "id": 290,
+    "service_title": "QUICPay",
+    "title": "すかいらーく店舗でQUICPayを使おうキャンペーン｜QUICPay",
+    "description": "期間中、全国のすかいらーく店舗でクイックペイを合計5,000円（税込）以上利用すると、すかいらーくご優待券1,000円分をもれなくプレゼント！",
+    "urls": [
+        "https://www.quicpay.jp/campaign/skylark2018.html"
+    ],
+    "img": "https://www.quicpay.jp/campaign/images/skylark2018_title.jpg",
+    "date": {
+        "start": "2018/08/01",
+        "end": "2018/09/30"
+    },
+    "on": [
+        "All"
+    ]
+},
+    {
       "id": 289,
       "service_title": "ファミマTカード",
       "title": "【クレジットポイントが最大5倍になるチャンス！】",
