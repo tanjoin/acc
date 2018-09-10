@@ -161,7 +161,7 @@ $('#create_json').click(function() {
 
   $('#result').addClass('blue-grey lighten-5 clipboard');
   $('#result').css('padding', '50px');
-  $('#result').html(JSON.stringify(data, null, 4).replace(/\r?\n/g, '<br>').replace(/ /g, '&nbsp;'));
+  $('#result').html(JSON.stringify(data, null, 2).replace(/\r?\n/g, '<br>    ').replace(/ /g, '&nbsp;').replace(/$/, ','));
 });
 
 window.onload = function() {

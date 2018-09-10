@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^14.5.0",
-    "gulp": "^3.9.1",
+    "browserify": "^16.2.2",
+    "gulp": "^4.0.0",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^1.1.2"
+    "vinyl-source-stream": "^2.0.0"
   }
 }

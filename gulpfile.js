@@ -4,7 +4,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 
 gulp.task('main', function() {
-  browserify( {
+  return browserify( {
     entries: ['./src/js/main.js']
   }).bundle()
   .pipe(source('main.js'))
@@ -13,7 +13,7 @@ gulp.task('main', function() {
 });
 
 gulp.task('export', () => {
-  browserify({
+  return browserify({
     entries: ['./src/js/export.js']
   }).bundle()
   .pipe(source('export.js'))
@@ -22,7 +22,7 @@ gulp.task('export', () => {
 });
 
 gulp.task('maker', function() {
-  browserify( {
+  return browserify( {
     entries: ['./src/js/maker.js']
   }).bundle()
   .pipe(source('maker.js'))
@@ -31,7 +31,7 @@ gulp.task('maker', function() {
 });
 
 gulp.task('calendar', function() {
-  browserify( {
+  return browserify( {
     entries: ['./src/js/calendar.js']
   }).bundle()
   .pipe(source('calendar.js'))
@@ -40,10 +40,11 @@ gulp.task('calendar', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./src/js/main.js', ['main']);
-  gulp.watch('./src/js/maker.js', ['maker']);
-  gulp.watch('./src/js/export.js', ['export']);
-  gulp.watch('./src/js/calendar.js', ['calendar']);
+  gulp.watch('./src/js/main.js',  gulp.series('main'));
+  gulp.watch('./src/js/maker.js',  gulp.series('maker'));
+  gulp.watch('./src/js/export.js',  gulp.series('export'));
+  gulp.watch('./src/js/calendar.js',  gulp.series('calendar'));
+  return
 });
 
-gulp.task('default', ['main', 'maker', 'export', 'calendar', 'watch']);
+gulp.task('default', gulp.series('main', 'maker', 'export', 'calendar', 'watch'));
