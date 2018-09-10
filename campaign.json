@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+    "id": 297,
+    "service_title": "JAL",
+    "title": "ボーナスWAONが当たる！電子マネー特典「WAON」交換キャンペーン - JALマイレージバンク",
+    "description": "キャンペーン期間\n2018年9月1日（土）～10月31日（水）（特典交換日）\n\n対象のお客さま\nJALマイレージバンク（JMB）日本地区会員かつ対象のJMB WAONをお持ちのお客さま\n\n対象のJMB WAON\nJMB WAONカード\nJMB G.G WAONカード\nBIC CAMERA JMB WAONカード\nイオンJMBカード（JMB WAON一体型）\nイオンJMBカード（JMB WAON一体型/G.Gマーク付き）\nモバイルJMB WAON\nJMB WAONとは？\n電子マネーWAONの機能がついたJMBカードです。WAONでのお支払いで200円（税込）=1マイルがたまります。\n\nJMB WAONカードのお申し込みはこちら\n\nキャンペーン内容\n期間中、マイルを電子マネー特典「WAON」に交換いただいた方のなかから抽選で3,000名様にボーナスWAONとして1,000WAON（1,000円相当）をプレゼント。",
+    "urls": [
+        "https://www.jal.co.jp/jal_aeon_10th/campaign/index.html"
+    ],
+    "date": {
+        "start": "2018/09/01",
+        "end": "2018/10/31"
+    },
+    "on": [
+        "All"
+    ]
+},
+    {
     "id": 296,
     "service_title": "WAON",
     "title": "チャージで当たるWAONキャンペーン | 電子マネー WAON [ワオン] 公式サイト",
