@@ -622,6 +622,14 @@ var sortCampaigns = function(a, b) {
     return 1;
   }
 
+  /** date が空の場合、エラーになるので仮の Object を追加して応急処置 **/
+  if (!a.date) {
+    a.date = {};
+  }
+  if (!b.date) {
+    b.date = {};
+  }
+
   var aDate = new Date(Date.parse(a.date.end));
   var bDate = new Date(Date.parse(b.date.end));
 
