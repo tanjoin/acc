@@ -1,6 +1,19 @@
 {
   "campaigns": [
     {
+      "id": 299,
+      "service_title": "イトーヨーカドー",
+      "title": "毎月８がつく日はハッピーデー",
+      "description": "８日・１８日・２８日はほとんど全品が５％OFF\n\n",
+      "urls": [
+        "http://www.itoyokado.co.jp/special/happyday/index.html"
+      ],
+      "date": {},
+      "on": [
+        "8th"
+      ]
+    },
+    {
       "id": 298,
       "service_title": "すかいらーく",
       "title": "すかいらーくアプリで30万ポイント山分け！さらに3倍！",
