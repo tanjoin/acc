@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 301,
+      "service_title": "吉野家",
+      "title": "秋の5週連チャンクーポン祭 ｜ 吉野家公式ウェブサイト",
+      "description": "第1週：10月22日 \n第2週：11月1日 \n第3週：11月8日 \n第4週：11月15日 \n第5週：11月22日\n\n10月22日(月)から5週連チャンで毎週2種類のクーポンをプレゼント！今すぐ使えるクーポンは毎週変わるのでお見逃しなく！！\n\n",
+      "urls": [
+        "https://cloud.ma.yoshinoya.com/lcoupon_l6s25fg0"
+      ],
+      "img": "https://image.ma.yoshinoya.com/lib/fe4015707564047c721575/m/1/53235b68-266e-43eb-b477-9052e7c1fb42.jpg",
+      "date": {
+        "start": "2018/10/22",
+        "end": "2018/11/26"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 300,
       "service_title": "セブンマイルプログラム",
       "title": "ボーナスマイル｜セブンマイルプログラム",
