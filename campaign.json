@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 302,
+      "service_title": "Yahoo!",
+      "title": "Yahoo!ズバトク",
+      "urls": [
+        "https://toku.yahoo.co.jp/"
+      ],
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 301,
       "service_title": "吉野家",
       "title": "秋の5週連チャンクーポン祭 ｜ 吉野家公式ウェブサイト",
