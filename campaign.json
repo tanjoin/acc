@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 303,
+      "service_title": "楽天",
+      "title": "【楽天PointClub】：キャンペーン一覧－楽天グループのサービス",
+      "urls": [
+        "https://point.rakuten.co.jp/campaign/"
+      ],
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 302,
       "service_title": "Yahoo!",
       "title": "Yahoo!ズバトク",
