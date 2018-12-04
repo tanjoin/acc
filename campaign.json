@@ -1,6 +1,20 @@
 {
   "campaigns": [
     {
+      "id": 311,
+      "service_title": "dポイント",
+      "title": "マクドナルド×dポイント年末感謝祭 サキドリ！おみくじ！キャンペーン | d POINT CLUB",
+      "urls": [
+        "https://dpoint.jp/ctrw/web2/src/dpc_lp_mcdonalds_2_181203.html"
+      ],
+      "date": {
+        "end": "2018/12/31 23:59"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 310,
       "service_title": "LAWSON",
       "title": "【ローソンアプリ限定】ローソンアプリにローソンIDでログインして、ベビースターラーメンをもらおう！｜ローソン研究所",
