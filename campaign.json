@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 325,
+      "service_title": "吉野家",
+      "title": "190209配信LINEクーポン ｜ 吉野家公式ウェブサイト",
+      "description": "丼もの注文でみそ汁無料",
+      "urls": [
+        "https://cloud.ma.yoshinoya.com/lcoupon_hx4xa8a6375"
+      ],
+      "img": "https://image.ma.yoshinoya.com/lib/fe4015707564047c721575/m/1/af6e16a8-2ef7-4469-aedb-555ec9bf649d.jpg",
+      "date": {
+        "end": "2019/02/14"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 324,
       "service_title": "松竹マルチプレックスシアターズ",
       "title": "2/4（月）～2/7（木）はSMT Membersデイ　インターネットチケット購入なら￥1,100",
