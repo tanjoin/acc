@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 329,
+      "service_title": "ローソン",
+      "title": "冬の サンリオ フェア",
+      "urls": [
+        "http://www.lawson.co.jp/campaign/sanriofair/"
+      ],
+      "img": "http://www.lawson.co.jp/campaign/sanriofair/img/main_keyvisual.png",
+      "date": {
+        "start": "2018/12/18",
+        "end": "2019/03/11"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 328,
       "service_title": "いきなり！ステーキ",
       "title": "【予告】いきなり！ステーキ　2/13~15の３日間限定！400号店達成記念！ワイルド祭り開催！",
