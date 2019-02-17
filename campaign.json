@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 331,
+      "service_title": "JCB",
+      "title": "いつでも、どこでも、お買い物はJCB！キャンペーン",
+      "description": "期間中、キャンペーン参加登録したJCBカードで対象業種を5回以上利用すると抽選でキャッシュバック。\n\n［Wチャンス］\n上の条件を満たすと、対象業種でのご利用合計金額1,000円（税込）を1口として、さらに抽選でキャッシュバック。\n\n\nキャンペーン対象\n［対象業種］\nスーパーマーケット・コンビニエンスストア・ドラッグストア・ショッピングセンター・ホームセンター・衣料品店・書店\n※インターネットでのお買い物も対象となります。",
+      "urls": [
+        "https://www.jcb.co.jp/campaign/okaimono1810.html"
+      ],
+      "img": "https://www.jcb.co.jp/common_new/images/campaign/detail/okaimono1810_img01.jpg",
+      "date": {
+        "start": "2018/10/05",
+        "end": "2019/03/15"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 330,
       "service_title": "ファミマTカード",
       "title": "3のつく日は3％分のポイントプレゼント | ポケットカード株式会社",
