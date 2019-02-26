@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 332,
+      "service_title": "JCB",
+      "title": "50％キャッシュバック！春のJCBキャンペーン！ | JCBのインターネットサービスMyJCB（マイジェーシービー）",
+      "description": "期間中、参加登録したJCBカードで合計3万円（税込）以上利用すると、抽選で300名様に利用金額合計の50％をキャッシュバック！\n※キャッシュバック上限金額は3万円です。\n\n「JCB STAR MEMBERS（スターメンバーズ）キャンペーンチャンスアップ」の対象です。ランクに応じて、抽選口数が通常の2～6倍になります。",
+      "urls": [
+        "https://my.jcb.co.jp/campaign/myj/cb_spring1902_myj.html"
+      ],
+      "date": {
+        "start": "2019/02/16",
+        "end": "2019/05/15"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 331,
       "service_title": "JCB",
       "title": "いつでも、どこでも、お買い物はJCB！キャンペーン",
