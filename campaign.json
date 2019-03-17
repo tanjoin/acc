@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 335,
+      "service_title": "LAWSON",
+      "title": "JMBローソンPontaカードVisa限定 総計45万マイルプレゼント！｜クレジットカードはセゾンカード",
+      "description": "期間中、Netアンサーにてエントリーのうえ、JMBローソンPontaカードVisaにてローソン内でショッピング2,000円(税込)以上ご利用いただくと、JALのマイル「総計45万マイル」をプレゼントいたします！",
+      "urls": [
+        "https://www.saisoncard.co.jp/cpn/lawson03/"
+      ],
+      "date": {
+        "start": "2019/03/01",
+        "end": "2019/03/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 334,
       "service_title": "dポイント",
       "title": "マクドナルド×dポイント2周年！感謝祭 | d POINT CLUB",
