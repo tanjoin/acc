@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 342,
+      "service_title": "QUICPay",
+      "title": "QUICPayを𠮷野家で使って生野菜サラダ&みそ汁が無料！｜QUICPay",
+      "description": "349\n\nキャンペーン概要\n𠮷野家の店頭でお会計の際に、クーポン画面を提示のうえQUICPayで支払うと、丼・定食・カレー1食につき生野菜サラダ&みそ汁（150円相当）がそれぞれ1食無料。\n対象となるQUICPay発行会社\n全てのQUICPay（Apple Pay、Google Pay含む）発行会社\n対象店舗\n𠮷野家\n\n\n",
+      "urls": [
+        "https://www.quicpay.jp/campaign/yoshinoya2019.html"
+      ],
+      "img": "https://www.quicpay.jp/campaign/images/yoshinoya2019_title2.jpg",
+      "date": {
+        "start": "2019/06/10",
+        "end": "2019/06/23"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 341,
       "service_title": "ファミリーマート",
       "title": "サッカー日本代表応援Twitterキャンペーン｜キャンペーン｜ファミリーマート",
