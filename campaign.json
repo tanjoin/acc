@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 343,
+      "service_title": "JCB",
+      "title": "Google Pay(TM)を使おう！もれなく10％キャッシュバックキャンペーン",
+      "description": "キャンペーン期間中に、参加登録したJCBカードではじめてGoogle Payを利用すると、ご利用合計金額の10％をもれなくキャッシュバック！\n\n※キャッシュバック上限金額は5,000円です。\n※スマートフォンの画像はイメージです。\n※2019年5月15日（水）以前に、Google Payの利用がある方は対象となりません。（2019年5月15日（水）以前にGoogle Payに登録されていても、利用がなければ対象です。）",
+      "urls": [
+        "https://www.jcb.co.jp/campaign/googlepay1905.html"
+      ],
+      "date": {
+        "start": "2019/05/16",
+        "end": "2019/08/15"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 342,
       "service_title": "QUICPay",
       "title": "QUICPayを𠮷野家で使って生野菜サラダ&みそ汁が無料！｜QUICPay",
