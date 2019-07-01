@@ -1,6 +1,20 @@
 {
   "campaigns": [
     {
+      "id": 350,
+      "service_title": "dカード",
+      "title": "ドコモオンラインショップでdカード、DCMXならいつでもポイント2倍! ｜ キャンペーン",
+      "description": "ドコモオンラインショップの端末・付属品（docomo select、オプション品等含む）ご購入時に、dカード/dカード GOLD/DCMX/DCMX GOLDで一括払いでお支払いすると、100円（税込）につき1ポイントの決済ポイントに加え、dポイントを100円（税込）につき、1ポイント進呈します。\n\n※購入に伴う送料もポイント進呈の対象となります。\n※Mastercard/Visaのお支払いが対象となります。\n※docomo selectを購入の場合は、さらに、100円（税込）につき1ポイントが進呈されます。",
+      "urls": [
+        "https://info.d-card.jp/std/campaigns/dos17/dos17.html"
+      ],
+      "img": "https://info.d-card.jp/std/campaigns/dos17/images_dos17/olsprize-img01.png",
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 351,
       "service_title": "ポケットカード",
       "title": "FamiPayボーナス チャージ金額に対して最大15%還元 | ポケットカード株式会社",
