@@ -1,6 +1,19 @@
 {
   "campaigns": [
     {
+      "id": 345,
+      "service_title": "ソフトバンク",
+      "title": "サービスの利用で貯める | スマートフォン・携帯電話 | ソフトバンク",
+      "description": "・毎日ゲームにチャレンジして貯める\n・とくするアンケート（アンケートに答えて貯める）\n",
+      "urls": [
+        "https://www.softbank.jp/mobile/point/saving/challenge/"
+      ],
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 344,
       "service_title": "セブンイレブン",
       "title": "日清焼そばU.F.O.を買って濃い濃い追いソース！or濃い濃いラー油マヨをゲット!!!｜セブン‐イレブン～近くて便利～",
