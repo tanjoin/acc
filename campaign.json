@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 355,
+      "service_title": "LINE",
+      "title": "セブン-イレブン×LINE Pay 3ペイまつり",
+      "description": "全国のセブン-イレブンで\nコード支払いをすると\n20%還元\n\nさらに！\n\nLINE Payなら3.5～5％\nポイント還元\n\nつまり、実質23.5～25％還元！\n\n還元率の内訳はこちら\nLINE Payボーナス還元\n---\n期間中全員\n20%\n\nマイカラーのポイント付与\n2%\n1%\n0.8%\n0.5%\nキャンペーン実施中！\n(2019年7月31日まで)\n\nコード支払いで\n+3%\n\n",
+      "urls": [
+        "https://linepay.line.me/campaign/201907-3payfes.html?utm_source=seveneleven&utm_medium=push&utm_campaign=190711&utm_content=01"
+      ],
+      "img": "https://static.line-scdn.net/pay_3pay_cp/16bbc4af5ee/img/sp/ghd-text-03-pc.png",
+      "date": {
+        "start": "2019/07/11",
+        "end": "2019/07/21"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 354,
       "service_title": "セブン銀行",
       "title": "デビットウェルカムキャンペーン！｜セブン銀行",
