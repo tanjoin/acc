@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 361,
+      "service_title": "ゼンショー",
+      "title": "ゼンショーのお店でたまる・つかえるポイント @ はま寿司",
+      "description": "情報公開されるまでこの状態",
+      "urls": [
+        "https://point.zensho.co.jp/index.html"
+      ],
+      "date": {
+        "start": "2019/07/23",
+        "end": "2019/07/30"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 360,
       "service_title": "ゼンショー",
       "title": "すき家で共通ポイントスタート！ | すき家 | キャンペーン | ゼンショーのお店でたまる・つかえるポイント",
