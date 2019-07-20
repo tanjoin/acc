@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 362,
+      "service_title": "三井住友カード",
+      "title": "いまならApple PayのiD利用でワールドプレゼントのポイントが合計10倍！｜クレジットカードの三井住友VISAカード",
+      "description": "期間中、エントリーのうえ、Apple PayのiDを対象店舗で利用すると、ワールドプレゼントのポイントが合計10倍（※）になります。\n\n合計10倍とならない場合がございます。本キャンペーンは「いつもの利用でポイント5倍！」によるポイント数と同数のポイントを提供するものですので、詳細は「いつもの利用でポイント5倍！」についてのご説明をご確認ください。\n\nhttps://www.smbc-card.com/mem/cardinfo/cardinfo9001629.jsp",
+      "urls": [
+        "https://www.smbc-card.com/mem/cardinfo/cardinfo7231884.jsp"
+      ],
+      "date": {
+        "start": "2019/06/01",
+        "end": "2019/08/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 361,
       "service_title": "ゼンショー",
       "title": "ゼンショーのお店でたまる・つかえるポイント @ はま寿司",
