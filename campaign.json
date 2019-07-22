@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 366,
+      "service_title": "マクドナルド",
+      "title": "サマーナゲット | McDonald's Japan",
+      "description": "チキンマックナゲット\n15ピース\nチキンマックナゲット 15ピース\n単品\n\n¥390\n\n(期間限定：7/17(水)～9/3(火))",
+      "urls": [
+        "http://www.mcdonalds.co.jp/campaign/summer-nuggets/"
+      ],
+      "img": "http://www.mcdonalds.co.jp/content/dam/web/mcdonalds/campaign/summer-nuggets/img/main01.jpg",
+      "date": {
+        "start": "2019/07/17",
+        "end": "2019/09/03"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 365,
       "service_title": "Visa",
       "title": "Visa x マクドナルドキャッシュレスキャンペーン | Visa",
