@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 374,
+      "service_title": "JCB",
+      "title": "60％キャッシュバック！夏のJCBキャンペーン",
+      "description": "期間中、参加登録したJCBカードで合計1万円（税込）以上利用するだけ！\n1回のご利用を1口として抽選でキャッシュバックします。\n※キャッシュバック上限金額：5万円",
+      "urls": [
+        "https://www.jcb.co.jp/campaign/cb_summer1905.html"
+      ],
+      "date": {
+        "start": "2019/05/16",
+        "end": "2019/11/15"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 373,
       "service_title": "JCB",
       "title": "もれなく電子マネーギフトゲット！お友達紹介でさらにゲット！Google Pay（TM）登録キャンペーン",
