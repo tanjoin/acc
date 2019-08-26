@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 373,
+      "service_title": "JCB",
+      "title": "もれなく電子マネーギフトゲット！お友達紹介でさらにゲット！Google Pay（TM）登録キャンペーン",
+      "description": "キャンペーン期間中に参加登録したJCBカードで、次の条件を満たすともれなくもらえる！\n\n（1）はじめてGoogle Payを登録すると200円分の電子マネーギフトがもらえる！\n（2）さらに、SNSでキャンペーンを紹介すると、1回につき200円分、最大3回までもらえる！",
+      "urls": [
+        "https://www.jcb.co.jp/campaign/googlepay_cp201906.html"
+      ],
+      "date": {
+        "start": "2019/06/17",
+        "end": "2019/08/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 372,
       "service_title": "JCB",
       "title": "JCBでスマホ決済！全員に20％キャッシュバックキャンペーン！",
