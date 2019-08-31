@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 375,
+      "service_title": "セゾンカード",
+      "title": "キャンペーン｜Apple Pay(アップルペイ)の使い方・キャンペーン｜クレジットカードのセゾンカード・UCカード",
+      "description": "対象期間中にNetアンサー/アットユーネットにエントリーのうえ、セゾンカード・UCカードのApple Payをはじめて1,000円以上（合算可）ご利用の方を対象に抽選で豪華アイテムをプレゼント！",
+      "urls": [
+        "https://www.saisoncard.co.jp/services/ap/cp/"
+      ],
+      "date": {
+        "start": "2019/09/01",
+        "end": "2019/09/30"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 374,
       "service_title": "JCB",
       "title": "60％キャッシュバック！夏のJCBキャンペーン",
