@@ -1,6 +1,20 @@
 {
   "campaigns": [
     {
+      "id": 378,
+      "service_title": "docomo",
+      "title": "ポイントボーナスチケット",
+      "description": "by 株式会社ドコモ・インサイトマーケティング",
+      "urls": [
+        "https://pbt.di-pink.com/"
+      ],
+      "date": {
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 377,
       "service_title": "JCB",
       "title": "【JCBオリジナルシリーズ】お友達紹介キャンペーン｜ クレジットカードのお申し込みなら、JCBオリジナルシリーズ",
