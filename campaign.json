@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 381,
+      "service_title": "PayPay",
+      "title": "ユニクロキャンペーン - PayPay",
+      "description": "※ 990円（税抜）のヒートテックインナー2枚（KIDSは790円（税抜）のヒートテックインナー2枚）をレジに持参して専用クーポンを使うと、1枚分が無料になります。一部対象外の商品があります。\n\nキャンペーン参加にはユニクロアプリとPayPayアプリが必要です。一部対象外の店舗があります。\n\nキャンペーン参加時の注意事項\n・お一人さま1回限りとなります。\n注意事項\n・掲載内容および適用条件、キャンペーンを予告なく変更する場合や、中止する場合があります。\n・「App Store」ボタンを押すとiTunes （外部サイト）が起動します。\n・アプリケーションはiPhone、iPod touch、iPadまたはAndroidでご利用いただけます。\n・Apple、Appleのロゴ、App Store、iPodのロゴ、iTunesは、米国および他国のApple Inc.の登録商標です。\n・iPhone、iPod touch、iPadはApple Inc.の商標です。\n・iPhone商標は、アイホン株式会社のライセンスに基づき使用されています。\n・Copyright (C) Apple Inc. All rights reserved.\n・Android、Androidロゴ、Google Play 、および Google Play ロゴは、Google LLC の商標です。\n・QRコードは（株）デンソーウェーブの登録商標です。\n",
+      "urls": [
+        "https://paypay.ne.jp/event/uniqlo/"
+      ],
+      "date": {
+        "start": "2019/10/04",
+        "end": "2019/10/22"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 380,
       "service_title": "セブン銀行",
       "title": "ATMチャージキャンペーン | セブン銀行",
