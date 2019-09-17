@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 385,
+      "service_title": "ヤマト運輸",
+      "title": "宅急便をApple Payで送ろう",
+      "description": "キャンペーン期間中に、クロネコメンバーズのお客さまが宅急便をスマートフォンで発送する際に、Apple Pay（オンライン決済）でお支払いいただくと、抽選でApp Store ＆ iTunes ギフトカード（デジタルコード）をプレゼントいたします。\n\nさらに、キャンペーン期間中にApple Pay（オンライン決済）でお支払いいただいた方全員にTポイント100ポイントをプレゼントいたします。（事前にTポイント利用手続きが必要です。）",
+      "urls": [
+        "http://www.kuronekoyamato.co.jp/ytc/campaign/sp-applepay/index.html"
+      ],
+      "img": "http://www.kuronekoyamato.co.jp/ytc/campaign/sp-applepay/img/mv_img.png",
+      "date": {
+        "start": "2019/09/09",
+        "end": "2019/09/30"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 384,
       "service_title": "じゃらん",
       "title": "オンラインカード決済で宿泊金額還元！さらにリクルートカード決済ならポイントを山分け！ - じゃらんnet",
