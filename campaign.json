@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 389,
+      "service_title": "Edy",
+      "title": "電子マネー「楽天Edy（ラクテンエディ）」 | おトクなキャンペーン実施中",
+      "urls": [
+        "https://edy.rakuten.co.jp/campaign/"
+      ],
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 388,
       "service_title": "nanaco",
       "title": "nanacoボーナスポイント - セブン-イレブン～近くて便利～",
