@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 388,
+      "service_title": "nanaco",
+      "title": "nanacoボーナスポイント - セブン-イレブン～近くて便利～",
+      "urls": [
+        "https://www.sej.co.jp/i/nanaco/bonuspoints/"
+      ],
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 387,
       "service_title": "JCB",
       "title": "【JCB ORIGINAL SERIESパートナー】ポイント10倍キャンペーン｜ クレジットカードなら、JCBカード",
