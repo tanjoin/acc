@@ -1,6 +1,17 @@
 {
   "campaigns": [
     {
+      "id": 390,
+      "service_title": "JCB",
+      "title": "JCB ORIGINAL SERIES",
+      "urls": [
+        "https://original.jcb.co.jp/os/index"
+      ],
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 389,
       "service_title": "Edy",
       "title": "電子マネー「楽天Edy（ラクテンエディ）」 | おトクなキャンペーン実施中",
