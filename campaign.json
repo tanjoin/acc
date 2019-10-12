@@ -1,6 +1,18 @@
 {
   "campaigns": [
     {
+      "id": 394,
+      "service_title": "セブン-イレブン",
+      "title": "セール・キャンペーン｜セブン‐イレブン～近くて便利～",
+      "urls": [
+        "https://www.sej.co.jp/cmp/"
+      ],
+      "date": {},
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 393,
       "service_title": "ポケットカード",
       "title": "最大20％還元キャンペーン（ファミマTカードはTポイントで還元）",
