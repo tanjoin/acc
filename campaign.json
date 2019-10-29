@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 397,
+      "service_title": "ビューカード",
+      "title": "ビューカードキャッシュレスキャンペーン：ビューカード",
+      "description": "エントリーのうえ、キャンペーン期間中のご利用金額合計100,000円(税込) を1口として、抽選で旅行商品もしくはJRE POINTをプレゼント。",
+      "urls": [
+        "https://www.jreast.co.jp/card/campaign/cashless_first/"
+      ],
+      "img": "https://www.jreast.co.jp/card/campaign/cashless_first/img/img-main_pc.png",
+      "date": {
+        "start": "2019/10/01",
+        "end": "2020/01/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 396,
       "service_title": "Ponta",
       "title": "KFCポイントバックキャンペーン｜共通ポイント Ponta [ポンタ]",
