@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 399,
+      "service_title": "Amazon",
+      "title": "キャンペーン期間中のお買い物で最大5,000ポイントプレゼント",
+      "description": "キャンペーン概要\n※ポイントキャンペーンにエントリーし、キャンペーン期間中にお買い物をすると最大7.5%のポイントが還元されます。必ずFAQ、キャンペーン細則をご確認ください\n※Amazonギフト券、Amazonコイン、予約商品を除く。\n※合計10,000円以上のお買物でポイントアップ対象。\n※獲得ポイントには上限があります。\n",
+      "urls": [
+        "https://www.amazon.co.jp/b/ref=smccemail?ie=UTF8&node=3082063051"
+      ],
+      "img": "https://images-fe.ssl-images-amazon.com/images/G/09/2019/x-site/monthly_deal/11/point/cm/114934_MD_PUC_CM_56.gif",
+      "date": {
+        "start": "2019/11/02 09:00",
+        "end": "2019/11/04 23:59"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 398,
       "service_title": "三井住友VISAカード",
       "title": "いつもの利用でポイント5倍！｜クレジットカードの三井住友VISAカード",
