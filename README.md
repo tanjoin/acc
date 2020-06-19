@@ -14,3 +14,4 @@
 - [【公式】セブンカード・プラス nanacoをもっとお得に](https://www.7card.co.jp/)
   - [会員様向けキャンペーン・ご優待サービス｜セブンカード](https://www.7card.co.jp/customer/campaign/index.html)
 - [【楽天PointClub】：キャンペーン一覧－楽天グループのサービス](https://point.rakuten.co.jp/campaign/)
+- [キャンペーン一覧 JR東日本の共通ポイントサイト － JRE POINT](https://www.jrepoint.jp/campaign/list/)
