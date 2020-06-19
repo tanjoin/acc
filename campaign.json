@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 421,
+      "service_title": "セブンカード・プラス",
+      "title": "nanacoクレジットチャージで毎月抽選キャンペーン｜セブンカード",
+      "description": "キャンペーン期間中、セブンカード・プラス／セブンカードで、nanacoクレジットチャージまたはnanacoオートチャージを各ご利用期間1回以上ご利用いただいた会員様を対象に抽選で最大10,000ポイントをプレゼント！毎回抽選を行うため最大8回のチャンス！\n\n<キャンペーン参加条件>\nキャンペーンに参加登録をする。\nセブンカード・プラス／セブンカードで、nanacoクレジットチャージまたはnanacoオートチャージを1回以上利用する。",
+      "urls": [
+        "https://www.7card.co.jp/campaign/cp_charge2006.html"
+      ],
+      "img": "https://www.7card.co.jp/resource201801/campaign/cp_charge2006/img_cp_charge2006.jpg",
+      "date": {
+        "start": "2020/06/16",
+        "end": "2021/02/15"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 420,
       "service_title": "えきねっと",
       "title": "えきねっと（JR東日本）｜「えきねっとチケットレスサービス」割引キャンペーン",
