@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+      "id": 425,
+      "service_title": "dカード",
+      "title": "【dカード】ローソン・ローソンストア100でいつでも3％OFF！",
+      "description": "※2020年7月7日0:00より、dカード・dポイントカードをご提示いただいた際のポイント還元率が以下の通り変更となりました。\n\n0:00～15:59 … 200円（税抜）ごとに1ポイント\n16:00～23:59 … 200円（税抜）ごとに2ポイント\nローソンストア100は200円（税抜）ごとに1ポイント",
+      "urls": [
+        "https://info.d-card.jp/std/topics/la/la_off.html"
+      ],
+      "date": {
+        "start": "2020/07/07"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 424,
       "service_title": "ビューカード",
       "title": "Suica×マイナポイント　ビューカードでSuicaチャージキャンペーン：ビューカード",
@@ -425,51 +440,6 @@
       "date": {},
       "on": [
         "10th"
-      ]
-    },
-    {
-      "id": 6,
-      "service_title": "dカード",
-      "title": "1% ポイント還元",
-      "description": "②dカード、DCMXのお支払いでdポイント（決済ポイント）を100円につき1ポイント進呈（1％ポイント還元）\n※dカード、dカード GOLD、DCMX、DCMX GOLDで電子マネー「iD」またはVisa/MasterCardでのお支払いが対象。\n※dカード miniのお支払いは、200円につき1ポイント進呈します（0.5％ポイント還元）",
-      "urls": [
-        "http://info.d-card.jp/std/topics/la/la_off.html"
-      ],
-      "date": {
-        "start": "2016/10/01"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 5,
-      "service_title": "dカード",
-      "title": "3% OFF",
-      "description": "①全国のローソン、ナチュラルローソンで、dカード、DCMXでお支払いいただくとお買物金額から3％割引します。\n※dカード、dカード GOLD、dカード mini、DCMX、DCMX GOLDで電子マネー「iD」またはVisa/MasterCardでのお支払いが対象。\n※ローソンストア100は対象外、また一部対象外の商品・サービスがあります。詳しくは以下[ご利用上の注意]をご確認ください。",
-      "urls": [
-        "http://info.d-card.jp/std/topics/la/la_off.html"
-      ],
-      "date": {
-        "start": "2016/10/01"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 4,
-      "service_title": "dカード",
-      "title": "1%ポイント還元",
-      "description": "③dカードまたはdポイントカードのご提示でdポイント（加盟店ポイント）を100円（税抜）につき1ポイント進呈（1％ポイント還元）",
-      "urls": [
-        "http://info.d-card.jp/std/topics/la/la_off.html"
-      ],
-      "date": {
-        "start": "2016/10/01"
-      },
-      "on": [
-        "All"
       ]
     }
   ]
