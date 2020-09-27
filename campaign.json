@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 429,
+      "service_title": "JRE POINT",
+      "title": "5万円のキャッシュバック・JRE POINTが当たる！JR東日本グループ　駅ビル・ホテルご利用キャンペーン：ビューカード",
+      "description": "期間中、VIEW's NETよりエントリーのうえ、対象施設でビューカードをご利用いただくと、ご利用金額合計10,000円（税込）を一口として、抽選で5万円キャッシュバック、またはJRE POINTをプレゼントします。\n\n",
+      "urls": [
+        "https://www.jreast.co.jp/card/campaign/stabldg_hotel/index.html"
+      ],
+      "img": "https://www.jreast.co.jp/card/campaign/stabldg_hotel/img/img-main_pc.png",
+      "date": {
+        "start": "2020/09/01",
+        "end": "2020/10/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 428,
       "service_title": "エポスカード",
       "title": "KITTE丸の内のご優待 | エポトクプラザ",
