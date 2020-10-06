@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 432,
+      "service_title": "三井住友VISAカード",
+      "title": "【すき家限定】Visaのタッチ決済でもれなく50％還元！｜クレジットカードの三井住友VISAカード",
+      "description": "キャンペーン期間中に、「Visaのタッチ決済」を利用し、国内のすき家にて500円（税込）以上のお会計をされた方\n\n",
+      "urls": [
+        "https://www.smbc-card.com/mem/cardinfo/cardinfo7242265.jsp"
+      ],
+      "date": {
+        "start": "2020/10/01",
+        "end": "2020/10/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 431,
       "service_title": "ファミマTカード",
       "title": "10,000円分当たる！クレジット払いご利用キャンペーン",
