@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 435,
+      "service_title": "ビューカード",
+      "title": "お店でQUICPayを使おう！",
+      "description": "期間中、エントリーのうえ、QUICPay™（クイックペイ）を合計15,000円（税込）以上店頭でご利用いただくと、抽選で100名様にJRE POINT 10,000ポイント（10,000円相当）が当たる！\n\n＜ポイント付与時期＞…2021年3月中旬以降",
+      "urls": [
+        "https://www.jreast.co.jp/card/campaign/quicpay/"
+      ],
+      "date": {
+        "start": "2020/11/01",
+        "end": "2021/01/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 434,
       "service_title": "ファミマTカード",
       "title": "50,000円分当たる！クレジット払いご利用キャンペーン",
