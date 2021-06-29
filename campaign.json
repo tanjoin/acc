@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 441,
+      "service_title": "PayPay",
+      "title": "夏のPayPay祭 セブン-イレブンアプリキャンペーン - PayPay",
+      "description": "全国のセブン-イレブン店舗において、購入商品の代金について、セブン-イレブンアプリからPayPayで支払うと、以下の通りPayPayボーナスを付与します。なお、ボーナス付与は、お支払いの翌日から起算して30日後となります。\n\n",
+      "urls": [
+        "https://paypay.ne.jp/event/matsuri202107-seven-eleven-app/"
+      ],
+      "img": "https://image.paypay.ne.jp/page/event/matsuri202107-seven-eleven-app/images/img_table_01.png",
+      "date": {
+        "start": "2021/07/01 00:00",
+        "end": "2021/07/25 23:59"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 440,
       "service_title": "楽天ポイントカード",
       "title": "【吉野家】楽天ポイントカード1周年記念 吉野家でお会計すると抽選で期間中の吉野家でのポイント100倍！ | キャンペーン一覧",
