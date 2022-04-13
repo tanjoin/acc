@@ -4,19 +4,19 @@
   "description": "- [https://tanjoin.github.io/acc/](https://tanjoin.github.io/acc/)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "build:main": "npx browserify src/js/main.js -o js/main.js",
+    "build:maker": "npx browserify src/js/maker.js -o js/maker.js",
+    "build:export": "npx browserify  src/js/export.js -o js/export.js",
+    "build:calendar": "npx browserify src/js/calendar.js -o js/calendar.js",
+    "build": "npm run build:main && npm run build:maker && npm run build:export && npm run build:calendar"
   },
   "repository": {
     "type": "git",
     "url": "git@tanjoin:tanjoin/acc.git"
   },
-  "author": "",
+  "author": "tanjoin",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^16.2.3",
-    "gulp": "^4.0.0",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "browserify": "^17.0.0"
   }
 }
