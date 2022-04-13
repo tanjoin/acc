@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 443,
+      "service_title": "松のや",
+      "title": "【対象者限定】PayPayクーポン",
+      "description": "※3 松弁ネット、ミニアプリ、モバイルオーダーは対象外です。",
+      "urls": [
+        "https://premium.yahoo.co.jp/coupon/paypay?ex=P_2778.C_C4pps222"
+      ],
+      "img": "https://s.yimg.jp/images/premium/cre/cmp/paypay/coupon/images/mod_bonus_pc_2204.png",
+      "date": {
+        "start": "2001/04/01 00:00",
+        "end": "2001/04/30 00:00"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 442,
       "service_title": "吉野家",
       "title": "【4月5日～4月21日】朝夜割・定食10%オフキャンペーン！",
