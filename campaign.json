@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 449,
+      "service_title": "吉野家",
+      "title": "今だけW定食・W弁当100円引キャンペーン | 吉野家公式ホームページ",
+      "description": "期間中、W定食とW弁当を税込価格から100円割引します。\n\n※販売時間：11時～翌朝4時\n※W弁当はご飯増量をご利用いただけます。\n※デリバリーは対象外。\n※現金とのお引換不可。",
+      "urls": [
+        "https://www.yoshinoya.com/campaign/w-teishoku_202306/"
+      ],
+      "img": "https://www.yoshinoya.com/wp-content/uploads/2023/06/27100930/w-teishoku_202306-pc.jpg",
+      "date": {
+        "start": "2023/06/30 11:00",
+        "end": "2001/07/18 20:00"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 448,
       "service_title": "楽天ポイントカード",
       "title": "楽天ポイントカード:【吉野家】年末年始の大感謝祭！抽選で100人に1人楽天ポイント50倍！ | キャンペーン一覧",
