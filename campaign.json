@@ -1,6 +1,21 @@
 {
   "campaigns": [
     {
+      "id": 450,
+      "service_title": "三井住友VISAカード",
+      "title": "対象のコンビニ・飲食店で最大5％還元！｜クレジットカードの三井住友VISAカード",
+      "urls": [
+        "https://www.smbc-card.com/mem/cardinfo/cardinfo9001629.jsp?dk=ml_005_000466"
+      ],
+      "img": "https://www.smbc-card.com/content/dam/smcc/jp/ja/individual/cardinfo/t_9001629.jpg",
+      "date": {
+        "start": "2023/07/01"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 449,
       "service_title": "吉野家",
       "title": "今だけW定食・W弁当100円引キャンペーン | 吉野家公式ホームページ",
