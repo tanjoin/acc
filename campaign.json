@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 451,
+      "service_title": "エポスカード",
+      "title": "Visaのタッチ決済キャンペーン｜クレジットカードはエポスカード",
+      "description": "期間中、累計1,000円（税込）以上Visaのタッチ決済を使うと\n抽選で10,000名さまに2,500エポスポイントが当たる！",
+      "urls": [
+        "https://www.eposcard.co.jp/campaign/20859.html"
+      ],
+      "date": {
+        "start": "2023/09/01",
+        "end": "2023/09/30"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 450,
       "service_title": "三井住友VISAカード",
       "title": "対象のコンビニ・飲食店で最大5％還元！｜クレジットカードの三井住友VISAカード",
