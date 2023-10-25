@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 452,
+      "service_title": "QUICPay",
+      "title": "ローソンでQUICPayを利用すると、抽選で10万名様に300円キャッシュバック！",
+      "urls": [
+        "https://www.quicpay.jp/campaign/2023/quicpay_lawson.html"
+      ],
+      "img": "https://www.quicpay.jp/campaign/assets/img/quicpay_lawson/prize_lead.png",
+      "date": {
+        "start": "2023/10/03",
+        "end": "2023/10/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 451,
       "service_title": "エポスカード",
       "title": "Visaのタッチ決済キャンペーン｜クレジットカードはエポスカード",
