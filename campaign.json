@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 453,
+      "service_title": "つけ麺専門店 三田製麺所",
+      "title": "三田の日",
+      "description": "Xユーザーの【公式】つけ麺専門店 三田製麺所さん: 「毎月3日は #三田の日 ! App・Twitter・Instagram・TikTok限定でお得なクーポンを配信♪ こちらの画像ご提示で 全部乗せトッピング「三田盛り」をお一つ値引きします。 お会計時にスマートフォンなどでクーポン画像をご提示下さい！ ※ご利用上の注意など詳細は画像をご確認下さい https://t.co/PkSCYUTRCo」 / X",
+      "urls": [
+        "https://twitter.com/mitaseimen/status/1720243388761743571"
+      ],
+      "img": "https://pbs.twimg.com/media/F9-IPkZa0AAwtpv?format=jpg&name=medium",
+      "date": {
+        "start": "2023/11/03",
+        "end": "2024/11/03"
+      },
+      "on": [
+        "3rd"
+      ]
+    },
+    {
       "id": 452,
       "service_title": "QUICPay",
       "title": "ローソンでQUICPayを利用すると、抽選で10万名様に300円キャッシュバック！",
