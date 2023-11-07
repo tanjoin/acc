@@ -1,0 +1,93 @@
+doctype html
+html 
+  head 
+    title acc content maker
+    include parts/meta.pug
+    include parts/link.pug
+  body
+    include parts/nav.pug
+    #contents 
+      .row 
+        .col.s12 
+          .row 
+            .input-field.col.s12 
+              input#content_id.validate(type="number", disabled="disabled", value="0")
+              label(for="content_id") ID
+            .input-field.col.s12 
+              input#content_title.validate(type="text", required)
+              label(for="content_title") タイトル
+            .input-field.col.s12 
+              input#content_service_title.autocomplete(type="text", required)
+              label(for="content_service_title") サービス
+            .input-field.col.s12 
+              input#content_start_date.datepicker.timepicker(type="text")
+              label(for="content_start_date") 開始日
+            .input-field.col.s12 
+              input#content_end_date.datepicker.timepicker(type="text")
+              label(for="content_end_date") 終了日
+            .input-field.col.s12
+              input#content_url.validate(type="text")
+              label(for="content_url") URL              
+            .input-field.col.s12
+              input#content_img.validate(type="text")
+              label(for="content_img") 画像URL
+            .input-field.col.s12
+              textarea#content_description.materialize-textarea(type="text")
+              label(for="content_description") 説明              
+            .input-field.col.s12
+              p On
+            .input-field.col.s12
+              input#on_all(type="checkbox" value="All")
+              label(for="on_all") All
+            .input-field.col.s12
+              input#on_mon(type="checkbox" value="Mon")
+              label(for="on_mon") Mon
+            .input-field.col.s12
+              input#on_tue(type="checkbox" value="Tue")
+              label(for="on_tue") Tue
+            .input-field.col.s12
+              input#on_wed(type="checkbox" value="Wed")
+              label(for="on_wed") Wed
+            .input-field.col.s12
+              input#on_thu(type="checkbox" value="Thu")
+              label(for="on_thu") Thu
+            .input-field.col.s12
+              input#on_fri(type="checkbox" value="Fri")
+              label(for="on_fri") Fri
+            .input-field.col.s12
+              input#on_sat(type="checkbox" value="Sat")
+              label(for="on_sat") Sat
+            .input-field.col.s12
+              input#on_sun(type="checkbox" value="Sun")
+              label(for="on_sun") Sun
+            .input-field.col.s12
+              input#on_5th(type="checkbox" value="5th")
+              label(for="on_5th") 5th
+            .input-field.col.s12
+              input#on_8th(type="checkbox" value="8th")
+              label(for="on_8th") 8th
+            .input-field.col.s12
+              input#on_10th(type="checkbox" value="10th")
+              label(for="on_10th") 10th
+            .input-field.col.s12
+              input#on_15th(type="checkbox" value="15th")
+              label(for="on_15th") 15th
+            .input-field.col.s12
+              input#on_20th(type="checkbox" value="20th")
+              label(for="on_20th") 20th
+            .input-field.col.s12
+              input#on_25th(type="checkbox" value="25th")
+              label(for="on_25th") 25th
+            .input-field.col.s12
+              input#on_30th(type="checkbox" value="30th")
+              label(for="on_30th") 30th
+            .col.s1 
+            #result.col.s10(style="margin:20px;", data-clipboard-target="#result")
+            .col.s1 
+            .col.s5 
+            #create_json.btn.col.s2 
+              span Create 
+            .col.s5
+    include parts/script.pug
+    script(src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js")
+    script(src="js/maker.js")

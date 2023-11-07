@@ -8,14 +8,22 @@ var Campaign = function(opt_jsonData) {
    * @private
    */
   if (opt_jsonData) {
+    // キャンペーンID
     this.id = opt_jsonData.id;
+    // キャンペーン名
     this.title = opt_jsonData.title;
-    this.serviceTitle = opt_jsonData.service_title;
-    this.date = opt_jsonData.date;
-    this.on = opt_jsonData.on;
-    this.urls = opt_jsonData.urls;
-    this.img = opt_jsonData.img;
+    // 説明文
     this.description = opt_jsonData.description;
+    // キャンペーン提供元
+    this.serviceTitle = opt_jsonData.service_title;
+    // 期間
+    this.date = opt_jsonData.date;
+    // 曜日・日付指定
+    this.on = opt_jsonData.on;
+    // URLリスト
+    this.urls = opt_jsonData.urls;
+    // 画像URL
+    this.img = opt_jsonData.img;
   }
 };
 

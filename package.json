@@ -4,11 +4,19 @@
   "description": "- [https://tanjoin.github.io/acc/](https://tanjoin.github.io/acc/)",
   "main": "index.js",
   "scripts": {
-    "build:main": "npx browserify src/js/main.js -o js/main.js",
-    "build:maker": "npx browserify src/js/maker.js -o js/maker.js",
-    "build:export": "npx browserify  src/js/export.js -o js/export.js",
-    "build:calendar": "npx browserify src/js/calendar.js -o js/calendar.js",
-    "build": "npm run build:main && npm run build:maker && npm run build:export && npm run build:calendar"
+    "build:main": "browserify src/js/main.js -o js/main.js",
+    "build:maker": "browserify src/js/maker.js -o js/maker.js",
+    "build:export": "browserify  src/js/export.js -o js/export.js",
+    "build:calendar": "browserify src/js/calendar.js -o js/calendar.js",
+    "build": "npm run build:main && npm run build:maker && npm run build:export && npm run build:calendar",
+    "html:index": "pug -P src/pug/index.pug -o .",
+    "html:maker": "pug -P src/pug/maker.pug -o .",
+    "html:export": "pug -P src/pug/export.pug -o .",
+    "html:coupon": "pug -P src/pug/coupon.pug -o .",
+    "html:calendar": "pug -P src/pug/index.pug -o .",
+    "html:watch": "pug --watch --pretty src/pug -o . ",
+    "html": "pug --pretty src/pug -o . ",
+    "start": "npm run build && npm run html"
   },
   "repository": {
     "type": "git",
@@ -17,6 +25,8 @@
   "author": "tanjoin",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^17.0.0"
+    "browserify": "^17.0.0",
+    "pug": "^3.0.2",
+    "pug-cli": "^1.0.0-alpha6"
   }
 }
