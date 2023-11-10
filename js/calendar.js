@@ -463,6 +463,10 @@ module.exports.On = {
         }
     },
     DATE: {
+        D_03: {
+            date: 3,
+            text: "3rd"
+        },
         D_05: {
             date: 5,
             text: "5th"
