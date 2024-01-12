@@ -35,38 +35,6 @@
       ]
     },
     {
-      "id": 452,
-      "service_title": "QUICPay",
-      "title": "ローソンでQUICPayを利用すると、抽選で10万名様に300円キャッシュバック！",
-      "urls": [
-        "https://www.quicpay.jp/campaign/2023/quicpay_lawson.html"
-      ],
-      "img": "https://www.quicpay.jp/campaign/assets/img/quicpay_lawson/prize_lead.png",
-      "date": {
-        "start": "2023/10/03",
-        "end": "2023/10/31"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 451,
-      "service_title": "エポスカード",
-      "title": "Visaのタッチ決済キャンペーン｜クレジットカードはエポスカード",
-      "description": "期間中、累計1,000円（税込）以上Visaのタッチ決済を使うと\n抽選で10,000名さまに2,500エポスポイントが当たる！",
-      "urls": [
-        "https://www.eposcard.co.jp/campaign/20859.html"
-      ],
-      "date": {
-        "start": "2023/09/01",
-        "end": "2023/09/30"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
       "id": 450,
       "service_title": "三井住友VISAカード",
       "title": "対象のコンビニ・飲食店で最大5％還元！｜クレジットカードの三井住友VISAカード",
@@ -82,23 +50,6 @@
       ]
     },
     {
-      "id": 449,
-      "service_title": "吉野家",
-      "title": "今だけW定食・W弁当100円引キャンペーン | 吉野家公式ホームページ",
-      "description": "期間中、W定食とW弁当を税込価格から100円割引します。\n\n※販売時間：11時～翌朝4時\n※W弁当はご飯増量をご利用いただけます。\n※デリバリーは対象外。\n※現金とのお引換不可。",
-      "urls": [
-        "https://www.yoshinoya.com/campaign/w-teishoku_202306/"
-      ],
-      "img": "https://www.yoshinoya.com/wp-content/uploads/2023/06/27100930/w-teishoku_202306-pc.jpg",
-      "date": {
-        "start": "2023/06/30 11:00",
-        "end": "2023/07/18 20:00"
-      },
-      "on": [
-        "All"
-      ]
-    },
-    {
       "id": 422,
       "service_title": "セブンカード・プラス",
       "title": "ビックカメラでのお買い物でポイントがお得｜セブンカード",
@@ -108,22 +59,6 @@
       ],
       "img": "https://www.7card.co.jp/resource201801/yutai/biccamera1901/img_yu_biccamera1901_pc.jpg",
       "date": {},
-      "on": [
-        "All"
-      ]
-    },
-    {
-      "id": 398,
-      "service_title": "三井住友VISAカード",
-      "title": "いつもの利用でポイント5倍！｜クレジットカードの三井住友VISAカード",
-      "description": "対象店舗（※1）で対象の三井住友カード（※2）をご利用いただくと、ワールドプレゼントのポイントが通常の5倍（※3）貯まります。\n\nセブン‐イレブン ファミリーマート ローソン マクドナルド\n以下の◎のカードやマイ・ペイすリボを登録いただいている方など、通常ポイントが1,000円（含む消費税等）の利用ごとに1ポイントではないお客さまは通常ポイント数が多いため5倍相当にはなりません。\nまた、対象のコンビニエンスストア、マクドナルドのご利用に対しては、本サービスの５倍ポイントのみを通常ポイントで付与いたします。（他のポイント優遇サービスとの重複付与は致しません。ただし、デビュープラスカードの通常２倍分は付与いたします）\n\n一部ポイント加算の対象にならない取引がございます。\n\n対象カード閉じる\n三井住友プラチナカード（VISA、マスター）／プラチナカードPA-TYPE（VISA、マスター）\n三井住友ゴールドカード（VISA、マスター）／ゴールドカードPA-TYPE（VISA、マスター）\n三井住友プライムゴールドカード（VISA、マスター）\n三井住友エグゼクティブカード（VISA、マスター）\n三井住友クラシックカード（VISA、マスター）／クラシックカードA（VISA、マスター）\n三井住友アミティエカード（VISA、マスター）\n三井住友VISA SMBC CARDゴールド／三井住友VISA SMBC CARDプライムゴールド／三井住友VISA SMBC CARDクラシック\n三井住友デビュープラスカード（VISA）\nエブリプラス（VISA）\n三井住友ビジネスプラチナカード for Owners（VISA、マスター）／三井住友ビジネスゴールドカード for Owners（VISA、マスター）\n三井住友ビジネスカード for Owners（VISA、マスター）\n三井住友ヤングゴールドカード（VISA、マスター）\n三井住友ETC一体型VISAゴールドカード／三井住友ETC一体型VISAクラシックカード\n三井住友銀行キャッシュカード一体型カード\n家族カードおよび対象カードを登録しているiD、Apple Pay、 Google Pay™ のご利用も対象です。\n\nエントリーについて\nご利用前の事前のエントリーなどは必要ございません。\n\nポイント加算について\n本サービスはご利用金額1,000円につき1ポイント付与する通常ポイントに加え、ご利用金額250円につき1ポイントを加算ポイントとして付与するサービスです。",
-      "urls": [
-        "https://www.smbc-card.com/mem/cardinfo/cardinfo9001629.jsp"
-      ],
-      "img": "https://www.smbc-card.com/mem/cardinfo/responsive/img/p_9001629_10.jpg",
-      "date": {
-        "end": "2023/06/30"
-      },
       "on": [
         "All"
       ]
