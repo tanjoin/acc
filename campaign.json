@@ -1,6 +1,22 @@
 {
   "campaigns": [
     {
+      "id": 457,
+      "service_title": "d払い",
+      "title": "やよい軒でd払い利用でもれなく＋10％還元キャンペーン！｜d払い - dポイントがたまる！かんたん、便利なスマホ決済",
+      "description": "エントリーの上、期間中やよい軒でお会計合計800円（税込）以上d払いでお支払いいただくと、もれなく期間中にd払いでお支払いいただいた税込金額の10％相当のdポイント（期間・用途限定）※を進呈いたします。\n\n※進呈上限はおひとりさまにつき期間中最大300ポイントとなります。",
+      "urls": [
+        "https://service.smt.docomo.ne.jp/keitai_payment/campaign/dpay_yayoiken_241001_5683/"
+      ],
+      "date": {
+        "start": "2024/10/01",
+        "end": "2024/10/31"
+      },
+      "on": [
+        "All"
+      ]
+    },
+    {
       "id": 456,
       "service_title": "JCB",
       "title": "マクドナルド（モバイルオーダー・マックデリバリーⓇサービス限定）｜ JCB ORIGINAL SERIES",
