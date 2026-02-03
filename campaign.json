@@ -1,6 +1,23 @@
 {
   "campaigns": [
     {
+      "id": 462,
+      "service_title": "QUICPay",
+      "title": "週末は全額キャッシュバック！QUICPayチャンス！｜QUICPay",
+      "description": "対象日にQUICPay（クイックペイ）TMを利用すると、抽選でキャンペーン期間中合計9,190名様に全額キャッシュバック。\n（キャッシュバック上限金額：1万円）\n\nお支払いの際は「クイックペイで」とお伝えください。",
+      "urls": [
+        "https://www.quicpay.jp/campaign/2025/qp_weekend_cashback.html"
+      ],
+      "date": {
+        "start": "2025/04/05",
+        "end": "2026/03/29"
+      },
+      "on": [
+        "Sat",
+        "Sun"
+      ]
+    },
+    {
       "id": 461,
       "service_title": "吉野家",
       "title": "あすトククーポンキャンペーン | 吉野家公式ホームページ",
