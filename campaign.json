@@ -288,21 +288,6 @@
       ]
     },
     {
-      "id": 9,
-      "service_title": "イオン",
-      "title": "お客さまわくわくデー",
-      "description": "200円で2ポイント",
-      "urls": [
-        "http://www.aeonretail.jp/otoku/wakuwakuday.html"
-      ],
-      "date": {},
-      "on": [
-        "5th",
-        "15th",
-        "25th"
-      ]
-    },
-    {
       "id": 8,
       "service_title": "イオン",
       "title": "ありが10デー",
